@@ -1,0 +1,83 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Apr 5, 2019, 10:01:39 PM
+    Author     : Muhammed ARSLAN
+*/
+.warp
+{
+    margin: 0 auto ;
+    text-align: center;
+
+}
+
+#loginlogin{
+    font-size: 50px;
+    font-family: cursive;
+}
+
+.login
+{
+    padding: 50px;
+    color: white;
+    text-align: center;
+    margin-left: 450px;
+    margin-right: 450px;
+
+}
+
+#background
+{
+    background-color: #FA2C56;
+}
+
+#pp {
+    padding-top:  150px ;
+
+    color: black ;
+    display: block;
+    margin-left: 0;
+    margin-right: 0;
+    margin-top: 1em;
+    margin-bottom: 1em;
+
+}
+
+.nheader
+{
+    background-color: #393351; 
+    padding: 25px;
+    border-radius: 50px;
+
+}
+
+.nheader2
+{
+    background-color: #FA2C56; 
+    padding: 25px;
+    border-radius: 30px;
+    color: white; 
+    font-family: cursive;
+}
+
+h2{
+    padding: 40px;
+
+}
+
+.buttons
+{
+    padding: 50px;
+    margin-left: 400px;
+    margin-right: 400px;
+}
+
+#npar
+{
+    margin: 0 auto ;
+    text-align: center;
+    padding-bottom: 100px;
+}
