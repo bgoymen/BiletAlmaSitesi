@@ -2,10 +2,39 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
                 xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-                template="/Admin/template/AdminTemplate.xhtml">
-    
+                template="/Admin/template/AdminTemplate.xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+
     <ui:define name="content">
-         Hoşgeldiniz.Kullanıcılar Sayfasına Geldiniz.
+        <h:form>
+            <h:commandButton class="btn btn-primary" action="/Admin/Other/Kullanıcılar/Create" value="Yeni Kullanıcı Ekle"/>
+
+            <h:dataTable value="#{userBean.read}" var="c" class="table table-striped">
+                <h:column>
+                    <f:facet name="header">ID</f:facet>
+                        #{c.id}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Mail</f:facet>
+                        #{c.user_mail}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Kullanıcı Adı</f:facet>
+                        #{c.user_name}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Şifre</f:facet>
+                        #{c.user_password}
+                </h:column>
+
+                <h:column>
+                    <f:facet name="header">İşlemler</f:facet>
+                    <h:commandButton class="btn btn-warning" action="#{userBean.updateForm(c)}" value="Güncelle"/>
+                    <h:commandButton class="btn btn-danger" action="#{userBean.delete(c.id)}" value="Sil"/>
+                </h:column>
+            </h:dataTable>
+        </h:form>
     </ui:define>
 </ui:composition>
 
