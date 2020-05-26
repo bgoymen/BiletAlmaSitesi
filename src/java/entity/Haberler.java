@@ -7,8 +7,35 @@ package entity;
 
 /**
  *
- * @author bünyamin
+ * @author Göymen
  */
 public class Haberler {
+    private int haber_id;
+    private String haber;
+
+    public Haberler() {
+    }
+
+    public Haberler(int haber_id, String haber) {
+        this.haber_id = haber_id;
+        this.haber = haber;
+    }
+
+    public int getHaber_id() {
+        return haber_id;
+    }
+
+    public void setHaber_id(int haber_id) {
+        this.haber_id = haber_id;
+    }
+
+    public String getHaber() {
+        return haber;
+    }
+
+    public void setHaber(String haber) {
+        this.haber = haber;
+    }
+    
     
 }

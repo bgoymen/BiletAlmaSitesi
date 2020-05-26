@@ -21,12 +21,36 @@ CREATE TABLE IF NOT EXISTS `haberler` (
   `haber_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `Haber` varchar(200) DEFAULT NULL,
   PRIMARY KEY (`haber_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 
 -- biletal.haberler: ~0 rows (yaklaşık) tablosu için veriler indiriliyor
 DELETE FROM `haberler`;
 /*!40000 ALTER TABLE `haberler` DISABLE KEYS */;
+INSERT INTO `haberler` (`haber_id`, `Haber`) VALUES
+	(2, 'adana sahilleri'),
+	(4, 'yeni bir haber ekliyorum 8768963');
 /*!40000 ALTER TABLE `haberler` ENABLE KEYS */;
+
+-- tablo yapısı dökülüyor biletal.iletisim
+CREATE TABLE IF NOT EXISTS `iletisim` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `mail` varchar(50) DEFAULT NULL,
+  `Baslik` varchar(50) DEFAULT NULL,
+  `Konu` varchar(200) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
+
+-- biletal.iletisim: ~0 rows (yaklaşık) tablosu için veriler indiriliyor
+DELETE FROM `iletisim`;
+/*!40000 ALTER TABLE `iletisim` DISABLE KEYS */;
+INSERT INTO `iletisim` (`id`, `mail`, `Baslik`, `Konu`) VALUES
+	(1, 'den', ' den', 'den'),
+	(2, 'as', 'as', 'as'),
+	(3, 'as', '', 'as'),
+	(4, 'ad', 'sad', 'ad'),
+	(5, 'sasas', 'sasa', 'sasa'),
+	(6, 'asdsfsdaga<s', 'gsdgsegsrg', 'fsdzfgsdgsz');
+/*!40000 ALTER TABLE `iletisim` ENABLE KEYS */;
 
 -- tablo yapısı dökülüyor biletal.otobus_firmalari
 CREATE TABLE IF NOT EXISTS `otobus_firmalari` (
@@ -131,22 +155,21 @@ CREATE TABLE IF NOT EXISTS `users` (
   `user_password` varchar(50) DEFAULT NULL,
   `type` int(11) unsigned NOT NULL DEFAULT 0,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=latin1;
 
 -- biletal.users: ~10 rows (yaklaşık) tablosu için veriler indiriliyor
 DELETE FROM `users`;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
 INSERT INTO `users` (`id`, `user_mail`, `user_name`, `user_password`, `type`) VALUES
 	(1, 'admin@gmail.com', 'admin', 'admin', 1),
-	(2, 'aad', 'daa', 'adass', 0),
 	(3, 'istedigimmail@gmail.com', 'istedigimkullaiciadi', 'istedigimsifre', 0),
-	(4, 'yenilendi', ' yenilendi2', 'yenilendi3', 0),
+	(4, 'yenilendi5', ' yenilendi6', 'yenilendi7', 0),
 	(5, 'antepli@gmail.com', 'antepli', 'antepli123', 0),
-	(17, 'bgoymen', NULL, NULL, 0),
-	(18, 'bgoymen21', 'bgoymen22', 'bgoymen23', 0),
-	(19, 'as', 'sa', 'as', 0),
-	(21, 'denem', 'deneme', 'deneme', 0),
-	(22, 'deneme2', 'deneme2', 'deneme2', 0);
+	(18, 'bgoymen35', 'bgoymen22', 'bgoymen23', 0),
+	(21, 'deneme', 'deneme', 'deneme', 0),
+	(22, 'deneme3', 'deneme3', 'deneme3', 0),
+	(23, 'ssadssdgdfhdzfhz', 'ffdhdfhs', 'hfdhdhdhz', 0),
+	(24, 'bg@gmail.com', '28', '2828', 0);
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
