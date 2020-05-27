@@ -7,23 +7,29 @@
                 xmlns:f="http://xmlns.jcp.org/jsf/core">
 
     <ui:define name="content">
-        <h:dataTable value="#{iletisimBean.read}" var="a" class="table table-striped">
-            <h:column>
-                <f:facet name="header">ID</f:facet>
-                    #{a.id}
-            </h:column>
-            <h:column>
-                <f:facet name="header">Mail</f:facet>
-                    #{a.mail}
-            </h:column>
-            <h:column>
-                <f:facet name="header">Baslik</f:facet>
-                    #{a.baslik}
-            </h:column>
-            <h:column>
-                <f:facet name="header">Konu</f:facet>
-                    #{a.konu}
-            </h:column>
-        </h:dataTable>
+        <h:form>
+            <h:dataTable value="#{iletisimBean.read}" var="a" class="table table-striped">
+                <h:column>
+                    <f:facet name="header">ID</f:facet>
+                        #{a.id}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Mail</f:facet>
+                        #{a.mail}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Baslik</f:facet>
+                        #{a.baslik}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Konu</f:facet>
+                        #{a.konu}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">İşlemler</f:facet>
+                    <h:commandButton class="btn btn-danger" action="#{iletisimBean.delete(a.id)}" value="Sil"/>
+                </h:column>
+            </h:dataTable>
+        </h:form>
     </ui:define>
 </ui:composition>
