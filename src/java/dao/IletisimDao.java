@@ -22,7 +22,7 @@ public class IletisimDao extends DBConnection {
     public void create(Iletisim i) {
         try {
             Statement st = this.connect().createStatement();
-            st.executeUpdate("insert into iletisim(mail,Baslik,Konu) values('" + i.getMail()+ "','" + i.getBaslik() + "','" + i.getKonu() + "')");
+            st.executeUpdate("insert into iletisim(mail,Baslik,Konu) values('" + i.getMail() + "','" + i.getBaslik() + "','" + i.getKonu() + "')");
         } catch (SQLException e) {
             System.out.println("Hata(IletisimDao(Create)): " + e.getMessage());
         }
@@ -43,8 +43,14 @@ public class IletisimDao extends DBConnection {
         }
         return list;
     }
-    
 
-
+    public void delete(int f) {
+        try {
+            Statement st = this.connect().createStatement();
+            st.executeUpdate("delete from iletisim where id=" + f);
+        } catch (SQLException e) {
+            System.out.println("Hata(İletişimDao(Delete)):" + e.getMessage());
+        }
+    }
 
 }

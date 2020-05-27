@@ -50,6 +50,11 @@ public class IletisimBean implements Serializable{
     public List<Iletisim> getRead(){
         return this.getDao().read();
     }
+    
+        public void delete(int c) {
+        this.getDao().delete(c);
+
+    }
 
     public IletisimDao getDao() {
         if (dao == null) {
