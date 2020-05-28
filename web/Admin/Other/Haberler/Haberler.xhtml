@@ -8,23 +8,29 @@
 
     <ui:define name="content">
         <h:form>
-            <h:commandButton class="btn btn-primary" action="/Admin/Other/Haberler/Create" value="Yeni Kullanıcı Ekle"/>
+            <div class="m-3">
+                <h:commandButton class="btn btn-primary" action="/Admin/Other/Haberler/Create" value="Yeni Kullanıcı Ekle"/>
+            </div>
 
-            <h:dataTable value="#{haberlerBean.read}" var="c" class="table table-striped">
-                <h:column>
-                    <f:facet name="header">ID</f:facet>
-                        #{c.haber_id}
-                </h:column>
-                <h:column>
-                    <f:facet name="header">Haber</f:facet>
-                        #{c.haber}
-                </h:column>
-                <h:column>
-                    <f:facet name="header">İşlemler</f:facet>
-                    <h:commandButton class="btn btn-warning" action="#{haberlerBean.updateForm(c)}" value="Güncelle"/>
-                    <h:commandButton class="btn btn-danger" action="#{haberlerBean.delete(c.haber_id)}" value="Sil"/>
-                </h:column>
-            </h:dataTable>
+            <div class="m-3">
+                <h:dataTable value="#{haberlerBean.read}" var="c" class="table table-striped">
+                    <h:column>
+                        <f:facet name="header">ID</f:facet>
+                            #{c.haber_id}
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Haber</f:facet>
+                            #{c.haber}
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">İşlemler</f:facet>
+                        <div class="btn-group">
+                            <h:commandButton class="btn btn-warning" action="#{haberlerBean.updateForm(c)}" value="Güncelle"/>
+                            <h:commandButton class="btn btn-danger" action="#{haberlerBean.delete(c.haber_id)}" value="Sil"/>
+                        </div>
+                    </h:column>
+                </h:dataTable>
+            </div>
         </h:form>
     </ui:define>
 </ui:composition>

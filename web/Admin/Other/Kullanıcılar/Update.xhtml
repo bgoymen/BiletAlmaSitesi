@@ -7,10 +7,14 @@
 
     <ui:define name="content">
         <h:form>
-            Mail: <h:inputText class="form-control" value="#{userBean.entity.user_mail}" required="true" requiredMessage="Lütfen bir mail giriniz"/>
-            Kullanıcı Adı: <h:inputText class="form-control" value="#{userBean.entity.user_name}" required="true" requiredMessage="Lütfen bir kullanıcı giriniz"/>
-            Kullanıcı Şifresi: <h:inputText class="form-control" value="#{userBean.entity.user_password}" required="true" requiredMessage="Lütfen bir şifre griniz"/>
-            <h:commandButton class="btn btn-success" action="#{userBean.update()}" value="Güncelle"/>
+            <div class="m-3">
+                Mail: <h:inputText class="form-control" value="#{userBean.entity.user_mail}" required="true" requiredMessage="Lütfen bir mail giriniz"/>
+                Kullanıcı Adı: <h:inputText class="form-control" value="#{userBean.entity.user_name}" required="true" requiredMessage="Lütfen bir kullanıcı giriniz"/>
+                Kullanıcı Şifresi: <h:inputText class="form-control" value="#{userBean.entity.user_password}" required="true" requiredMessage="Lütfen bir şifre griniz"/>
+            </div>
+            <div class="m-3">
+                <h:commandButton class="btn btn-success" action="#{userBean.update()}" value="Güncelle"/>
+            </div>
         </h:form>
     </ui:define>
 </ui:composition>

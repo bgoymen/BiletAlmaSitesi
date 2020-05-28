@@ -7,8 +7,10 @@
 
     <ui:define name="content">
         <h:form>
-            Haber: <h:inputText class="form-control" value="#{haberlerBean.entity.haber}" required="true" requiredMessage="Lütfen bir Haber giriniz"/>
-            <h:commandButton class="btn btn-primary" action="#{haberlerBean.create()}" value="Haberi Ekle"/>
+            <p class="m-3">Haber: <h:inputText class="form-control" value="#{haberlerBean.entity.haber}" required="true" requiredMessage="Lütfen bir Haber giriniz"/></p>
+            <div class="m-3">
+                <h:commandButton class="btn btn-primary" action="#{haberlerBean.create()}" value="Haberi Ekle"/>
+            </div>
         </h:form>
     </ui:define>
 </ui:composition>

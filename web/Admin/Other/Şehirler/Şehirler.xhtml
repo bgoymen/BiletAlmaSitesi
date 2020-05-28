@@ -8,9 +8,12 @@
 
     <ui:define name="content">
         <h:form>
-            <h:commandButton class="btn btn-primary" action="/Admin/Other/Şehirler/Create" value="Yeni Şehir Ekle"/>
+            <div class="m-3">
+                <h:commandButton class="btn btn-primary" action="/Admin/Other/Şehirler/Create" value="Yeni Şehir Ekle"/>
+            </div>
 
-            <h:dataTable value="#{sehirlerBean.read}" var="s" class="table table-striped">
+            <div class="m-3">
+                <h:dataTable value="#{sehirlerBean.read}" var="s" class="table table-striped">
                 <h:column>
                     <f:facet name="header">ID</f:facet>
                         #{s.id}
@@ -21,10 +24,13 @@
                 </h:column>
                 <h:column>
                     <f:facet name="header">İşlemler</f:facet>
-                    <h:commandButton class="btn btn-warning" action="#{sehirlerBean.updateForm(s)}" value="Güncelle"/>
-                    <h:commandButton class="btn btn-danger" action="#{sehirlerBean.delete(s.id)}" value="Sil"/>
+                    <div class="btn-group">
+                        <h:commandButton class="btn btn-warning" action="#{sehirlerBean.updateForm(s)}" value="Güncelle"/>
+                        <h:commandButton class="btn btn-danger" action="#{sehirlerBean.delete(s.id)}" value="Sil"/>
+                    </div>
                 </h:column>
             </h:dataTable>
+            </div>
         </h:form>
     </ui:define>
 </ui:composition>

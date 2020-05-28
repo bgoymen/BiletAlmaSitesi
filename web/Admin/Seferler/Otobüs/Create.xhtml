@@ -9,25 +9,35 @@
     <ui:define name="content">
         <h:form>
 
-            <h:selectOneMenu class="custom-select" value="#{otobus_SeferleriBean.entity.firma_id}"  required="true">
-                Otobüs Firması Seçiniz:<f:selectItems value="#{otobus_FirmalariBean.read}"  var="a"  itemLabel="#{a.name}" itemValue="#{a.id}"/>
-            </h:selectOneMenu>
-            <h:selectOneMenu class="custom-select" value="#{otobus_SeferleriBean.entity.kalkis_nok}"  required="true">
-                Kalkış Noktası Seçiniz: <f:selectItems value="#{sehirlerBean.read}"  var="b"  itemLabel="#{b.name}" itemValue="#{b.id}" />
-            </h:selectOneMenu>
-            <h:selectOneMenu class="custom-select" value="#{otobus_SeferleriBean.entity.varis_nok}"  required="true">
-                Varış Noktası Seçiniz: <f:selectItems value="#{sehirlerBean.read}"  var="c"  itemLabel="#{c.name}" itemValue="#{c.id}" />
-            </h:selectOneMenu>
-            <h:selectOneMenu class="custom-select" value="#{otobus_SeferleriBean.entity.koltuk_Sayisi}"  required="true">
-                Koltuk Sayısını Seçiniz: 
-                <f:selectItem   itemLabel="10" itemValue="10" />
-                <f:selectItem   itemLabel="20" itemValue="20" />
-                <f:selectItem   itemLabel="30" itemValue="30" />
-                <f:selectItem   itemLabel="40" itemValue="40" />
-                <f:selectItem   itemLabel="50" itemValue="50" />
-            </h:selectOneMenu>
+            <div class="m-3">
+                <h:selectOneMenu class="custom-select" value="#{otobus_SeferleriBean.entity.firma_id}"  required="true">
+                    <p class="m-3">Otobüs Firması Seçiniz:</p><f:selectItems value="#{otobus_FirmalariBean.read}"  var="a"  itemLabel="#{a.name}" itemValue="#{a.id}"/>
+                </h:selectOneMenu>
+            </div>
+            <div class="m-3">
+                <h:selectOneMenu class="custom-select" value="#{otobus_SeferleriBean.entity.kalkis_nok}"  required="true">
+                    <p class="m-3">Kalkış Noktası Seçiniz: </p><f:selectItems value="#{sehirlerBean.read}"  var="b"  itemLabel="#{b.name}" itemValue="#{b.id}" />
+                </h:selectOneMenu>
+            </div>
+            <div class="m-3">
+                <h:selectOneMenu class="custom-select" value="#{otobus_SeferleriBean.entity.varis_nok}"  required="true">
+                    <p class="m-3">Varış Noktası Seçiniz: </p><f:selectItems value="#{sehirlerBean.read}"  var="c"  itemLabel="#{c.name}" itemValue="#{c.id}" />
+                </h:selectOneMenu>
+            </div>
+            <div class="m-3">
+                <h:selectOneMenu class="custom-select" value="#{otobus_SeferleriBean.entity.koltuk_Sayisi}"  required="true">
+                    <p class="m-3">Koltuk Sayısını Seçiniz: </p> 
+                    <f:selectItem   itemLabel="10" itemValue="10" />
+                    <f:selectItem   itemLabel="20" itemValue="20" />
+                    <f:selectItem   itemLabel="30" itemValue="30" />
+                    <f:selectItem   itemLabel="40" itemValue="40" />
+                    <f:selectItem   itemLabel="50" itemValue="50" />
+                </h:selectOneMenu>
+            </div>
 
-            <h:commandButton class="btn btn-primary" action="#{otobus_SeferleriBean.create()}" value="Seferi Ekle"/>
+            <div class="m-3">
+                <h:commandButton class="btn btn-primary" action="#{otobus_SeferleriBean.create()}" value="Seferi Ekle"/>
+            </div>
 
         </h:form>
     </ui:define>

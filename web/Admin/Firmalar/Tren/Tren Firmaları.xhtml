@@ -8,25 +8,29 @@
 
     <ui:define name="content">
         <h:form>
-            <h:commandButton class="btn btn-primary" action="/Admin/Firmalar/Tren/Create" value="Yeni Tren Firması Ekle"/>
+            <div class="m-3">
+                <h:commandButton class="btn btn-primary" action="/Admin/Firmalar/Tren/Create" value="Yeni Tren Firması Ekle"/>
+            </div>
 
-            <h:dataTable value="#{tren_FirmalariBean.read}" var="f" class="table table-striped">
-                <h:column>
-                    <f:facet name="header">ID</f:facet>
-                        #{f.id}
-                </h:column>
-                <h:column>
-                    <f:facet name="header">Firma Adı</f:facet>
-                        #{f.name}
-                </h:column>
-                <h:column>
-                    <f:facet name="header">İşlemler</f:facet>
-                    <div class="btn-group" role="group" >
-                        <h:commandButton class="btn btn-warning" action="#{tren_FirmalariBean.updateForm(f)}" value="Güncelle"/>
-                        <h:commandButton class="btn btn-danger" action="#{tren_FirmalariBean.delete(f.id)}" value="Sil"/>
-                    </div>
-                </h:column>
-            </h:dataTable>
+            <div class="m-3">
+                <h:dataTable value="#{tren_FirmalariBean.read}" var="f" class="table table-striped">
+                    <h:column>
+                        <f:facet name="header">ID</f:facet>
+                            #{f.id}
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Firma Adı</f:facet>
+                            #{f.name}
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">İşlemler</f:facet>
+                        <div class="btn-group" role="group" >
+                            <h:commandButton class="btn btn-warning" action="#{tren_FirmalariBean.updateForm(f)}" value="Güncelle"/>
+                            <h:commandButton class="btn btn-danger" action="#{tren_FirmalariBean.delete(f.id)}" value="Sil"/>
+                        </div>
+                    </h:column>
+                </h:dataTable>
+            </div>
         </h:form>
     </ui:define>
 </ui:composition>

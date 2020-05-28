@@ -10,18 +10,26 @@
     </h:head>
     <h:body class="background">
         <div class="container,warp,iletisim" >
-            
+
             <h:form>
-                <h:commandButton class="btn btn-primary" action="index" value="Geri Dön"/>
+                <div>
+                    <h:commandButton class="btn btn-primary" action="index" value="Geri Dön"/>
+                </div>
             </h:form>
             <br/>
-            <p class="iletisim" id="iletisim3">Iletisim</p>
+            <div class="m-3">
+                <p class="iletisim" id="iletisim3">Iletisim</p>
+            </div>
 
-            <h:form class ="iletisim">
-                <p>E-postanız: <h:inputText class="form-control" value="#{iletisimBean.entity.mail}" required="true" requiredMessage="E-posta Alanı Boş Olamaz"/></p>
-                <p>İletişimde Bulunmak İstediğiniz Başlık: <h:inputText class="form-control" value="#{iletisimBean.entity.baslik}" required="true" requiredMessage="Başlık Alanı Boş Olamaz"/> </p>
-                <p>Konu: <h:inputText class="form-control" value="#{iletisimBean.entity.konu}" required="true" requiredMessage="Konu Alanı boş olamaz"/> </p>
-                <h:commandButton class="btn btn-success" action="#{iletisimBean.control}" value="İlet"/>
+            <h:form>
+                <div class ="iletisim">
+                    <p class="m-3">E-postanız: <h:inputText class="form-control" value="#{iletisimBean.entity.mail}" required="true" requiredMessage="E-posta Alanı Boş Olamaz"/></p>
+                    <p class="m-3">İletişimde Bulunmak İstediğiniz Başlık: <h:inputText class="form-control" value="#{iletisimBean.entity.baslik}" required="true" requiredMessage="Başlık Alanı Boş Olamaz"/> </p>
+                    <p class="m-3">Konu: <h:inputText class="form-control" value="#{iletisimBean.entity.konu}" required="true" requiredMessage="Konu Alanı boş olamaz"/> </p>
+                    <div class = "m-3">
+                        <h:commandButton class="btn btn-success" action="#{iletisimBean.control}" value="İlet"/>
+                    </div>
+                </div>
             </h:form>
 
         </div>

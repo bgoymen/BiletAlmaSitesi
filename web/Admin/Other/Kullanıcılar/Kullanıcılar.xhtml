@@ -8,32 +8,38 @@
 
     <ui:define name="content">
         <h:form>
-            <h:commandButton class="btn btn-primary" action="/Admin/Other/Kullanıcılar/Create" value="Yeni Kullanıcı Ekle"/>
+            <div class="m-3">
+                <h:commandButton class="btn btn-primary" action="/Admin/Other/Kullanıcılar/Create" value="Yeni Kullanıcı Ekle"/>
+            </div>
 
-            <h:dataTable value="#{userBean.read}" var="c" class="table table-striped">
-                <h:column>
-                    <f:facet name="header">ID</f:facet>
-                        #{c.id}
-                </h:column>
-                <h:column>
-                    <f:facet name="header">Mail</f:facet>
-                        #{c.user_mail}
-                </h:column>
-                <h:column>
-                    <f:facet name="header">Kullanıcı Adı</f:facet>
-                        #{c.user_name}
-                </h:column>
-                <h:column>
-                    <f:facet name="header">Şifre</f:facet>
-                        #{c.user_password}
-                </h:column>
+            <div class="m-3">
+                <h:dataTable value="#{userBean.read}" var="c" class="table table-striped">
+                    <h:column>
+                        <f:facet name="header">ID</f:facet>
+                            #{c.id}
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Mail</f:facet>
+                            #{c.user_mail}
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Kullanıcı Adı</f:facet>
+                            #{c.user_name}
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Şifre</f:facet>
+                            #{c.user_password}
+                    </h:column>
 
-                <h:column>
-                    <f:facet name="header">İşlemler</f:facet>
-                    <h:commandButton class="btn btn-warning" action="#{userBean.updateForm(c)}" value="Güncelle"/>
-                    <h:commandButton class="btn btn-danger" action="#{userBean.delete(c.id)}" value="Sil"/>
-                </h:column>
-            </h:dataTable>
+                    <h:column>
+                        <f:facet name="header">İşlemler</f:facet>
+                        <div class="btn-group">
+                            <h:commandButton class="btn btn-warning" action="#{userBean.updateForm(c)}" value="Güncelle"/>
+                            <h:commandButton class="btn btn-danger" action="#{userBean.delete(c.id)}" value="Sil"/>
+                        </div>
+                    </h:column>
+                </h:dataTable>
+            </div>
         </h:form>
     </ui:define>
 </ui:composition>

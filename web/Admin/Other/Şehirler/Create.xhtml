@@ -7,8 +7,10 @@
 
     <ui:define name="content">
         <h:form>
-            Şehrin Adı: <h:inputText class="form-control" value="#{sehirlerBean.entity.name}" required="true" requiredMessage="Lütfen bir Şehir Adı giriniz"/>
-            <h:commandButton class="btn btn-primary" action="#{sehirlerBean.create()}" value="Şehri Ekle"/>
+            <p class="m-3">Şehrin Adı: <h:inputText class="form-control" value="#{sehirlerBean.entity.name}" required="true" requiredMessage="Lütfen bir Şehir Adı giriniz"/></p>
+            <div class="m-3">
+                <h:commandButton class="btn btn-primary" action="#{sehirlerBean.create()}" value="Şehri Ekle"/>
+            </div>
         </h:form>
     </ui:define>
 </ui:composition>

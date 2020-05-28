@@ -7,8 +7,10 @@
 
     <ui:define name="content">
         <h:form>
-            Uçak Firması Adı: <h:inputText class="form-control" value="#{ucak_FirmalariBean.entity.name}" required="true" requiredMessage="Lütfen bir Ad giriniz"/>
-            <h:commandButton class="btn btn-primary" action="#{ucak_FirmalariBean.update()}" value="Uçak Firmasını Güncelle"/>
+            <p class="m-3">Uçak Firması Adı: <h:inputText class="form-control" value="#{ucak_FirmalariBean.entity.name}" required="true" requiredMessage="Lütfen bir Ad giriniz"/></p>
+            <div class="m-3">
+                <h:commandButton class="btn btn-primary" action="#{ucak_FirmalariBean.update()}" value="Uçak Firmasını Güncelle"/>
+            </div>
         </h:form>
     </ui:define>
 </ui:composition>
