@@ -17,8 +17,25 @@ import util.DBConnection;
  *
  * @author Göymen
  */
-public class Tren_FirmalariDao extends DBConnection{
-        public void create(Tren_Firmalari f) {
+public class Tren_FirmalariDao extends DBConnection {
+
+    public Tren_Firmalari getById(int id) {
+        Tren_Firmalari f = null;
+
+        try {
+            Statement st = this.connect().createStatement();
+            ResultSet rs = st.executeQuery("select * from tren_firmalari where id=" + id);
+            rs.next();
+
+            f = new Tren_Firmalari(rs.getInt("id"), rs.getString("Name"));
+        } catch (SQLException e) {
+            System.out.println("Hata(OtobusFirmalariDao(getById)): " + e.getMessage());
+        }
+
+        return f;
+    }
+
+    public void create(Tren_Firmalari f) {
         try {
             Statement st = this.connect().createStatement();
             st.executeUpdate("insert into tren_firmalari(Name) values('" + f.getName() + "')");

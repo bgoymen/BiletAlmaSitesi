@@ -5,8 +5,8 @@
  */
 package controller;
 
-import dao.Tren_FirmalariDao;
-import entity.Tren_Firmalari;
+import dao.Tren_SeferleriDao;
+import entity.Tren_Seferleri;
 import java.io.Serializable;
 import java.util.List;
 import javax.enterprise.context.SessionScoped;
@@ -18,28 +18,28 @@ import javax.inject.Named;
  */
 @Named
 @SessionScoped
-public class Tren_FirmalariBean implements Serializable {
+public class Tren_SeferleriBean implements Serializable {
 
-    private Tren_FirmalariDao dao;
-    private Tren_Firmalari entity;
+    private Tren_SeferleriDao dao;
+    private Tren_Seferleri entity;
 
     public String create() {
         this.getDao().create(entity);
-        return "/Admin/Firmalar/Tren/Tren Firmaları";
+        return "/Admin/Seferler/Tren/Tren Seferleri";
     }
 
-    public List<Tren_Firmalari> getRead() {
+    public List<Tren_Seferleri> getRead() {
         return this.getDao().read();
     }
 
-    public String updateForm(Tren_Firmalari f) {
-        this.entity = f;
-        return "/Admin/Firmalar/Tren/Update";
+    public String updateForm(Tren_Seferleri s) {
+        this.entity = s;
+        return "/Admin/Seferler/Tren/Update";
     }
 
     public String update() {
         this.getDao().update(entity);
-        return "/Admin/Firmalar/Tren/Tren Firmaları";
+        return "/Admin/Seferler/Tren/Tren Seferleri";
     }
 
     public void delete(int c) {
@@ -47,37 +47,33 @@ public class Tren_FirmalariBean implements Serializable {
 
     }
 
-    public Tren_Firmalari getById(int id) {
-        return this.getDao().getById(id);
+    public Tren_SeferleriBean() {
     }
 
-    public Tren_FirmalariBean() {
-    }
-
-    public Tren_FirmalariBean(Tren_FirmalariDao dao, Tren_Firmalari entity) {
+    public Tren_SeferleriBean(Tren_SeferleriDao dao, Tren_Seferleri entity) {
         this.dao = dao;
         this.entity = entity;
     }
 
-    public Tren_FirmalariDao getDao() {
+    public Tren_SeferleriDao getDao() {
         if (this.dao == null) {
-            dao = new Tren_FirmalariDao();
+            dao = new Tren_SeferleriDao();
         }
         return dao;
     }
 
-    public void setDao(Tren_FirmalariDao dao) {
+    public void setDao(Tren_SeferleriDao dao) {
         this.dao = dao;
     }
 
-    public Tren_Firmalari getEntity() {
+    public Tren_Seferleri getEntity() {
         if (this.entity == null) {
-            entity = new Tren_Firmalari();
+            entity = new Tren_Seferleri();
         }
         return entity;
     }
 
-    public void setEntity(Tren_Firmalari entity) {
+    public void setEntity(Tren_Seferleri entity) {
         this.entity = entity;
     }
 
