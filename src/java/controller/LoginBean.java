@@ -22,23 +22,25 @@ import javax.inject.Named;
  */
 @Named
 @SessionScoped
-public class LoginBean implements Serializable{
+public class LoginBean implements Serializable {
+
     private UsersDao dao;
 
     private Users entity;
-    
-    public String control() throws SQLException{
+
+    public String control() throws SQLException {
         ResultSet rs = getRead();
-        if(rs == null){
+        if (rs == null) {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Kullanıcı Adı Veya Şifre Hatalı"));
             return null;
-        }else{
-            while(rs.next()){
-                if((rs.getString("user_mail").equals(entity.getUser_mail())) && (rs.getString("user_password").equals(entity.getUser_password()))){
-                    if(rs.getString("type").equals("0")){
+        } else {
+            while (rs.next()) {
+                if ((rs.getString("user_mail").equals(entity.getUser_mail())) && (rs.getString("user_password").equals(entity.getUser_password()))) {
+                    if (rs.getString("type").equals("0")) {
+                        entity.setId(rs.getInt("id"));
+                        entity.setUser_name(rs.getString("user_name"));
                         return "Standart/Standart";
-                    }
-                    else if(rs.getString("type").equals("1")){
+                    } else if (rs.getString("type").equals("1")) {
                         return "Admin/Admin";
                     }
                 }
@@ -52,30 +54,33 @@ public class LoginBean implements Serializable{
 //        this.getDao().create(entity);
 //        return "index";
 //    }
-    
     public ResultSet getRead() {
         return this.getDao().read2();
+    }
+    
+        public String updateForm(Users c) {
+        this.entity = c;
+        return "/Standart/Ayarlar";
+    }
+
+    public String update() {
+        this.getDao().update(entity);
+        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Bilgileriniz Güncellendi"));
+        return "/Standart/Ayarlar";
     }
 
 //    public List<Users> getRead() {
 //        return this.getDao().read();
 //    }
 
-//    public String updateForm(Users c) {
-//        this.entity = c;
-//        return "Update";
-//    }
-
 //    public String update() {
 //        this.getDao().update(entity);
 //        return "index";
 //    }
-
 //    public void delete(int c) {
 //        this.getDao().delete(c);
 //
 //    }
-
     public LoginBean() {
     }
 

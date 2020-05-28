@@ -46,6 +46,10 @@ public class SehirlerBean implements Serializable {
         this.getDao().delete(c);
 
     }
+    
+    public Sehirler getById(int id){
+        return this.getDao().getById(id);
+    }
 
     public SehirlerBean() {
     }

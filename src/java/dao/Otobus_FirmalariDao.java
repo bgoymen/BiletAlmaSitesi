@@ -19,6 +19,23 @@ import util.DBConnection;
  */
 public class Otobus_FirmalariDao extends DBConnection {
 
+    public Otobus_Firmalari getById(int id) {
+        Otobus_Firmalari f = null;
+
+        try {
+            Statement st = this.connect().createStatement();
+            ResultSet rs = st.executeQuery("select * from otobus_firmalari where id=" + id);
+            rs.next();
+            
+            f = new Otobus_Firmalari(rs.getInt("id"), rs.getString("Name"));
+        }
+        catch(SQLException e){
+            System.out.println("Hata(OtobusFirmalariDao(getById)): " + e.getMessage());
+    }
+        
+        return f;
+    }
+
     public void create(Otobus_Firmalari f) {
         try {
             Statement st = this.connect().createStatement();

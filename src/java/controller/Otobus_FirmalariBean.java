@@ -22,6 +22,8 @@ public class Otobus_FirmalariBean implements Serializable {
 
     private Otobus_FirmalariDao dao;
     private Otobus_Firmalari entity;
+    
+
 
     public String create() {
         this.getDao().create(entity);
@@ -30,6 +32,10 @@ public class Otobus_FirmalariBean implements Serializable {
 
     public List<Otobus_Firmalari> getRead() {
         return this.getDao().read();
+    }
+    
+    public Otobus_Firmalari getById(int id){
+        return this.getDao().getById(id);
     }
 
     public String updateForm(Otobus_Firmalari f) {

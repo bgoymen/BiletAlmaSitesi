@@ -21,8 +21,10 @@
                 </h:column>
                 <h:column>
                     <f:facet name="header">İşlemler</f:facet>
-                    <h:commandButton class="btn btn-warning" action="#{otobus_FirmalariBean.updateForm(f)}" value="Güncelle"/>
-                    <h:commandButton class="btn btn-danger" action="#{otobus_FirmalariBean.delete(f.id)}" value="Sil"/>
+                    <div class="btn-group" role="group">
+                        <h:commandButton class="btn btn-warning" action="#{otobus_FirmalariBean.updateForm(f)}" value="Güncelle"/>
+                        <h:commandButton class="btn btn-danger" action="#{otobus_FirmalariBean.delete(f.id)}" value="Sil"/>
+                    </div>
                 </h:column>
             </h:dataTable>
         </h:form>

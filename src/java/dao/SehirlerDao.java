@@ -44,6 +44,23 @@ public class SehirlerDao extends DBConnection {
 
         return list;
     }
+    
+    public Sehirler getById(int id) {
+        Sehirler s = null;
+
+        try {
+            Statement st = this.connect().createStatement();
+            ResultSet rs = st.executeQuery("select * from sehirler where id=" + id);
+            rs.next();
+            
+            s = new Sehirler(rs.getInt("id"), rs.getString("Name"));
+        }
+        catch(SQLException e){
+            System.out.println("Hata(OtobusFirmalariDao(getById)): " + e.getMessage());
+    }
+        
+        return s;
+    }
 
     public void update(Sehirler s) {
         try {

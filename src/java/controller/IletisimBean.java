@@ -20,38 +20,37 @@ import javax.inject.Named;
  */
 @Named
 @SessionScoped
-public class IletisimBean implements Serializable{
+public class IletisimBean implements Serializable {
 
     private IletisimDao dao;
 
     private Iletisim entity;
-    
-        public String control(){
-        if((entity.getMail() == null) || (entity.getBaslik() == null) || (entity.getKonu() == null)){
+
+    public String control() {
+        if ((entity.getMail() == null) || (entity.getBaslik() == null) || (entity.getKonu() == null)) {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Bir hata Meyadan Geldi"));
             System.out.println(entity.getMail());
             System.out.println(entity.getBaslik());
             System.out.println(entity.getKonu());
             return null;
-        }
-        else{
+        } else {
             create();
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("İşlem Başarılı Bir Şekilde Gerçekleşti"));
             return null;
         }
-        
+
     }
 
     public String create() {
         this.getDao().create(entity);
         return "index";
     }
-    
-    public List<Iletisim> getRead(){
+
+    public List<Iletisim> getRead() {
         return this.getDao().read();
     }
-    
-        public void delete(int c) {
+
+    public void delete(int c) {
         this.getDao().delete(c);
 
     }
@@ -85,6 +84,5 @@ public class IletisimBean implements Serializable{
         this.dao = dao;
         this.entity = entity;
     }
-    
 
 }

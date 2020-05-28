@@ -21,8 +21,10 @@
                 </h:column>
                 <h:column>
                     <f:facet name="header">İşlemler</f:facet>
+                    <div class="btn-group" role="group">
                     <h:commandButton class="btn btn-warning" action="#{ucak_FirmalariBean.updateForm(f)}" value="Güncelle"/>
                     <h:commandButton class="btn btn-danger" action="#{ucak_FirmalariBean.delete(f.id)}" value="Sil"/>
+                    </div>
                 </h:column>
             </h:dataTable>
         </h:form>

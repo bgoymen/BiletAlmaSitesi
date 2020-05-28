@@ -71,7 +71,7 @@ public class UsersDao extends DBConnection {
     public void delete(int c) {
         try {
             Statement st = this.connect().createStatement();
-            st.executeUpdate("delete from user where id="+c);
+            st.executeUpdate("delete from users where id="+c);
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
