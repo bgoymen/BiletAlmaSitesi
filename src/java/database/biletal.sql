@@ -56,16 +56,22 @@ CREATE TABLE IF NOT EXISTS `otobus_firmalari` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `Name` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=latin1;
 
--- biletal.otobus_firmalari: ~4 rows (yaklaşık) tablosu için veriler indiriliyor
+-- biletal.otobus_firmalari: ~10 rows (yaklaşık) tablosu için veriler indiriliyor
 DELETE FROM `otobus_firmalari`;
 /*!40000 ALTER TABLE `otobus_firmalari` DISABLE KEYS */;
 INSERT INTO `otobus_firmalari` (`id`, `Name`) VALUES
 	(1, 'Seç'),
 	(2, 'KamilKoç'),
 	(3, 'Beydagi'),
-	(4, 'Ben');
+	(4, 'Ben'),
+	(7, 'Zafer2'),
+	(8, 'Metro'),
+	(9, 'Malatya Medine Turizm'),
+	(10, 'Yeni Adana'),
+	(11, 'Star DiyarBak?r'),
+	(12, 'Kay?s?Kent');
 /*!40000 ALTER TABLE `otobus_firmalari` ENABLE KEYS */;
 
 -- tablo yapısı dökülüyor biletal.otobus_seferleri
@@ -74,6 +80,7 @@ CREATE TABLE IF NOT EXISTS `otobus_seferleri` (
   `firma_id` int(10) unsigned NOT NULL DEFAULT 0,
   `kalkis_nok` int(10) unsigned NOT NULL,
   `varis_nok` int(10) unsigned NOT NULL,
+  `koltuk_sayisi` int(10) unsigned NOT NULL DEFAULT 10,
   PRIMARY KEY (`id`),
   KEY `firma_id_fk` (`firma_id`),
   KEY `kalkis_nok_fk` (`kalkis_nok`),
@@ -81,11 +88,17 @@ CREATE TABLE IF NOT EXISTS `otobus_seferleri` (
   CONSTRAINT `firma_id_fk` FOREIGN KEY (`firma_id`) REFERENCES `otobus_firmalari` (`id`),
   CONSTRAINT `kalkis_nok_fk` FOREIGN KEY (`kalkis_nok`) REFERENCES `sehirler` (`id`),
   CONSTRAINT `varis_nok_fk` FOREIGN KEY (`varis_nok`) REFERENCES `sehirler` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=latin1;
 
--- biletal.otobus_seferleri: ~0 rows (yaklaşık) tablosu için veriler indiriliyor
+-- biletal.otobus_seferleri: ~5 rows (yaklaşık) tablosu için veriler indiriliyor
 DELETE FROM `otobus_seferleri`;
 /*!40000 ALTER TABLE `otobus_seferleri` DISABLE KEYS */;
+INSERT INTO `otobus_seferleri` (`id`, `firma_id`, `kalkis_nok`, `varis_nok`, `koltuk_sayisi`) VALUES
+	(5, 2, 1, 5, 10),
+	(9, 2, 2, 5, 20),
+	(12, 8, 3, 8, 30),
+	(13, 10, 11, 3, 20),
+	(14, 9, 7, 11, 50);
 /*!40000 ALTER TABLE `otobus_seferleri` ENABLE KEYS */;
 
 -- tablo yapısı dökülüyor biletal.satin_alinan_bilet
@@ -104,16 +117,22 @@ CREATE TABLE IF NOT EXISTS `sehirler` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `Name` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=latin1;
 
--- biletal.sehirler: ~4 rows (yaklaşık) tablosu için veriler indiriliyor
+-- biletal.sehirler: ~10 rows (yaklaşık) tablosu için veriler indiriliyor
 DELETE FROM `sehirler`;
 /*!40000 ALTER TABLE `sehirler` DISABLE KEYS */;
 INSERT INTO `sehirler` (`id`, `Name`) VALUES
 	(1, '?stanbul'),
 	(2, 'Ankara'),
 	(3, 'Trabzon'),
-	(5, 'Malatya');
+	(5, 'Malatya'),
+	(6, 'Antalya'),
+	(7, 'Bolu'),
+	(8, 'Van'),
+	(9, 'Manisa'),
+	(10, 'Samsun'),
+	(11, 'Sivas');
 /*!40000 ALTER TABLE `sehirler` ENABLE KEYS */;
 
 -- tablo yapısı dökülüyor biletal.tren_firmalari
@@ -205,7 +224,7 @@ INSERT INTO `users` (`id`, `user_mail`, `user_name`, `user_password`, `type`) VA
 	(3, 'istedigimmail@gmail.com', 'istedigimkullaiciadi', 'istedigimsifre', 0),
 	(4, 'yenilendi8', ' yenilendi9', 'yenilendi10', 0),
 	(5, 'antepli@gmail.com', 'antepli', 'antepli123', 0),
-	(18, 'bgoymen35', 'bgoymen22', 'bgoymen23', 0),
+	(18, 'bgoymen55', 'bgoymen25', 'bgoymen55', 0),
 	(21, 'deneme', 'deneme', 'deneme', 0),
 	(22, 'deneme3', 'deneme3', 'deneme3', 0),
 	(23, 'ssadssdgdfhdzfhz', 'ffdhdfhs', 'hfdhdhdhz', 0),
