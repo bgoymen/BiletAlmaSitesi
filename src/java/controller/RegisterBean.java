@@ -22,26 +22,23 @@ import javax.inject.Named;
  */
 @Named
 @SessionScoped
-public class RegisterBean implements Serializable{
+public class RegisterBean implements Serializable {
 
     private UsersDao dao;
 
     private Users entity;
 
     public String control() throws SQLException {
-        ResultSet rs = getRead2();
-        if (rs == null) {
-            return "Login";
-        } else {
-            while (rs.next()) {
-                if (rs.getString("user_mail").equals(entity.getUser_mail())) {
-                    FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Bu E-mail Alınamaz"));
-                    return "Register";
-                }
-            }
-            create();
+
+        boolean c = this.getDao().control(entity.getUser_mail());
+
+        if (c == false) {
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Bu E-mail Alınamaz"));
+            return "Register";
+        } else if (c == true) {
             return "Login";
         }
+        return null;
     }
 
     public void create() {

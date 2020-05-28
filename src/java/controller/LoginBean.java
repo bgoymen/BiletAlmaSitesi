@@ -29,25 +29,20 @@ public class LoginBean implements Serializable {
     private Users entity;
 
     public String control() throws SQLException {
-        ResultSet rs = getRead();
-        if (rs == null) {
+
+        Users u = this.getDao().control(entity.getUser_mail(), entity.getUser_password());
+
+        if (u == null) {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Kullanıcı Adı Veya Şifre Hatalı"));
             return null;
-        } else {
-            while (rs.next()) {
-                if ((rs.getString("user_mail").equals(entity.getUser_mail())) && (rs.getString("user_password").equals(entity.getUser_password()))) {
-                    if (rs.getString("type").equals("0")) {
-                        entity.setId(rs.getInt("id"));
-                        entity.setUser_name(rs.getString("user_name"));
-                        return "Standart/Standart";
-                    } else if (rs.getString("type").equals("1")) {
-                        return "Admin/Admin";
-                    }
-                }
-            }
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Kullanıcı Adı Veya Şifre Hatalı"));
-            return null;
+        } else if (u.getType() == 0) {
+            entity = u;
+            return "Standart/Standart";
+        } else if (u.getType() == 1) {
+            entity = u;
+            return "Admin/Admin";
         }
+        return null;
     }
 
 //    public String create() {
@@ -57,8 +52,8 @@ public class LoginBean implements Serializable {
     public ResultSet getRead() {
         return this.getDao().read2();
     }
-    
-        public String updateForm(Users c) {
+
+    public String updateForm(Users c) {
         this.entity = c;
         return "/Standart/Ayarlar";
     }
@@ -72,7 +67,6 @@ public class LoginBean implements Serializable {
 //    public List<Users> getRead() {
 //        return this.getDao().read();
 //    }
-
 //    public String update() {
 //        this.getDao().update(entity);
 //        return "index";
