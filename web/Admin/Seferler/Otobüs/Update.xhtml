@@ -18,6 +18,14 @@
             <h:selectOneMenu class="custom-select" value="#{otobus_SeferleriBean.entity.varis_nok}"  required="true">
                 Varış Noktası Seçiniz: <f:selectItems value="#{sehirlerBean.read}"  var="c"  itemLabel="#{c.name}" itemValue="#{c.id}" />
             </h:selectOneMenu>
+            <h:selectOneMenu class="custom-select" value="#{otobus_SeferleriBean.entity.koltuk_Sayisi}"  required="true">
+                Koltuk Sayısını Seçiniz: 
+                <f:selectItem   itemLabel="10" itemValue="10" />
+                <f:selectItem   itemLabel="20" itemValue="20" />
+                <f:selectItem   itemLabel="30" itemValue="30" />
+                <f:selectItem   itemLabel="40" itemValue="40" />
+                <f:selectItem   itemLabel="50" itemValue="50" />
+            </h:selectOneMenu>
 
             <h:commandButton class="btn btn-primary" action="#{otobus_SeferleriBean.update()}" value="Seferi Güncelle"/>
 

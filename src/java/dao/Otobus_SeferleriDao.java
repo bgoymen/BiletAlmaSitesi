@@ -21,7 +21,7 @@ public class Otobus_SeferleriDao extends DBConnection{
         public void create(Otobus_Seferleri f) {
         try {
             Statement st = this.connect().createStatement();
-            st.executeUpdate("insert into otobus_seferleri(firma_id,kalkis_nok, varis_nok) values(" + f.getFirma_id() + "," +f.getKalkis_nok() + "," + f.getVaris_nok() +")");
+            st.executeUpdate("insert into otobus_seferleri(firma_id,kalkis_nok, varis_nok,koltuk_sayisi) values(" + f.getFirma_id() + "," +f.getKalkis_nok() + "," + f.getVaris_nok() +"," + f.getKoltuk_Sayisi()+")");
             
         } catch (SQLException ex) {
             System.out.println("Hata(Otobus_SeferleriDao(Create)):" + ex.getMessage());
@@ -35,7 +35,7 @@ public class Otobus_SeferleriDao extends DBConnection{
             ResultSet rs = st.executeQuery("select * from otobus_seferleri order by id asc");
 
             while (rs.next()) {
-                Otobus_Seferleri tmp = new Otobus_Seferleri(rs.getInt("id"), rs.getInt("firma_id"), rs.getInt("kalkis_nok"), rs.getInt("varis_nok"));
+                Otobus_Seferleri tmp = new Otobus_Seferleri(rs.getInt("id"), rs.getInt("firma_id"), rs.getInt("kalkis_nok"), rs.getInt("varis_nok"), rs.getInt("koltuk_sayisi"));
                 
                 list.add(tmp);
             }
@@ -50,7 +50,7 @@ public class Otobus_SeferleriDao extends DBConnection{
     public void update(Otobus_Seferleri f) {
         try {
             Statement st = this.connect().createStatement();
-            st.executeUpdate("update otobus_seferleri set firma_id= '" + f.getFirma_id() + "', kalkis_nok= '" + f.getKalkis_nok() + "', varis_nok= '" +f.getVaris_nok()+"'where id=" + f.getId());
+            st.executeUpdate("update otobus_seferleri set firma_id= '" + f.getFirma_id() + "', kalkis_nok= '" + f.getKalkis_nok() + "', varis_nok= '" +f.getVaris_nok()+"',koltuk_sayisi= '"+f.getKoltuk_Sayisi()+"' where id=" + f.getId());
 
         } catch (SQLException e) {
             System.out.println("Hata(Otobus_SeferleriDao(Update)):" + e.getMessage());

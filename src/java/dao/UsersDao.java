@@ -67,9 +67,9 @@ public class UsersDao extends DBConnection {
             return null;
         }
     }
-    
-        public boolean control(String user_mail) throws SQLException {
-       ResultSet rs = this.read2();
+
+    public boolean control(String user_mail) throws SQLException {
+        ResultSet rs = this.read2();
         if (rs == null) {
             return true;
         } else {

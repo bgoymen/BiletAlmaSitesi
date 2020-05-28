@@ -35,8 +35,6 @@ public class Otobus_SeferleriBean implements Serializable {
 
     public String updateForm(Otobus_Seferleri s) {
         this.entity = s;
-        System.out.println(entity.getId() + " " +entity.getFirma_id() + " " + entity.getKalkis_nok() + " " + entity.getVaris_nok());
-        System.out.println(s.getId() + " " + s.getFirma_id() + " " + s.getKalkis_nok() + " " + s.getVaris_nok());
         return "/Admin/Seferler/Otobüs/Update";
     }
 
