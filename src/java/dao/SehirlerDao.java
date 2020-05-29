@@ -23,6 +23,9 @@ public class SehirlerDao extends DBConnection {
         try {
             Statement st = this.connect().createStatement();
             st.executeUpdate("insert into sehirler(Name) values('" + s.getName() + "')");
+            
+            st.close();
+            
         } catch (SQLException ex) {
             System.out.println("Hata(SehirlerDao(Create)):" + ex.getMessage());
         }
@@ -38,6 +41,10 @@ public class SehirlerDao extends DBConnection {
                 Sehirler tmp = new Sehirler(rs.getInt("id"), rs.getString("Name"));
                 list.add(tmp);
             }
+            
+            st.close();
+            rs.close();
+            
         } catch (SQLException e) {
             System.out.println("Hata(SehirlerDao(read)):" + e.getMessage());
         }
@@ -54,6 +61,10 @@ public class SehirlerDao extends DBConnection {
             rs.next();
             
             s = new Sehirler(rs.getInt("id"), rs.getString("Name"));
+            
+            st.close();
+            rs.close();
+            
         }
         catch(SQLException e){
             System.out.println("Hata(OtobusFirmalariDao(getById)): " + e.getMessage());
@@ -66,6 +77,8 @@ public class SehirlerDao extends DBConnection {
         try {
             Statement st = this.connect().createStatement();
             st.executeUpdate("update sehirler set Name= '" + s.getName() + "'where id=" + s.getId());
+            
+            st.close();
 
         } catch (SQLException e) {
             System.out.println("Hata(SehirlerDao(Update)):" + e.getMessage());
@@ -76,6 +89,9 @@ public class SehirlerDao extends DBConnection {
         try {
             Statement st = this.connect().createStatement();
             st.executeUpdate("delete from sehirler where id=" + s);
+            
+            st.close();
+            
         } catch (SQLException e) {
             System.out.println("Hata(SehirlerDao(Delete)):" + e.getMessage());
         }

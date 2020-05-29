@@ -22,6 +22,9 @@ public class Ucak_FirmalariDao extends DBConnection{
         try {
             Statement st = this.connect().createStatement();
             st.executeUpdate("insert into ucak_firmalari(Name) values('" + f.getName() + "')");
+            
+            st.close();
+            
         } catch (SQLException ex) {
             System.out.println("Hata(Ucak_FirmalariDao(Create)):" + ex.getMessage());
         }
@@ -37,6 +40,9 @@ public class Ucak_FirmalariDao extends DBConnection{
                 Ucak_Firmalari tmp = new Ucak_Firmalari(rs.getInt("id"), rs.getString("Name"));
                 list.add(tmp);
             }
+            
+            st.close();
+            
         } catch (SQLException e) {
             System.out.println("Hata(Ucak_FirmalariDao(read)):" + e.getMessage());
         }
@@ -48,6 +54,8 @@ public class Ucak_FirmalariDao extends DBConnection{
         try {
             Statement st = this.connect().createStatement();
             st.executeUpdate("update ucak_firmalari set Name= '" + f.getName() + "'where id=" + f.getId());
+            
+            st.close();
 
         } catch (SQLException e) {
             System.out.println("Hata(Ucak_FirmalariDao(Update)):" + e.getMessage());
@@ -58,6 +66,9 @@ public class Ucak_FirmalariDao extends DBConnection{
         try {
             Statement st = this.connect().createStatement();
             st.executeUpdate("delete from ucak_firmalari where id=" + f);
+            
+            st.close();
+            
         } catch (SQLException e) {
             System.out.println("Hata(Ucak_FirmalariDao(Delete)):" + e.getMessage());
         }

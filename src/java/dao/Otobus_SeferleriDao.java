@@ -26,7 +26,7 @@ public class Otobus_SeferleriDao extends DBConnection {
             try {
                 Statement st = this.connect().createStatement();
                 st.executeUpdate("insert into otobus_seferleri(firma_id,kalkis_nok, varis_nok,koltuk_sayisi,fiyat) values(" + f.getFirma_id() + "," + f.getKalkis_nok() + "," + f.getVaris_nok() + "," + f.getKoltuk_Sayisi() + "," + f.getFiyat() + ")");
-
+                st.close();
             } catch (SQLException ex) {
                 System.out.println("Hata(Otobus_SeferleriDao(Create)):" + ex.getMessage());
             }
@@ -45,6 +45,10 @@ public class Otobus_SeferleriDao extends DBConnection {
 
                 list.add(tmp);
             }
+            
+            st.close();
+            rs.close();
+            
         } catch (SQLException e) {
             System.out.println("Hata(Otobus_SeferleriDao(read)):" + e.getMessage());
         }
@@ -59,7 +63,9 @@ public class Otobus_SeferleriDao extends DBConnection {
             try {
                 Statement st = this.connect().createStatement();
                 st.executeUpdate("update otobus_seferleri set firma_id= '" + f.getFirma_id() + "', kalkis_nok= '" + f.getKalkis_nok() + "', varis_nok= '" + f.getVaris_nok() + "',koltuk_sayisi= '" + f.getKoltuk_Sayisi() + "', fiyat='" + f.getFiyat() + "' where id=" + f.getId());
-
+                
+                st.close();
+                
             } catch (SQLException e) {
                 System.out.println("Hata(Otobus_SeferleriDao(Update)):" + e.getMessage());
             }
@@ -71,6 +77,9 @@ public class Otobus_SeferleriDao extends DBConnection {
         try {
             Statement st = this.connect().createStatement();
             st.executeUpdate("delete from otobus_seferleri where id=" + f);
+            
+            st.close();
+            
         } catch (SQLException e) {
             System.out.println("Hata(Otobus_SeferleriDao(Delete)):" + e.getMessage());
         }

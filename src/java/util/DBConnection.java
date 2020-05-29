@@ -14,16 +14,19 @@ import java.sql.SQLException;
  * @author bünyamin
  */
 public abstract class DBConnection {
+
     private Connection connection;
-    
-    public Connection connect(){
-        try{
-            Class.forName("com.mysql.jdbc.Driver");
-            this.connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/biletal", "root", "123");
-        }catch(ClassNotFoundException | SQLException e){
-            System.out.println(e.getMessage());
+
+    public Connection connect() throws SQLException {
+        if (this.connection == null || this.connection.isClosed()) {
+            try {
+                Class.forName("com.mysql.jdbc.Driver");
+                this.connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/biletal", "root", "123");
+            } catch (ClassNotFoundException | SQLException e) {
+                System.out.println(e.getMessage());
+            }
         }
-        
+
         return this.connection;
     }
 }

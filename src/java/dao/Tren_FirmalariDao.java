@@ -28,6 +28,9 @@ public class Tren_FirmalariDao extends DBConnection {
             rs.next();
 
             f = new Tren_Firmalari(rs.getInt("id"), rs.getString("Name"));
+            
+            rs.close();
+            st.close();
         } catch (SQLException e) {
             System.out.println("Hata(OtobusFirmalariDao(getById)): " + e.getMessage());
         }
@@ -39,6 +42,9 @@ public class Tren_FirmalariDao extends DBConnection {
         try {
             Statement st = this.connect().createStatement();
             st.executeUpdate("insert into tren_firmalari(Name) values('" + f.getName() + "')");
+            
+            st.close();
+            
         } catch (SQLException ex) {
             System.out.println("Hata(Tren_FirmalariDao(Create)):" + ex.getMessage());
         }
@@ -54,6 +60,10 @@ public class Tren_FirmalariDao extends DBConnection {
                 Tren_Firmalari tmp = new Tren_Firmalari(rs.getInt("id"), rs.getString("Name"));
                 list.add(tmp);
             }
+            
+            st.close();
+            rs.close();
+            
         } catch (SQLException e) {
             System.out.println("Hata(Tren_FirmalariDao(read)):" + e.getMessage());
         }
@@ -65,6 +75,8 @@ public class Tren_FirmalariDao extends DBConnection {
         try {
             Statement st = this.connect().createStatement();
             st.executeUpdate("update tren_firmalari set Name= '" + f.getName() + "'where id=" + f.getId());
+            
+            st.close();
 
         } catch (SQLException e) {
             System.out.println("Hata(Tren_FirmalariDao(Update)):" + e.getMessage());
@@ -75,6 +87,9 @@ public class Tren_FirmalariDao extends DBConnection {
         try {
             Statement st = this.connect().createStatement();
             st.executeUpdate("delete from tren_firmalari where id=" + f);
+            
+            st.close();
+            
         } catch (SQLException e) {
             System.out.println("Hata(Tren_FirmalariDao(Delete)):" + e.getMessage());
         }
