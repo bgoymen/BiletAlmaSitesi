@@ -5,10 +5,10 @@
  */
 package controller;
 
-import dao.Otobus_SeferleriDao;
 import dao.Satin_Alinan_BiletDao;
 import entity.Otobus_Seferleri;
 import entity.Satin_Alinan_Bilet;
+import entity.Tren_Seferleri;
 import java.io.Serializable;
 import java.util.List;
 import javax.enterprise.context.SessionScoped;
@@ -31,42 +31,68 @@ public class Bilet_AlBean implements Serializable {
 
     private Otobus_Seferleri o_sefer;
 
+    private Tren_Seferleri t_Sefer;
+
     public List<Otobus_Seferleri> getList_otobus_sefer() {
         return this.getDao().read_otbus_bileti(kalkis_sehri, varis_sehri);
     }
 
-    public String bos_koltuk_goz_at(Otobus_Seferleri s) {
+    public List<Tren_Seferleri> getList_tren_sefer() {
+        return this.getDao().read_tren_bileti(kalkis_sehri, varis_sehri);
+    }
+
+    public String bos_koltuk_goz_at_otobus(Otobus_Seferleri s) {
         this.o_sefer = s;
         return "/Standart/Bilet Al/Otobüs/Satın Al";
     }
 
-    public List<Integer> getSatin_Alirken_Koltuklar() {
+    public String bos_koltuk_goz_at_tren(Tren_Seferleri s) {
+        this.t_Sefer = s;
+        return "/Standart/Bilet Al/Tren/Satın Al";
+    }
+
+    public List<Integer> getSatin_Alirken_Koltuklar_otobus() {
         return this.getDao().satin_alirken_koltuklar(o_sefer.getKoltuk_Sayisi());
     }
 
-    public boolean koltuk_dolu_mu(int koltuk_no){
-        boolean a = this.getDao().koltuk_dolu_mu(this.getO_sefer().getId(), koltuk_no);
+    public List<Integer> getSatin_Alirken_Koltuklar_tren() {
+        return this.getDao().satin_alirken_koltuklar(t_Sefer.getKoltuk_sayisi());
+    }
+
+    public boolean koltuk_dolu_mu_otobus(int koltuk_no) {
+        boolean a = this.getDao().koltuk_dolu_mu_otobus(this.getO_sefer().getId(), koltuk_no);
         return a;
     }
-    
-    public String create(int koltuk_no){        
+
+    public boolean koltuk_dolu_mu_tren(int koltuk_no) {
+        boolean a = this.getDao().koltuk_dolu_mu_tren(this.getT_Sefer().getId(), koltuk_no);
+        return a;
+    }
+
+    public String create_otobus(int koltuk_no) {
         UserBean u = new UserBean();
         entity = new Satin_Alinan_Bilet(u.user_id(), 1, o_sefer.getId(), 0, 0, koltuk_no);
-//        entity = new Satin_Alinan_Bilet(1, u.user_id(), 1, o_sefer.getId(), 0, 0, o_sefer.getKalkis_nok(),o_sefer.getVaris_nok(), o_sefer.getFiyat(),koltuk_no);
         this.getDao().create(entity);
         return "/Satın Adığım Biletler/Satın Aldığım Biletler";
     }
-   
+
+    public String create_tren(int koltuk_no) {
+        UserBean u = new UserBean();
+        entity = new Satin_Alinan_Bilet(u.user_id(), 3, 0, 0, t_Sefer.getId(),koltuk_no);
+        this.getDao().create(entity);
+        return "/Satın Adığım Biletler/Satın Aldığım Biletler";
+    }
 
     public Bilet_AlBean() {
     }
 
-    public Bilet_AlBean(Satin_Alinan_BiletDao dao, Satin_Alinan_Bilet entity, int kalkis_sehri, int varis_sehri, Otobus_Seferleri o_sefer) {
+    public Bilet_AlBean(Satin_Alinan_BiletDao dao, Satin_Alinan_Bilet entity, int kalkis_sehri, int varis_sehri, Otobus_Seferleri o_sefer, Tren_Seferleri t_Sefer) {
         this.dao = dao;
         this.entity = entity;
         this.kalkis_sehri = kalkis_sehri;
         this.varis_sehri = varis_sehri;
         this.o_sefer = o_sefer;
+        this.t_Sefer = t_Sefer;
     }
 
     public Satin_Alinan_BiletDao getDao() {
@@ -116,6 +142,17 @@ public class Bilet_AlBean implements Serializable {
 
     public void setO_sefer(Otobus_Seferleri o_sefer) {
         this.o_sefer = o_sefer;
+    }
+
+    public Tren_Seferleri getT_Sefer() {
+        if (this.t_Sefer == null) {
+            this.t_Sefer = new Tren_Seferleri();
+        }
+        return t_Sefer;
+    }
+
+    public void setT_Sefer(Tren_Seferleri t_Sefer) {
+        this.t_Sefer = t_Sefer;
     }
 
 }

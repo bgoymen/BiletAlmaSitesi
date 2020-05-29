@@ -9,28 +9,28 @@
     <ui:define name="content">
         <h:form>
             <div class="m-3">
-                <h:dataTable value="#{bilet_AlBean.satin_Alirken_Koltuklar_otobus}" var="s" class="table table-striped">
+                <h:dataTable value="#{bilet_AlBean.list_tren_sefer}" var="s" class="table table-striped">
                     <h:column>
                         <f:facet name="header">Firma Adı</f:facet>
-                            #{otobus_FirmalariBean.getById(bilet_AlBean.o_sefer.firma_id).name}
+                            #{tren_FirmalariBean.getById(s.tren_firma_id).name}
                     </h:column>
                     <h:column>
-                        <f:facet name="header">Koltuk No</f:facet>
-                            #{s}
+                        <f:facet name="header">Koltuk Sayısı</f:facet>
+                            #{s.koltuk_sayisi}
                     </h:column>
                     <h:column>
                         <f:facet name="header">Fiyat</f:facet>
-                        ₺ #{bilet_AlBean.o_sefer.fiyat}
+                        ₺ #{s.fiyat}
                     </h:column>
                     <h:column>
                         <f:facet name="header">İşlemler</f:facet>
-                        <h:outputText rendered="#{bilet_AlBean.koltuk_dolu_mu_otobus(s)}" styleClass="color: red;" value="X Dolu"/>
-                        <h:commandButton rendered="#{!bilet_AlBean.koltuk_dolu_mu_otobus(s)}" action="#{bilet_AlBean.create_otobus(s)}" class="btn btn-primary" value="Satın AL"/>
+                        <div class="btn-group" role="group">
+                            <h:commandButton class="btn btn-primary" action="#{bilet_AlBean.bos_koltuk_goz_at_tren(s)}" value="Boş Koltuklara Bak" />
+                        </div>
                     </h:column>
                 </h:dataTable>
             </div>
         </h:form>
     </ui:define>
 </ui:composition>
-
 

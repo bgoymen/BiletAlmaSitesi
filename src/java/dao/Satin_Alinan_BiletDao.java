@@ -7,6 +7,7 @@ package dao;
 
 import entity.Otobus_Seferleri;
 import entity.Satin_Alinan_Bilet;
+import entity.Tren_Seferleri;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -40,7 +41,7 @@ public class Satin_Alinan_BiletDao extends DBConnection {
 
                 try {
                     Statement st = this.connect().createStatement();
-                    st.executeUpdate("insert into satin_alinan_bilet(user_id,seyeha_turu, otobus_seferleri_id,ucak_seferleri_id,tren_seferleri_id,koltuk_no) values(" + s.getUser_id() + "," + s.getSeyehat_turu() + ",0,"+s.getUcak_seferleri_id()+",0," + s.getKoltuk_no() + ")");
+                    st.executeUpdate("insert into satin_alinan_bilet(user_id,seyehat_turu, otobus_seferleri_id,ucak_seferleri_id,tren_seferleri_id,koltuk_no) values(" + s.getUser_id() + "," + s.getSeyehat_turu() + ",0," + s.getUcak_seferleri_id() + ",0," + s.getKoltuk_no() + ")");
 
                 } catch (SQLException ex) {
                     System.out.println("Hata(Satin_Alinan_BiletDao(Create(2))):" + ex.getMessage());
@@ -51,7 +52,7 @@ public class Satin_Alinan_BiletDao extends DBConnection {
 
                 try {
                     Statement st = this.connect().createStatement();
-                    st.executeUpdate("insert into satin_alinan_bilet(user_id,seyeha_turu, otobus_seferleri_id,ucak_seferleri_id,tren_seferleri_id,koltuk_no) values(" + s.getUser_id() + "," + s.getSeyehat_turu() + ",0,0"+s.getTren_seferleri_id()+"," + s.getKoltuk_no() + ")");
+                    st.executeUpdate("insert into satin_alinan_bilet(user_id,seyehat_turu, otobus_seferleri_id,ucak_seferleri_id,tren_seferleri_id,koltuk_no) values(" + s.getUser_id() + "," + s.getSeyehat_turu() + ",0,0," + s.getTren_seferleri_id() + "," + s.getKoltuk_no() + ")");
 
                 } catch (SQLException ex) {
                     System.out.println("Hata(Satin_Alinan_BiletDao(Create(3))):" + ex.getMessage());
@@ -131,6 +132,25 @@ public class Satin_Alinan_BiletDao extends DBConnection {
         return list;
     }
 
+    public List<Tren_Seferleri> read_tren_bileti(int kalkis_sehri, int varis_sehri) {
+        List<Tren_Seferleri> list = new ArrayList<>();
+        try {
+
+            Statement st = this.connect().createStatement();
+            ResultSet rs = st.executeQuery("select * from tren_seferleri order by id asc");
+            while (rs.next()) {
+                if ((rs.getInt("kalkis_nok") == kalkis_sehri) && (rs.getInt("varis_nok") == varis_sehri)) {
+                    Tren_Seferleri tmp = new Tren_Seferleri(rs.getInt("id"), rs.getInt("tren_firma_id"), rs.getInt("kalkis_nok"), rs.getInt("varis_nok"), rs.getInt("koltuk_sayisi"), rs.getInt("fiyat"));
+                    list.add(tmp);
+                }
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(Satin_Alinan_BiletDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return list;
+    }
+
     public boolean readConrol(int kalkis_nok, int varis_nok) {
         if (kalkis_nok == varis_nok) {
             return false;
@@ -159,12 +179,28 @@ public class Satin_Alinan_BiletDao extends DBConnection {
         return satin_alirken;
     }
 
-    public boolean koltuk_dolu_mu(int otobus_seferleri_id, int koltuk_no) {
+    public boolean koltuk_dolu_mu_otobus(int otobus_seferleri_id, int koltuk_no) {
         try {
             Statement st = this.connect().createStatement();
             ResultSet rs = st.executeQuery("select * from satin_alinan_bilet order by id asc");
             while (rs.next()) {
                 if ((rs.getInt("otobus_seferleri_id") == otobus_seferleri_id) && (rs.getInt("koltuk_no") == koltuk_no)) {
+                    return true;
+                }
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Satin_Alinan_BiletDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return false;
+    }
+    
+        public boolean koltuk_dolu_mu_tren(int tren_seferleri_id, int koltuk_no) {
+        try {
+            Statement st = this.connect().createStatement();
+            ResultSet rs = st.executeQuery("select * from satin_alinan_bilet order by id asc");
+            while (rs.next()) {
+                if ((rs.getInt("tren_seferleri_id") == tren_seferleri_id) && (rs.getInt("koltuk_no") == koltuk_no)) {
                     return true;
                 }
             }
