@@ -6,10 +6,12 @@
 package controller;
 
 import dao.Satin_Alinan_BiletDao;
+import dao.UsersDao;
 import entity.Otobus_Seferleri;
 import entity.Satin_Alinan_Bilet;
 import entity.Tren_Seferleri;
 import entity.Ucak_Seferleri;
+import entity.Users;
 import java.io.Serializable;
 import java.util.List;
 import javax.enterprise.context.SessionScoped;
@@ -91,22 +93,22 @@ public class Bilet_AlBean implements Serializable {
     }
 
     public String create_otobus(int koltuk_no) {
-        UserBean u = new UserBean();
-        entity = new Satin_Alinan_Bilet(u.user_id(), 1, o_sefer.getId(), 0, 0, koltuk_no);
+        int user_id = LoginBean.getUser_id();
+        entity = new Satin_Alinan_Bilet(user_id, 1, o_sefer.getId(), 0, 0, koltuk_no);
         this.getDao().create(entity);
         return "/Satın Adığım Biletler/Satın Aldığım Biletler";
     }
 
     public String create_tren(int koltuk_no) {
-        UserBean u = new UserBean();
-        entity = new Satin_Alinan_Bilet(u.user_id(), 3, 0, 0, t_Sefer.getId(), koltuk_no);
+        int user_id = LoginBean.getUser_id();
+        entity = new Satin_Alinan_Bilet(user_id, 3, 0, 0, t_Sefer.getId(), koltuk_no);
         this.getDao().create(entity);
         return "/Satın Adığım Biletler/Satın Aldığım Biletler";
     }
-    
-        public String create_ucak(int koltuk_no) {
-        UserBean u = new UserBean();
-        entity = new Satin_Alinan_Bilet(u.user_id(), 2, 0, u_sefer.getId(), 0, koltuk_no);
+
+    public String create_ucak(int koltuk_no) {
+        int user_id = LoginBean.getUser_id();
+        entity = new Satin_Alinan_Bilet(user_id, 2, 0, u_sefer.getId(), 0, koltuk_no);
         this.getDao().create(entity);
         return "/Satın Adığım Biletler/Satın Aldığım Biletler";
     }
@@ -122,6 +124,7 @@ public class Bilet_AlBean implements Serializable {
         this.o_sefer = o_sefer;
         this.t_Sefer = t_Sefer;
         this.u_sefer = u_sefer;
+
     }
 
     public Satin_Alinan_BiletDao getDao() {

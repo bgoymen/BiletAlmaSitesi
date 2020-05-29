@@ -27,6 +27,8 @@ public class LoginBean implements Serializable {
 
     private Users entity;
 
+    private static int user_id;
+
     public String control() throws SQLException {
 
         Users u = this.getDao().control(entity.getUser_mail(), entity.getUser_password());
@@ -36,6 +38,7 @@ public class LoginBean implements Serializable {
             return null;
         } else if (u.getType() == 0) {
             entity = u;
+            setUser_id(entity.getId());
             return "Standart/Standart";
         } else if (u.getType() == 1) {
             entity = u;
@@ -61,6 +64,10 @@ public class LoginBean implements Serializable {
         this.getDao().update(entity);
         FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Bilgileriniz Güncellendi"));
         return "/Standart/Ayarlar";
+    }
+
+    public static int user_id() {
+        return getUser_id();
     }
 
 //    public List<Users> getRead() {
@@ -97,6 +104,14 @@ public class LoginBean implements Serializable {
 
     public void setEntity(Users entity) {
         this.entity = entity;
+    }
+
+    public static int getUser_id() {
+        return user_id;
+    }
+
+    public static void setUser_id(int user_id) {
+        LoginBean.user_id = user_id;
     }
 
 }

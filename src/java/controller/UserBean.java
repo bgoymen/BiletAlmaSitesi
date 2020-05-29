@@ -53,10 +53,6 @@ public class UserBean implements Serializable {
 
     }
 
-    public int user_id() {
-        return this.getEntity().getId();
-    }
-
     public UserBean() {
     }
 
