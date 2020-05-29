@@ -35,6 +35,10 @@
                             #{s.koltuk_Sayisi}
                     </h:column>
                     <h:column>
+                        <f:facet name="header">Fiyat</f:facet>
+                        ₺ #{s.fiyat}
+                    </h:column>
+                    <h:column>
                         <f:facet name="header">İşlemler</f:facet>
                         <div class="btn-group" role="group">
                             <h:commandButton class="btn btn-warning" action="#{otobus_SeferleriBean.updateForm(s)}" value="Güncelle"/>

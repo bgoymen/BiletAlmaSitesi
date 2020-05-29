@@ -29,12 +29,14 @@
 
             <div class="m-3">
                 <h:selectOneMenu class="custom-select" value="#{tren_SeferleriBean.entity.koltuk_sayisi}"  required="true">
-                    <p>Koltuk Sayısını Seçiniz:</p> 
-                    <f:selectItem   itemLabel="10" itemValue="10" />
-                    <f:selectItem   itemLabel="20" itemValue="20" />
-                    <f:selectItem   itemLabel="30" itemValue="30" />
-                    <f:selectItem   itemLabel="40" itemValue="40" />
-                    <f:selectItem   itemLabel="50" itemValue="50" />
+                    <p class="m-3">Koltuk Sayısını Seçiniz: </p> 
+                    <f:selectItems value="#{seferlerBean.koltuk_sayisi}"/>
+                </h:selectOneMenu>
+            </div>
+            <div class="m-3">
+                <h:selectOneMenu class="custom-select" value="#{tren_SeferleriBean.entity.fiyat}"  required="true">
+                    <p class="m-3">Fiyatı Seçiniz: </p> 
+                    <f:selectItems value="#{seferlerBean.fiyat}"/>
                 </h:selectOneMenu>
             </div>
 

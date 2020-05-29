@@ -16,16 +16,18 @@ public class Tren_Seferleri {
     private int kalkis_nok;
     private int varis_nok;
     private int koltuk_sayisi;
+    private int fiyat;
 
     public Tren_Seferleri() {
     }
 
-    public Tren_Seferleri(int id, int tren_firma_id, int kalkis_nok, int varis_nok, int koltuk_sayisi) {
+    public Tren_Seferleri(int id, int tren_firma_id, int kalkis_nok, int varis_nok, int koltuk_sayisi, int fiyat) {
         this.id = id;
         this.tren_firma_id = tren_firma_id;
         this.kalkis_nok = kalkis_nok;
         this.varis_nok = varis_nok;
         this.koltuk_sayisi = koltuk_sayisi;
+        this.fiyat = fiyat;
     }
 
     public int getId() {
@@ -68,4 +70,11 @@ public class Tren_Seferleri {
         this.koltuk_sayisi = koltuk_sayisi;
     }
 
+    public int getFiyat() {
+        return fiyat;
+    }
+
+    public void setFiyat(int fiyat) {
+        this.fiyat = fiyat;
+    }
 }

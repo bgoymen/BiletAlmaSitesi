@@ -17,14 +17,20 @@ import util.DBConnection;
  *
  * @author Göymen
  */
-public class Otobus_SeferleriDao extends DBConnection{
-        public void create(Otobus_Seferleri f) {
-        try {
-            Statement st = this.connect().createStatement();
-            st.executeUpdate("insert into otobus_seferleri(firma_id,kalkis_nok, varis_nok,koltuk_sayisi) values(" + f.getFirma_id() + "," +f.getKalkis_nok() + "," + f.getVaris_nok() +"," + f.getKoltuk_Sayisi()+")");
-            
-        } catch (SQLException ex) {
-            System.out.println("Hata(Otobus_SeferleriDao(Create)):" + ex.getMessage());
+public class Otobus_SeferleriDao extends DBConnection {
+
+    public boolean create(Otobus_Seferleri f) {
+        if (f.getKalkis_nok() == f.getVaris_nok()) {
+            return false;
+        } else {
+            try {
+                Statement st = this.connect().createStatement();
+                st.executeUpdate("insert into otobus_seferleri(firma_id,kalkis_nok, varis_nok,koltuk_sayisi,fiyat) values(" + f.getFirma_id() + "," + f.getKalkis_nok() + "," + f.getVaris_nok() + "," + f.getKoltuk_Sayisi() + "," + f.getFiyat() + ")");
+
+            } catch (SQLException ex) {
+                System.out.println("Hata(Otobus_SeferleriDao(Create)):" + ex.getMessage());
+            }
+            return true;
         }
     }
 
@@ -35,8 +41,8 @@ public class Otobus_SeferleriDao extends DBConnection{
             ResultSet rs = st.executeQuery("select * from otobus_seferleri order by id asc");
 
             while (rs.next()) {
-                Otobus_Seferleri tmp = new Otobus_Seferleri(rs.getInt("id"), rs.getInt("firma_id"), rs.getInt("kalkis_nok"), rs.getInt("varis_nok"), rs.getInt("koltuk_sayisi"));
-                
+                Otobus_Seferleri tmp = new Otobus_Seferleri(rs.getInt("id"), rs.getInt("firma_id"), rs.getInt("kalkis_nok"), rs.getInt("varis_nok"), rs.getInt("koltuk_sayisi"), rs.getInt("fiyat"));
+
                 list.add(tmp);
             }
         } catch (SQLException e) {
@@ -45,15 +51,19 @@ public class Otobus_SeferleriDao extends DBConnection{
 
         return list;
     }
-   
 
-    public void update(Otobus_Seferleri f) {
-        try {
-            Statement st = this.connect().createStatement();
-            st.executeUpdate("update otobus_seferleri set firma_id= '" + f.getFirma_id() + "', kalkis_nok= '" + f.getKalkis_nok() + "', varis_nok= '" +f.getVaris_nok()+"',koltuk_sayisi= '"+f.getKoltuk_Sayisi()+"' where id=" + f.getId());
+    public boolean update(Otobus_Seferleri f) {
+        if (f.getKalkis_nok() == f.getVaris_nok()) {
+            return false;
+        } else {
+            try {
+                Statement st = this.connect().createStatement();
+                st.executeUpdate("update otobus_seferleri set firma_id= '" + f.getFirma_id() + "', kalkis_nok= '" + f.getKalkis_nok() + "', varis_nok= '" + f.getVaris_nok() + "',koltuk_sayisi= '" + f.getKoltuk_Sayisi() + "', fiyat='" + f.getFiyat() + "' where id=" + f.getId());
 
-        } catch (SQLException e) {
-            System.out.println("Hata(Otobus_SeferleriDao(Update)):" + e.getMessage());
+            } catch (SQLException e) {
+                System.out.println("Hata(Otobus_SeferleriDao(Update)):" + e.getMessage());
+            }
+            return true;
         }
     }
 

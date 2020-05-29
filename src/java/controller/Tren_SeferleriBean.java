@@ -10,6 +10,8 @@ import entity.Tren_Seferleri;
 import java.io.Serializable;
 import java.util.List;
 import javax.enterprise.context.SessionScoped;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import javax.inject.Named;
 
 /**
@@ -24,8 +26,16 @@ public class Tren_SeferleriBean implements Serializable {
     private Tren_Seferleri entity;
 
     public String create() {
-        this.getDao().create(entity);
-        return "/Admin/Seferler/Tren/Tren Seferleri";
+        boolean c = this.getDao().create(entity);
+        if (c == false) {
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Kalkış Noktası İle Varış Noktası Aynı Olamaz!!"));
+            entity = new Tren_Seferleri();
+            return "/Admin/Seferler/Tren/Create";
+        } else {
+            entity = new Tren_Seferleri();
+            return "/Admin/Seferler/Tren/Tren Seferleri";
+        }
+
     }
 
     public List<Tren_Seferleri> getRead() {
@@ -38,8 +48,15 @@ public class Tren_SeferleriBean implements Serializable {
     }
 
     public String update() {
-        this.getDao().update(entity);
-        return "/Admin/Seferler/Tren/Tren Seferleri";
+        boolean c = this.getDao().update(entity);
+        if (c == false) {
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Kalkış Noktası İle Varış Noktası Aynı Olamaz!!"));
+            return "/Admin/Seferler/Tren/Update";
+        } else {
+            entity = new Tren_Seferleri();
+            return "/Admin/Seferler/Tren/Tren Seferleri";
+        }
+
     }
 
     public void delete(int c) {

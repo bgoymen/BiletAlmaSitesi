@@ -16,16 +16,18 @@ public class Otobus_Seferleri {
     private int kalkis_nok;
     private int varis_nok;
     private int koltuk_Sayisi;
+    private int fiyat;
 
     public Otobus_Seferleri() {
     }
 
-    public Otobus_Seferleri(int id, int firma_id, int kalkis_nok, int varis_nok, int koltuk_Sayisi) {
+    public Otobus_Seferleri(int id, int firma_id, int kalkis_nok, int varis_nok, int koltuk_Sayisi, int fiyat) {
         this.id = id;
         this.firma_id = firma_id;
         this.kalkis_nok = kalkis_nok;
         this.varis_nok = varis_nok;
         this.koltuk_Sayisi = koltuk_Sayisi;
+        this.fiyat = fiyat;
     }
 
     public int getId() {
@@ -67,5 +69,14 @@ public class Otobus_Seferleri {
     public void setKoltuk_Sayisi(int koltuk_Sayisi) {
         this.koltuk_Sayisi = koltuk_Sayisi;
     }
+
+    public int getFiyat() {
+        return fiyat;
+    }
+
+    public void setFiyat(int fiyat) {
+        this.fiyat = fiyat;
+    }
+    
 
 }
