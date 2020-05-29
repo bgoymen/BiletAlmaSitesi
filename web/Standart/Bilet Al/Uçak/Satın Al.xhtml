@@ -1,0 +1,36 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                template="/Standart/template/StandartTemplate.xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:define name="content">
+        <h:form>
+            <div class="m-3">
+                <h:dataTable value="#{bilet_AlBean.satin_Alirken_Koltuklar_ucak}" var="s" class="table table-striped">
+                    <h:column>
+                        <f:facet name="header">Firma Adı</f:facet>
+                            #{ucak_FirmalariBean.getById(bilet_AlBean.u_sefer.ucak_firma_id).name}
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Koltuk No</f:facet>
+                            #{s}
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Fiyat</f:facet>
+                        ₺ #{bilet_AlBean.u_sefer.fiyat}
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">İşlemler</f:facet>
+                        <h:outputText rendered="#{bilet_AlBean.koltuk_dolu_mu_ucak(s)}" styleClass="color: red;" value="X Dolu"/>
+                        <h:commandButton rendered="#{!bilet_AlBean.koltuk_dolu_mu_ucak(s)}" action="#{bilet_AlBean.create_ucak(s)}" class="btn btn-primary" value="Satın AL"/>
+                    </h:column>
+                </h:dataTable>
+            </div>
+        </h:form>
+    </ui:define>
+</ui:composition>
+
+

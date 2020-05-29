@@ -9,6 +9,7 @@ import dao.Satin_Alinan_BiletDao;
 import entity.Otobus_Seferleri;
 import entity.Satin_Alinan_Bilet;
 import entity.Tren_Seferleri;
+import entity.Ucak_Seferleri;
 import java.io.Serializable;
 import java.util.List;
 import javax.enterprise.context.SessionScoped;
@@ -33,12 +34,18 @@ public class Bilet_AlBean implements Serializable {
 
     private Tren_Seferleri t_Sefer;
 
+    private Ucak_Seferleri u_sefer;
+
     public List<Otobus_Seferleri> getList_otobus_sefer() {
         return this.getDao().read_otbus_bileti(kalkis_sehri, varis_sehri);
     }
 
     public List<Tren_Seferleri> getList_tren_sefer() {
         return this.getDao().read_tren_bileti(kalkis_sehri, varis_sehri);
+    }
+
+    public List<Ucak_Seferleri> getList_ucak_sefer() {
+        return this.getDao().read_ucak_bileti(kalkis_sehri, varis_sehri);
     }
 
     public String bos_koltuk_goz_at_otobus(Otobus_Seferleri s) {
@@ -51,12 +58,21 @@ public class Bilet_AlBean implements Serializable {
         return "/Standart/Bilet Al/Tren/Satın Al";
     }
 
+    public String bos_koltuk_goz_at_ucak(Ucak_Seferleri s) {
+        this.u_sefer = s;
+        return "/Standart/Bilet Al/Uçak/Satın Al";
+    }
+
     public List<Integer> getSatin_Alirken_Koltuklar_otobus() {
         return this.getDao().satin_alirken_koltuklar(o_sefer.getKoltuk_Sayisi());
     }
 
     public List<Integer> getSatin_Alirken_Koltuklar_tren() {
         return this.getDao().satin_alirken_koltuklar(t_Sefer.getKoltuk_sayisi());
+    }
+
+    public List<Integer> getSatin_Alirken_Koltuklar_ucak() {
+        return this.getDao().satin_alirken_koltuklar(u_sefer.getKoltuk_sayisi());
     }
 
     public boolean koltuk_dolu_mu_otobus(int koltuk_no) {
@@ -69,6 +85,11 @@ public class Bilet_AlBean implements Serializable {
         return a;
     }
 
+    public boolean koltuk_dolu_mu_ucak(int koltuk_no) {
+        boolean a = this.getDao().koltuk_dolu_mu_ucak(this.getU_sefer().getId(), koltuk_no);
+        return a;
+    }
+
     public String create_otobus(int koltuk_no) {
         UserBean u = new UserBean();
         entity = new Satin_Alinan_Bilet(u.user_id(), 1, o_sefer.getId(), 0, 0, koltuk_no);
@@ -78,7 +99,14 @@ public class Bilet_AlBean implements Serializable {
 
     public String create_tren(int koltuk_no) {
         UserBean u = new UserBean();
-        entity = new Satin_Alinan_Bilet(u.user_id(), 3, 0, 0, t_Sefer.getId(),koltuk_no);
+        entity = new Satin_Alinan_Bilet(u.user_id(), 3, 0, 0, t_Sefer.getId(), koltuk_no);
+        this.getDao().create(entity);
+        return "/Satın Adığım Biletler/Satın Aldığım Biletler";
+    }
+    
+        public String create_ucak(int koltuk_no) {
+        UserBean u = new UserBean();
+        entity = new Satin_Alinan_Bilet(u.user_id(), 2, 0, u_sefer.getId(), 0, koltuk_no);
         this.getDao().create(entity);
         return "/Satın Adığım Biletler/Satın Aldığım Biletler";
     }
@@ -86,13 +114,14 @@ public class Bilet_AlBean implements Serializable {
     public Bilet_AlBean() {
     }
 
-    public Bilet_AlBean(Satin_Alinan_BiletDao dao, Satin_Alinan_Bilet entity, int kalkis_sehri, int varis_sehri, Otobus_Seferleri o_sefer, Tren_Seferleri t_Sefer) {
+    public Bilet_AlBean(Satin_Alinan_BiletDao dao, Satin_Alinan_Bilet entity, int kalkis_sehri, int varis_sehri, Otobus_Seferleri o_sefer, Tren_Seferleri t_Sefer, Ucak_Seferleri u_sefer) {
         this.dao = dao;
         this.entity = entity;
         this.kalkis_sehri = kalkis_sehri;
         this.varis_sehri = varis_sehri;
         this.o_sefer = o_sefer;
         this.t_Sefer = t_Sefer;
+        this.u_sefer = u_sefer;
     }
 
     public Satin_Alinan_BiletDao getDao() {
@@ -153,6 +182,17 @@ public class Bilet_AlBean implements Serializable {
 
     public void setT_Sefer(Tren_Seferleri t_Sefer) {
         this.t_Sefer = t_Sefer;
+    }
+
+    public Ucak_Seferleri getU_sefer() {
+        if (this.u_sefer == null) {
+            u_sefer = new Ucak_Seferleri();
+        }
+        return u_sefer;
+    }
+
+    public void setU_sefer(Ucak_Seferleri u_sefer) {
+        this.u_sefer = u_sefer;
     }
 
 }

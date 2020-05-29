@@ -8,6 +8,7 @@ package dao;
 import entity.Otobus_Seferleri;
 import entity.Satin_Alinan_Bilet;
 import entity.Tren_Seferleri;
+import entity.Ucak_Seferleri;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -151,6 +152,25 @@ public class Satin_Alinan_BiletDao extends DBConnection {
         return list;
     }
 
+    public List<Ucak_Seferleri> read_ucak_bileti(int kalkis_sehri, int varis_sehri) {
+        List<Ucak_Seferleri> list = new ArrayList<>();
+        try {
+
+            Statement st = this.connect().createStatement();
+            ResultSet rs = st.executeQuery("select * from ucak_seferleri order by id asc");
+            while (rs.next()) {
+                if ((rs.getInt("kalkis_nok") == kalkis_sehri) && (rs.getInt("varis_nok") == varis_sehri)) {
+                    Ucak_Seferleri tmp = new Ucak_Seferleri(rs.getInt("id"), rs.getInt("ucak_firma_id"), rs.getInt("kalkis_nok"), rs.getInt("varis_nok"), rs.getInt("koltuk_sayisi"), rs.getInt("fiyat"));
+                    list.add(tmp);
+                }
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(Satin_Alinan_BiletDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return list;
+    }
+
     public boolean readConrol(int kalkis_nok, int varis_nok) {
         if (kalkis_nok == varis_nok) {
             return false;
@@ -194,13 +214,29 @@ public class Satin_Alinan_BiletDao extends DBConnection {
 
         return false;
     }
-    
-        public boolean koltuk_dolu_mu_tren(int tren_seferleri_id, int koltuk_no) {
+
+    public boolean koltuk_dolu_mu_tren(int tren_seferleri_id, int koltuk_no) {
         try {
             Statement st = this.connect().createStatement();
             ResultSet rs = st.executeQuery("select * from satin_alinan_bilet order by id asc");
             while (rs.next()) {
                 if ((rs.getInt("tren_seferleri_id") == tren_seferleri_id) && (rs.getInt("koltuk_no") == koltuk_no)) {
+                    return true;
+                }
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Satin_Alinan_BiletDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return false;
+    }
+
+    public boolean koltuk_dolu_mu_ucak(int ucak_seferleri_id, int koltuk_no) {
+        try {
+            Statement st = this.connect().createStatement();
+            ResultSet rs = st.executeQuery("select * from satin_alinan_bilet order by id asc");
+            while (rs.next()) {
+                if ((rs.getInt("ucak_seferleri_id") == ucak_seferleri_id) && (rs.getInt("koltuk_no") == koltuk_no)) {
                     return true;
                 }
             }
