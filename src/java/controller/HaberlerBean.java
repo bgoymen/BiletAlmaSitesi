@@ -26,6 +26,7 @@ public class HaberlerBean implements Serializable {
 
     public String create() {
         this.getDao().create(entity);
+        entity = new Haberler();
         return "/Admin/Other/Haberler/Haberler";
     }
 
@@ -40,6 +41,7 @@ public class HaberlerBean implements Serializable {
 
     public String update() {
         this.getDao().update(entity);
+        entity = new Haberler();
         return "/Admin/Other/Haberler/Haberler";
     }
 

@@ -1,0 +1,47 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                template="/Admin/template/AdminTemplate.xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:define name="content">
+        <h:form>
+
+            <div class="m-3">
+                <h:selectOneMenu class="custom-select" value="#{ucak_SeferleriBean.entity.ucak_firma_id}"  required="true">
+                    <p class="m-3">Uçak Firması Seçiniz:</p><f:selectItems value="#{ucak_FirmalariBean.read}"  var="a"  itemLabel="#{a.name}" itemValue="#{a.id}"/>
+                </h:selectOneMenu>
+            </div>
+            <div class="m-3">
+                <h:selectOneMenu class="custom-select" value="#{ucak_SeferleriBean.entity.kalkis_nok}"  required="true">
+                    <p class="m-3">Kalkış Noktası Seçiniz: </p><f:selectItems value="#{sehirlerBean.read}"  var="b"  itemLabel="#{b.name}" itemValue="#{b.id}" />
+                </h:selectOneMenu>
+            </div>
+            <div class="m-3">
+                <h:selectOneMenu class="custom-select" value="#{ucak_SeferleriBean.entity.varis_nok}"  required="true">
+                    <p class="m-3">Varış Noktası Seçiniz: </p><f:selectItems value="#{sehirlerBean.read}"  var="c"  itemLabel="#{c.name}" itemValue="#{c.id}" />
+                </h:selectOneMenu>
+            </div>
+            <div class="m-3">
+                <h:selectOneMenu class="custom-select" value="#{ucak_SeferleriBean.entity.koltuk_sayisi}"  required="true">
+                    <p class="m-3">Koltuk Sayısını Seçiniz: </p> 
+                    <f:selectItems value="#{seferlerBean.koltuk_sayisi}"/>
+                </h:selectOneMenu>
+            </div>
+            <div class="m-3">
+                <h:selectOneMenu class="custom-select" value="#{ucak_SeferleriBean.entity.fiyat}"  required="true">
+                    <p class="m-3">Fiyatı Seçiniz: </p> 
+                    <f:selectItems value="#{seferlerBean.fiyat}"/>
+                </h:selectOneMenu>
+            </div>
+
+            <div class="m-3">
+                <h:commandButton class="btn btn-primary" action="#{ucak_SeferleriBean.create()}" value="Seferi Ekle"/>
+            </div>
+
+        </h:form>
+    </ui:define>
+</ui:composition>
+

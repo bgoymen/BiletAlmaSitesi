@@ -24,7 +24,7 @@ public class UsersDao extends DBConnection {
             Statement st = this.connect().createStatement();
             st.executeUpdate("insert into users(user_mail,user_name,user_password) values('" + c.getUser_mail() + "','" + c.getUser_name() + "','" + c.getUser_password() + "')");
         
-            st.close();
+            
             
         } catch (SQLException e) {
             System.out.println(e.getMessage());
@@ -42,7 +42,8 @@ public class UsersDao extends DBConnection {
                 list.add(tmp);
             }
             
-            st.close();
+            
+            
             
         } catch (SQLException e) {
             System.out.println(e.getMessage());
@@ -68,7 +69,7 @@ public class UsersDao extends DBConnection {
                 }
             }
             
-            rs.close();
+            
 
             return null;
         }
@@ -84,7 +85,7 @@ public class UsersDao extends DBConnection {
                     return false;
                 }
             }
-            rs.close();
+            
             return true;
         }
     }
@@ -96,8 +97,7 @@ public class UsersDao extends DBConnection {
             Statement st = this.connect().createStatement();
             rs = st.executeQuery("select * from users order by id asc");
             
-            rs.close();
-            st.close();
+            
             
         } catch (SQLException e) {
             System.out.println(e.getMessage());
@@ -110,7 +110,7 @@ public class UsersDao extends DBConnection {
             Statement st = this.connect().createStatement();
             st.executeUpdate("update users set user_mail= '" + c.getUser_mail() + "', user_name= '" + c.getUser_name() + "', user_password= '" + c.getUser_password() + "'where id=" + c.getId());
             
-            st.close();
+            
             
         } catch (SQLException e) {
             System.out.println(e.getMessage());
@@ -122,7 +122,7 @@ public class UsersDao extends DBConnection {
             Statement st = this.connect().createStatement();
             st.executeUpdate("delete from users where id=" + c);
             
-            st.close();
+            
             
         } catch (SQLException e) {
             System.out.println(e.getMessage());

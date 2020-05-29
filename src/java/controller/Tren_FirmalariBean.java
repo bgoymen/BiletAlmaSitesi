@@ -25,6 +25,7 @@ public class Tren_FirmalariBean implements Serializable {
 
     public String create() {
         this.getDao().create(entity);
+        entity = new Tren_Firmalari();
         return "/Admin/Firmalar/Tren/Tren Firmaları";
     }
 
@@ -39,6 +40,7 @@ public class Tren_FirmalariBean implements Serializable {
 
     public String update() {
         this.getDao().update(entity);
+        entity = new Tren_Firmalari();
         return "/Admin/Firmalar/Tren/Tren Firmaları";
     }
 

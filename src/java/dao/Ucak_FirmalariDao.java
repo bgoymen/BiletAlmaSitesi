@@ -18,12 +18,32 @@ import util.DBConnection;
  * @author Göymen
  */
 public class Ucak_FirmalariDao extends DBConnection{
+    
+        public Ucak_Firmalari getById(int id) {
+        Ucak_Firmalari f = null;
+
+        try {
+            Statement st = this.connect().createStatement();
+            ResultSet rs = st.executeQuery("select * from ucak_firmalari where id=" + id);
+            rs.next();
+
+            f = new Ucak_Firmalari(rs.getInt("id"), rs.getString("Name"));
+            
+            
+           
+        } catch (SQLException e) {
+            System.out.println("Hata(UcakFirmalariDao(getById)): " + e.getMessage());
+        }
+
+        return f;
+    }
+    
     public void create(Ucak_Firmalari f) {
         try {
             Statement st = this.connect().createStatement();
             st.executeUpdate("insert into ucak_firmalari(Name) values('" + f.getName() + "')");
             
-            st.close();
+           
             
         } catch (SQLException ex) {
             System.out.println("Hata(Ucak_FirmalariDao(Create)):" + ex.getMessage());
@@ -41,7 +61,8 @@ public class Ucak_FirmalariDao extends DBConnection{
                 list.add(tmp);
             }
             
-            st.close();
+           
+            
             
         } catch (SQLException e) {
             System.out.println("Hata(Ucak_FirmalariDao(read)):" + e.getMessage());
@@ -55,7 +76,7 @@ public class Ucak_FirmalariDao extends DBConnection{
             Statement st = this.connect().createStatement();
             st.executeUpdate("update ucak_firmalari set Name= '" + f.getName() + "'where id=" + f.getId());
             
-            st.close();
+           
 
         } catch (SQLException e) {
             System.out.println("Hata(Ucak_FirmalariDao(Update)):" + e.getMessage());
@@ -67,7 +88,7 @@ public class Ucak_FirmalariDao extends DBConnection{
             Statement st = this.connect().createStatement();
             st.executeUpdate("delete from ucak_firmalari where id=" + f);
             
-            st.close();
+           
             
         } catch (SQLException e) {
             System.out.println("Hata(Ucak_FirmalariDao(Delete)):" + e.getMessage());

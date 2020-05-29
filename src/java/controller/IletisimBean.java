@@ -43,6 +43,7 @@ public class IletisimBean implements Serializable {
 
     public String create() {
         this.getDao().create(entity);
+        entity = new Iletisim();
         return "index";
     }
 

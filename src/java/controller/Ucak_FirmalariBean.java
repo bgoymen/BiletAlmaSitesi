@@ -6,6 +6,7 @@
 package controller;
 
 import dao.Ucak_FirmalariDao;
+import entity.Tren_Firmalari;
 import entity.Ucak_Firmalari;
 import java.io.Serializable;
 import java.util.List;
@@ -18,17 +19,23 @@ import javax.inject.Named;
  */
 @Named
 @SessionScoped
-public class Ucak_FirmalariBean implements Serializable{
+public class Ucak_FirmalariBean implements Serializable {
+
     private Ucak_FirmalariDao dao;
     private Ucak_Firmalari entity;
 
     public String create() {
         this.getDao().create(entity);
+        entity = new Ucak_Firmalari();
         return "/Admin/Firmalar/Uçak/Uçak Firmaları";
     }
 
     public List<Ucak_Firmalari> getRead() {
         return this.getDao().read();
+    }
+
+    public Ucak_Firmalari getById(int id) {
+        return this.getDao().getById(id);
     }
 
     public String updateForm(Ucak_Firmalari f) {
@@ -38,6 +45,7 @@ public class Ucak_FirmalariBean implements Serializable{
 
     public String update() {
         this.getDao().update(entity);
+        entity = new Ucak_Firmalari();
         return "/Admin/Firmalar/Uçak/Uçak Firmaları";
     }
 
@@ -75,5 +83,5 @@ public class Ucak_FirmalariBean implements Serializable{
     public void setEntity(Ucak_Firmalari entity) {
         this.entity = entity;
     }
-    
+
 }

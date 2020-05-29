@@ -1,4 +1,4 @@
-/*
+    /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
@@ -24,7 +24,7 @@ public class SehirlerDao extends DBConnection {
             Statement st = this.connect().createStatement();
             st.executeUpdate("insert into sehirler(Name) values('" + s.getName() + "')");
             
-            st.close();
+            
             
         } catch (SQLException ex) {
             System.out.println("Hata(SehirlerDao(Create)):" + ex.getMessage());
@@ -42,8 +42,8 @@ public class SehirlerDao extends DBConnection {
                 list.add(tmp);
             }
             
-            st.close();
-            rs.close();
+            
+            
             
         } catch (SQLException e) {
             System.out.println("Hata(SehirlerDao(read)):" + e.getMessage());
@@ -62,8 +62,8 @@ public class SehirlerDao extends DBConnection {
             
             s = new Sehirler(rs.getInt("id"), rs.getString("Name"));
             
-            st.close();
-            rs.close();
+            
+            
             
         }
         catch(SQLException e){
@@ -78,7 +78,7 @@ public class SehirlerDao extends DBConnection {
             Statement st = this.connect().createStatement();
             st.executeUpdate("update sehirler set Name= '" + s.getName() + "'where id=" + s.getId());
             
-            st.close();
+            
 
         } catch (SQLException e) {
             System.out.println("Hata(SehirlerDao(Update)):" + e.getMessage());
@@ -90,7 +90,7 @@ public class SehirlerDao extends DBConnection {
             Statement st = this.connect().createStatement();
             st.executeUpdate("delete from sehirler where id=" + s);
             
-            st.close();
+            
             
         } catch (SQLException e) {
             System.out.println("Hata(SehirlerDao(Delete)):" + e.getMessage());

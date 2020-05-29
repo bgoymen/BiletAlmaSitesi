@@ -17,25 +17,27 @@ import javax.inject.Named;
  */
 @Named
 @SessionScoped
-public class SeferlerBean implements Serializable{
+public class SeferlerBean implements Serializable {
+
     private SeferlerDao dao;
-    
-    public List<Integer> getKoltuk_sayisi(){
+
+    public List<Integer> getKoltuk_sayisi() {
         return this.getDao().koltuk_sayisi();
     }
-    
-    public List<Integer> getFiyat(){
+
+    public List<Integer> getFiyat() {
         return this.getDao().fiyat();
     }
 
     public SeferlerDao getDao() {
-        if(dao == null) dao = new SeferlerDao();
+        if (dao == null) {
+            dao = new SeferlerDao();
+        }
         return dao;
     }
 
     public void setDao(SeferlerDao dao) {
         this.dao = dao;
     }
-    
-    
+
 }

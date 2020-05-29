@@ -27,6 +27,7 @@ public class Otobus_FirmalariBean implements Serializable {
 
     public String create() {
         this.getDao().create(entity);
+        entity = new Otobus_Firmalari();
         return "/Admin/Firmalar/Otobüs/Otobüs Firmaları";
     }
 
@@ -45,6 +46,7 @@ public class Otobus_FirmalariBean implements Serializable {
 
     public String update() {
         this.getDao().update(entity);
+        entity = new Otobus_Firmalari();
         return "/Admin/Firmalar/Otobüs/Otobüs Firmaları";
     }
 

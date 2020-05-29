@@ -29,8 +29,8 @@ public class Otobus_FirmalariDao extends DBConnection {
             
             f = new Otobus_Firmalari(rs.getInt("id"), rs.getString("Name"));
             
-            rs.close();
-            st.close();
+            
+            
         }
         catch(SQLException e){
             System.out.println("Hata(OtobusFirmalariDao(getById)): " + e.getMessage());
@@ -43,7 +43,7 @@ public class Otobus_FirmalariDao extends DBConnection {
         try {
             Statement st = this.connect().createStatement();
             st.executeUpdate("insert into otobus_firmalari(Name) values('" + f.getName() + "')");
-            st.close();
+            
         } catch (SQLException ex) {
             System.out.println("Hata(Otobus_FirmalariDao(Create)):" + ex.getMessage());
         }
@@ -59,8 +59,8 @@ public class Otobus_FirmalariDao extends DBConnection {
                 Otobus_Firmalari tmp = new Otobus_Firmalari(rs.getInt("id"), rs.getString("Name"));
                 list.add(tmp);
             }
-            rs.close();
-            st.close();
+            
+            
         } catch (SQLException e) {
             System.out.println("Hata(Otobus_FirmalariDao(read)):" + e.getMessage());
         }
@@ -72,7 +72,7 @@ public class Otobus_FirmalariDao extends DBConnection {
         try {
             Statement st = this.connect().createStatement();
             st.executeUpdate("update otobus_firmalari set Name= '" + f.getName() + "'where id=" + f.getId());
-            st.close();
+            
         } catch (SQLException e) {
             System.out.println("Hata(Otobus_FirmalariDao(Update)):" + e.getMessage());
         }
@@ -82,7 +82,7 @@ public class Otobus_FirmalariDao extends DBConnection {
         try {
             Statement st = this.connect().createStatement();
             st.executeUpdate("delete from otobus_firmalari where id=" + f);
-            st.close();
+            
         } catch (SQLException e) {
             System.out.println("Hata(Otobus_FirmalariDao(Delete)):" + e.getMessage());
         }
