@@ -41,7 +41,7 @@ public class Tren_SeferleriDao extends DBConnection {
         try {
             Statement st = this.connect().createStatement();
             ResultSet rs = st.executeQuery("select * from tren_seferleri order by id asc");
-
+            rs.next();
             while (rs.next()) {
                 Tren_Seferleri tmp = new Tren_Seferleri(rs.getInt("id"), rs.getInt("tren_firma_id"), rs.getInt("kalkis_nok"), rs.getInt("varis_nok"), rs.getInt("koltuk_sayisi"), rs.getInt("fiyat"));
                 list.add(tmp);

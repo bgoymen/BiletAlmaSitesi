@@ -1,0 +1,19 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                template="/Standart/template/StandartTemplate.xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html">
+
+    <ui:define name="content">
+        <h:form class="buttons">
+            <div class="btn-group">
+                <h:commandButton class="btn btn-dark" action="/Standart/Bilet Al/Otobüs/Otobüs Bileti" value="Otbüs Bileti Satın Al"/>
+                <h:commandButton class="btn btn-dark" action="/Standart/Bilet Al/Uçak/Uçak Bileti" value="Uçak Bileti Satın Al"/>
+                <h:commandButton class="btn btn-dark" action="/Standart/Bilet Al/Tren/Tren Bileti" value="Tren Bileti Satın Al"/>
+            </div>
+        </h:form>
+    </ui:define>
+</ui:composition>
+
+

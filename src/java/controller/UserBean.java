@@ -47,12 +47,14 @@ public class UserBean implements Serializable {
         this.getDao().update(entity);
         return "/Admin/Other/Kullanıcılar/Kullanıcılar";
     }
-    
-
 
     public void delete(int c) {
         this.getDao().delete(c);
 
+    }
+
+    public int user_id() {
+        return this.getEntity().getId();
     }
 
     public UserBean() {
@@ -64,7 +66,9 @@ public class UserBean implements Serializable {
     }
 
     public UsersDao getDao() {
-        if(this.dao == null) dao = new UsersDao();
+        if (this.dao == null) {
+            dao = new UsersDao();
+        }
         return dao;
     }
 
@@ -73,7 +77,9 @@ public class UserBean implements Serializable {
     }
 
     public Users getEntity() {
-        if(this.entity == null) entity = new Users();
+        if (this.entity == null) {
+            entity = new Users();
+        }
         return entity;
     }
 

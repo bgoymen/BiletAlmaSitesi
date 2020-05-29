@@ -55,7 +55,7 @@ public class Tren_FirmalariDao extends DBConnection {
         try {
             Statement st = this.connect().createStatement();
             ResultSet rs = st.executeQuery("select * from tren_firmalari order by id asc");
-
+            rs.next();
             while (rs.next()) {
                 Tren_Firmalari tmp = new Tren_Firmalari(rs.getInt("id"), rs.getString("Name"));
                 list.add(tmp);

@@ -36,7 +36,7 @@ public class SehirlerDao extends DBConnection {
         try {
             Statement st = this.connect().createStatement();
             ResultSet rs = st.executeQuery("select * from sehirler order by id asc");
-
+            rs.next();
             while (rs.next()) {
                 Sehirler tmp = new Sehirler(rs.getInt("id"), rs.getString("Name"));
                 list.add(tmp);

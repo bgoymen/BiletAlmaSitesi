@@ -36,7 +36,7 @@ public class UsersDao extends DBConnection {
         try {
             Statement st = this.connect().createStatement();
             ResultSet rs = st.executeQuery("select * from users order by id asc");
-
+            rs.next();
             while (rs.next()) {
                 Users tmp = new Users(rs.getInt("id"), rs.getString("user_mail"), rs.getString("user_name"), rs.getString("user_password"), rs.getInt("type"));
                 list.add(tmp);
