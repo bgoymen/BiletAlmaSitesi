@@ -13,20 +13,20 @@
         <h:form>
             <div class="container">
                 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-                    <h:commandLink class="navbar-brand" action="/Admin/Admin" value="Ana Sayfa"/>
+                    <h:commandLink class="navbar-brand" action="/Admin/Admin?faces-redirect=true" value="Ana Sayfa"/>
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
                     </button>
                     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                         <div class="navbar-nav">
-                            <h:commandLink styleClass="nav-item nav-link active" action="/Admin/Firmalar/Firmalar" value="Firmalar"/>
+                            <h:commandLink styleClass="nav-item nav-link active" action="/Admin/Firmalar/Firmalar?faces-redirect=true" value="Firmalar"/>
                             <h:commandLink styleClass="nav-item nav-link active" action="#{userBean.kullanıcılar()}" value="Kullanıcılar"/>
-                            <h:commandLink styleClass="nav-item nav-link active" action="/Admin/Seferler/Seferler" value="Seferler"/>
+                            <h:commandLink styleClass="nav-item nav-link active" action="/Admin/Seferler/Seferler?faces-redirect=true" value="Seferler"/>
                             <h:commandLink styleClass="nav-item nav-link active" action="#{sehirlerBean.sehirler()}" value="Şehirler"/>
                             <h:commandLink styleClass="nav-item nav-link active" action="#{haberlerBean.haberler()}" value="Haberler"/>
-                            <h:commandLink styleClass="nav-item nav-link active" action="/Admin/Other/Kampanyalar/Kampanyalar" value="Kampanyalar"/>
-                            <h:commandLink styleClass="nav-item nav-link active" action="/Admin/Other/İletişimler" value="İletişimler"/>
-                            <h:commandLink styleClass="nav-item nav-link active" action="/index" value="Çıkış Yap"/>
+                            <h:commandLink styleClass="nav-item nav-link active" action="/Admin/Other/Kampanyalar/Kampanyalar?faces-redirect=true/" value="Kampanyalar"/>
+                            <h:commandLink styleClass="nav-item nav-link active" action="/Admin/Other/Iletisimler?faces-redirect=true" value="İletişimler"/>
+                            <h:commandLink styleClass="nav-item nav-link active" action="/index?faces-redirect=true" value="Çıkış Yap"/>
                         </div>
                     </div>
                 </nav>

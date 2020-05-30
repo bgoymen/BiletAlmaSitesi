@@ -59,7 +59,7 @@ public class HaberlerBean implements Serializable {
 
     public String haberler() {
         this.entity = new Haberler();
-        return "/Admin/Other/Haberler/Haberler";
+        return "/Admin/Other/Haberler/Haberler?faces-redirect=true";
     }
 
     public HaberlerBean() {

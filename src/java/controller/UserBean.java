@@ -63,7 +63,7 @@ public class UserBean implements Serializable {
 
     public String kullanıcılar() {
         this.entity = new Users();
-        return "/Admin/Other/Kullanıcılar/Kullanıcılar";
+        return "/Admin/Other/Kullanicilar/Kullanicilar?faces-redirect=true";
     }
 
     public UserBean() {

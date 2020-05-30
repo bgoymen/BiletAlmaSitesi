@@ -63,7 +63,7 @@ public class SehirlerBean implements Serializable {
 
     public String sehirler() {
         this.entity = new Sehirler();
-        return "/Admin/Other/Şehirler/Şehirler";
+        return "/Admin/Other/Sehirler/Sehirler?faces-redirect=true";
     }
 
     public SehirlerBean() {

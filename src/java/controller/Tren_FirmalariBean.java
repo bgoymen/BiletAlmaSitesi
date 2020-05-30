@@ -47,10 +47,9 @@ public class Tren_FirmalariBean implements Serializable {
         this.entity = f;
     }
 
-    public String update() {
+    public void update() {
         this.getDao().update(entity);
         entity = new Tren_Firmalari();
-        return "/Admin/Firmalar/Tren/Tren Firmaları";
     }
 
     public void delete(int c) {

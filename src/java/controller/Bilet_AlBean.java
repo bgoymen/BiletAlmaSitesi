@@ -75,17 +75,17 @@ public class Bilet_AlBean implements Serializable {
 
     public String bos_koltuk_goz_at_otobus(Otobus_Seferleri s) {
         this.o_sefer = s;
-        return "/Standart/Bilet Al/Otobüs/Satın Al";
+        return "/Standart/BiletAl/Otobus/SatinAl?faces-redirect=true";
     }
 
     public String bos_koltuk_goz_at_tren(Tren_Seferleri s) {
         this.t_Sefer = s;
-        return "/Standart/Bilet Al/Tren/Satın Al";
+        return "/Standart/BiletAl/Tren/SatinAl?faces-redirect=true";
     }
 
     public String bos_koltuk_goz_at_ucak(Ucak_Seferleri s) {
         this.u_sefer = s;
-        return "/Standart/Bilet Al/Uçak/Satın Al";
+        return "/Standart/BiletAl/Ucak/SatinAl?faces-redirect=true";
     }
 
     public List<Integer> getSatin_Alirken_Koltuklar_otobus() {
@@ -119,21 +119,21 @@ public class Bilet_AlBean implements Serializable {
         int user_id = LoginBean.getUser_id();
         entity = new Satin_Alinan_Bilet(user_id, 1, o_sefer.getId(), 0, 0, koltuk_no);
         this.getDao().create(entity);
-        return "/Satın Adığım Biletler/Satın Aldığım Biletler";
+        return "/SatinAldigimBiletler/SatinAldiğimBiletler/Otobus?faces-redirect=true";
     }
 
     public String create_tren(int koltuk_no) {
         int user_id = LoginBean.getUser_id();
         entity = new Satin_Alinan_Bilet(user_id, 3, 0, 0, t_Sefer.getId(), koltuk_no);
         this.getDao().create(entity);
-        return "/Satın Adığım Biletler/Satın Aldığım Biletler";
+        return "/SatinAldigimBiletler/SatinAldiğimBiletler/Tren?faces-redirect=true";
     }
 
     public String create_ucak(int koltuk_no) {
         int user_id = LoginBean.getUser_id();
         entity = new Satin_Alinan_Bilet(user_id, 2, 0, u_sefer.getId(), 0, koltuk_no);
         this.getDao().create(entity);
-        return "/Satın Adığım Biletler/Satın Aldığım Biletler";
+        return "/SatinAldigimBiletler/SatinAldiğimBiletler/Ucak?faces-redirect=true";
     }
 
     public Bilet_AlBean() {
