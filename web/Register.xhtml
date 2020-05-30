@@ -14,7 +14,7 @@
 
             <h:form class="login">
                 E-postanız: <h:inputText class="form-control" value="#{registerBean.entity.user_mail}" required="true" requiredMessage="Lütfen bir e-posta giriniz"/> <br />
-                Kullanıcı Adınız: <h:inputText class="form-control" value="#{registerBean.entity.user_name}" required="true" requiredMessage="Lütfen bir kullanıcı adı giriniz"/> <br />
+                Kullanıcı Adınız: <h:inputText class="form-control" value="#{registerBean.entity.user_name}"/> <br />
                 Şifreniz: <h:inputText class="form-control" value="#{registerBean.entity.user_password}" required="true" requiredMessage="Lütfen bir şifre giriniz"/> <br />
                 <h:commandButton class="btn btn-success" action="#{registerBean.control()}" value="Kayıt Ol"/>
             </h:form>
