@@ -68,6 +68,36 @@ public class Otobus_SeferleriDao extends DBConnection {
         return null;
     }
 
+    public ResultSet read3_kalkis(int sehir_id) {
+
+        try {
+            Statement st = this.connect().createStatement();
+            ResultSet rs = st.executeQuery("select * from otobus_seferleri where kalkis_nok=" + sehir_id);
+
+            return rs;
+
+        } catch (SQLException e) {
+            System.out.println("Hata(Otobus_SeferleriDao(read3_kalkis)):" + e.getMessage());
+        }
+
+        return null;
+    }
+
+    public ResultSet read3_varis(int sehir_id) {
+
+        try {
+            Statement st = this.connect().createStatement();
+            ResultSet rs = st.executeQuery("select * from otobus_seferleri where varis_nok=" + sehir_id);
+
+            return rs;
+
+        } catch (SQLException e) {
+            System.out.println("Hata(Otobus_SeferleriDao(read3_varis)):" + e.getMessage());
+        }
+
+        return null;
+    }
+
     public boolean update(Otobus_Seferleri f) {
         if (f.getKalkis_nok() == f.getVaris_nok()) {
             return false;

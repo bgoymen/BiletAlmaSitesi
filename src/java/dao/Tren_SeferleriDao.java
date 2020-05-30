@@ -67,6 +67,36 @@ public class Tren_SeferleriDao extends DBConnection {
         return null;
     }
 
+    public ResultSet read3_kalkis(int sehir_id) {
+
+        try {
+            Statement st = this.connect().createStatement();
+            ResultSet rs = st.executeQuery("select * from tren_seferleri where kalkis_nok=" + sehir_id);
+
+            return rs;
+
+        } catch (SQLException e) {
+            System.out.println("Hata(Tren_SeferleriDao(read3_kalkis)):" + e.getMessage());
+        }
+
+        return null;
+    }
+
+    public ResultSet read3_varis(int sehir_id) {
+
+        try {
+            Statement st = this.connect().createStatement();
+            ResultSet rs = st.executeQuery("select * from tren_seferleri where varis_nok=" + sehir_id);
+
+            return rs;
+
+        } catch (SQLException e) {
+            System.out.println("Hata(Tren_SeferleriDao(read3_varis)):" + e.getMessage());
+        }
+
+        return null;
+    }
+
     public boolean update(Tren_Seferleri s) {
         if (s.getKalkis_nok() == s.getVaris_nok()) {
             return false;
