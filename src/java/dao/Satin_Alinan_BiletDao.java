@@ -26,149 +26,108 @@ public class Satin_Alinan_BiletDao extends DBConnection {
 
     public void create(Satin_Alinan_Bilet s) {
 
-        switch (s.getSeyehat_turu()) {
-            case 1:
+        try {
+            Statement st = this.connect().createStatement();
+            st.executeUpdate("insert into satin_alinan_bilet(user_id,seyehat_turu, otobus_seferleri_id,ucak_seferleri_id,tren_seferleri_id,koltuk_no) values(" + s.getUser_id() + "," + s.getSeyehat_turu() + "," + s.getOtobus_seferleri_id() + ",0,0," + s.getKoltuk_no() + ")");
 
-                try {
-                    Statement st = this.connect().createStatement();
-                    st.executeUpdate("insert into satin_alinan_bilet(user_id,seyehat_turu, otobus_seferleri_id,ucak_seferleri_id,tren_seferleri_id,koltuk_no) values(" + s.getUser_id() + "," + s.getSeyehat_turu() + "," + s.getOtobus_seferleri_id() + ",0,0," + s.getKoltuk_no() + ")");
-
-                } catch (SQLException ex) {
-                    System.out.println("Hata(Satin_Alinan_BiletDao(Create(1))):" + ex.getMessage());
-                }
-
-                break;
-            case 2:
-
-                try {
-                    Statement st = this.connect().createStatement();
-                    st.executeUpdate("insert into satin_alinan_bilet(user_id,seyehat_turu, otobus_seferleri_id,ucak_seferleri_id,tren_seferleri_id,koltuk_no) values(" + s.getUser_id() + "," + s.getSeyehat_turu() + ",0," + s.getUcak_seferleri_id() + ",0," + s.getKoltuk_no() + ")");
-
-                } catch (SQLException ex) {
-                    System.out.println("Hata(Satin_Alinan_BiletDao(Create(2))):" + ex.getMessage());
-                }
-
-                break;
-            case 3:
-
-                try {
-                    Statement st = this.connect().createStatement();
-                    st.executeUpdate("insert into satin_alinan_bilet(user_id,seyehat_turu, otobus_seferleri_id,ucak_seferleri_id,tren_seferleri_id,koltuk_no) values(" + s.getUser_id() + "," + s.getSeyehat_turu() + ",0,0," + s.getTren_seferleri_id() + "," + s.getKoltuk_no() + ")");
-
-                } catch (SQLException ex) {
-                    System.out.println("Hata(Satin_Alinan_BiletDao(Create(3))):" + ex.getMessage());
-                }
-
-                break;
-            default:
-                System.out.println("Hata(Satin_Alinan_Bilet(Create): Switch-Case)");
-                break;
+        } catch (SQLException ex) {
+            System.out.println("Hata(Satin_Alinan_BiletDao(Create(1))):" + ex.getMessage());
         }
+
     }
 
-    public List<Satin_Alinan_Bilet> read(int kalkis_sehri, int varis_sehri, int seyehat_turu) {
-        return null;
-//        boolean control = this.readConrol(kalkis_sehri, varis_sehri);
-//        if (control == false) {
-//            return null;
-//        } else {
-//            List<Satin_Alinan_Bilet> list = new ArrayList<>();
-//            try {
-//                Statement st = this.connect().createStatement();
-//                ResultSet rs = st.executeQuery("select * from satin_alinan_bilet order by id asc");
-//
-//                switch (seyehat_turu) {
-//                    case 1:
-//                        while (rs.next()) {
-//                            if ((rs.getInt("kalkis_nok") == kalkis_sehri) && (rs.getInt("varis_nok") == varis_sehri)) {
-//                                Satin_Alinan_Bilet tmp = new Satin_Alinan_Bilet(rs.getInt("id"), rs.getInt("otobus_seferi_id"), rs.getInt("kalkis_nok"), rs.getInt("varis_nok"), rs.getInt("fiyat"), 1, rs.getInt("koltuk_no"));
-//                                list.add(tmp);
-//                            }
-//                        }
-//                        break;
-//
-//                    case 2:
-//                        while (rs.next()) {
-//                            if ((rs.getInt("kalkis_nok") == kalkis_sehri) && (rs.getInt("varis_nok") == varis_sehri)) {
-//                                Satin_Alinan_Bilet tmp = new Satin_Alinan_Bilet(rs.getInt("id"), rs.getInt("ucak_seferi_id"), rs.getInt("kalkis_nok"), rs.getInt("varis_nok"), rs.getInt("fiyat"), 2, rs.getInt("koltuk_no"));
-//                                list.add(tmp);
-//                            }
-//                        }
-//                        break;
-//                    case 3:
-//                        while (rs.next()) {
-//                            if ((rs.getInt("kalkis_nok") == kalkis_sehri) && (rs.getInt("varis_nok") == varis_sehri)) {
-//                                Satin_Alinan_Bilet tmp = new Satin_Alinan_Bilet(rs.getInt("id"), rs.getInt("tren_seferi_id"), rs.getInt("kalkis_nok"), rs.getInt("varis_nok"), rs.getInt("fiyat"), 3, rs.getInt("koltuk_no"));
-//                                list.add(tmp);
-//                            }
-//                        }
-//                        break;
-//                    default:
-//                        break;
-//                }
-//            } catch (SQLException e) {
-//                System.out.println("Hata(Otobus_SeferleriDao(read)):" + e.getMessage());
-//            }
-//
-//            return list;
-//        }
+    public List<Satin_Alinan_Bilet> read_Satin_alinanlari_goster(int id, int seyehat_turu) {
+        List<Satin_Alinan_Bilet> list = new ArrayList<>();
+        try {
+
+            Statement st = this.connect().createStatement();
+            ResultSet rs = st.executeQuery("select * from satin_alinan_bilet order by id asc");
+
+            while (rs.next()) {
+                if ((rs.getInt("user_id") == id) && (rs.getInt("seyehat_turu") == seyehat_turu)){
+                    Satin_Alinan_Bilet tmp = new Satin_Alinan_Bilet(rs.getInt("id"), rs.getInt("user_id"), rs.getInt("seyehat_turu"), rs.getInt("otobus_seferleri_id"), rs.getInt("ucak_seferleri_id"), rs.getInt("tren_seferleri_id"), rs.getInt("koltuk_no"));
+                    list.add(tmp);
+                }
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Satin_Alinan_BiletDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return list;
     }
 
     public List<Otobus_Seferleri> read_otbus_bileti(int kalkis_sehri, int varis_sehri) {
-        List<Otobus_Seferleri> list = new ArrayList<>();
-        try {
 
-            Statement st = this.connect().createStatement();
-            ResultSet rs = st.executeQuery("select * from otobus_seferleri order by id asc");
-            while (rs.next()) {
-                if ((rs.getInt("kalkis_nok") == kalkis_sehri) && (rs.getInt("varis_nok") == varis_sehri)) {
-                    Otobus_Seferleri tmp = new Otobus_Seferleri(rs.getInt("id"), rs.getInt("firma_id"), rs.getInt("kalkis_nok"), rs.getInt("varis_nok"), rs.getInt("koltuk_sayisi"), rs.getInt("fiyat"));
-                    list.add(tmp);
+        boolean control = this.readConrol(kalkis_sehri, varis_sehri);
+        if (control == false) {
+            return null;
+        } else {
+            List<Otobus_Seferleri> list = new ArrayList<>();
+            try {
+
+                Statement st = this.connect().createStatement();
+                ResultSet rs = st.executeQuery("select * from otobus_seferleri order by id asc");
+                while (rs.next()) {
+                    if ((rs.getInt("kalkis_nok") == kalkis_sehri) && (rs.getInt("varis_nok") == varis_sehri)) {
+                        Otobus_Seferleri tmp = new Otobus_Seferleri(rs.getInt("id"), rs.getInt("firma_id"), rs.getInt("kalkis_nok"), rs.getInt("varis_nok"), rs.getInt("koltuk_sayisi"), rs.getInt("fiyat"));
+                        list.add(tmp);
+                    }
                 }
-            }
 
-        } catch (SQLException ex) {
-            Logger.getLogger(Satin_Alinan_BiletDao.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (SQLException ex) {
+                Logger.getLogger(Satin_Alinan_BiletDao.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            return list;
         }
-        return list;
     }
 
     public List<Tren_Seferleri> read_tren_bileti(int kalkis_sehri, int varis_sehri) {
-        List<Tren_Seferleri> list = new ArrayList<>();
-        try {
 
-            Statement st = this.connect().createStatement();
-            ResultSet rs = st.executeQuery("select * from tren_seferleri order by id asc");
-            while (rs.next()) {
-                if ((rs.getInt("kalkis_nok") == kalkis_sehri) && (rs.getInt("varis_nok") == varis_sehri)) {
-                    Tren_Seferleri tmp = new Tren_Seferleri(rs.getInt("id"), rs.getInt("tren_firma_id"), rs.getInt("kalkis_nok"), rs.getInt("varis_nok"), rs.getInt("koltuk_sayisi"), rs.getInt("fiyat"));
-                    list.add(tmp);
+        boolean control = this.readConrol(kalkis_sehri, varis_sehri);
+        if (control == false) {
+            return null;
+        } else {
+            List<Tren_Seferleri> list = new ArrayList<>();
+            try {
+
+                Statement st = this.connect().createStatement();
+                ResultSet rs = st.executeQuery("select * from tren_seferleri order by id asc");
+                while (rs.next()) {
+                    if ((rs.getInt("kalkis_nok") == kalkis_sehri) && (rs.getInt("varis_nok") == varis_sehri)) {
+                        Tren_Seferleri tmp = new Tren_Seferleri(rs.getInt("id"), rs.getInt("tren_firma_id"), rs.getInt("kalkis_nok"), rs.getInt("varis_nok"), rs.getInt("koltuk_sayisi"), rs.getInt("fiyat"));
+                        list.add(tmp);
+                    }
                 }
-            }
 
-        } catch (SQLException ex) {
-            Logger.getLogger(Satin_Alinan_BiletDao.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (SQLException ex) {
+                Logger.getLogger(Satin_Alinan_BiletDao.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            return list;
         }
-        return list;
+
     }
 
     public List<Ucak_Seferleri> read_ucak_bileti(int kalkis_sehri, int varis_sehri) {
-        List<Ucak_Seferleri> list = new ArrayList<>();
-        try {
+        boolean control = this.readConrol(kalkis_sehri, varis_sehri);
+        if (control == false) {
+            return null;
+        } else {
+            List<Ucak_Seferleri> list = new ArrayList<>();
+            try {
 
-            Statement st = this.connect().createStatement();
-            ResultSet rs = st.executeQuery("select * from ucak_seferleri order by id asc");
-            while (rs.next()) {
-                if ((rs.getInt("kalkis_nok") == kalkis_sehri) && (rs.getInt("varis_nok") == varis_sehri)) {
-                    Ucak_Seferleri tmp = new Ucak_Seferleri(rs.getInt("id"), rs.getInt("ucak_firma_id"), rs.getInt("kalkis_nok"), rs.getInt("varis_nok"), rs.getInt("koltuk_sayisi"), rs.getInt("fiyat"));
-                    list.add(tmp);
+                Statement st = this.connect().createStatement();
+                ResultSet rs = st.executeQuery("select * from ucak_seferleri order by id asc");
+                while (rs.next()) {
+                    if ((rs.getInt("kalkis_nok") == kalkis_sehri) && (rs.getInt("varis_nok") == varis_sehri)) {
+                        Ucak_Seferleri tmp = new Ucak_Seferleri(rs.getInt("id"), rs.getInt("ucak_firma_id"), rs.getInt("kalkis_nok"), rs.getInt("varis_nok"), rs.getInt("koltuk_sayisi"), rs.getInt("fiyat"));
+                        list.add(tmp);
+                    }
                 }
-            }
 
-        } catch (SQLException ex) {
-            Logger.getLogger(Satin_Alinan_BiletDao.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (SQLException ex) {
+                Logger.getLogger(Satin_Alinan_BiletDao.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            return list;
         }
-        return list;
     }
 
     public boolean readConrol(int kalkis_nok, int varis_nok) {
@@ -245,5 +204,9 @@ public class Satin_Alinan_BiletDao extends DBConnection {
         }
 
         return false;
+    }
+
+    public int seyehat_turu(Satin_Alinan_Bilet s){
+        return s.getSeyehat_turu();
     }
 }

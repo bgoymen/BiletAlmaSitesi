@@ -79,13 +79,13 @@ public class Otobus_SeferleriDao extends DBConnection {
     }
 
     public int kalkis_nok(int id) {
-        
+
         try {
             Statement st = this.connect().createStatement();
             ResultSet rs = st.executeQuery("select * from otobus_seferleri order by id asc");
             rs.next();
             while (rs.next()) {
-                if(rs.getInt("id") == id){
+                if (rs.getInt("id") == id) {
                     return rs.getInt("kalkis_nok");
                 }
             }
@@ -95,16 +95,33 @@ public class Otobus_SeferleriDao extends DBConnection {
         }
         return -1;
     }
-    
-        public int varis_nok(int id) {
-        
+
+    public int varis_nok(int id) {
+
         try {
             Statement st = this.connect().createStatement();
             ResultSet rs = st.executeQuery("select * from otobus_seferleri order by id asc");
             rs.next();
             while (rs.next()) {
-                if(rs.getInt("id") == id){
+                if (rs.getInt("id") == id) {
                     return rs.getInt("varis_nok");
+                }
+            }
+
+        } catch (SQLException e) {
+            System.out.println("Hata(Otobus_SeferleriDao(read)):" + e.getMessage());
+        }
+        return -1;
+    }
+
+    public int firma_id(int id) {
+        try {
+            Statement st = this.connect().createStatement();
+            ResultSet rs = st.executeQuery("select * from otobus_seferleri order by id asc");
+            rs.next();
+            while (rs.next()) {
+                if (rs.getInt("id") == id) {
+                    return rs.getInt("firma_id");
                 }
             }
 

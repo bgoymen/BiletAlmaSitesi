@@ -15,6 +15,8 @@ import entity.Users;
 import java.io.Serializable;
 import java.util.List;
 import javax.enterprise.context.SessionScoped;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import javax.inject.Named;
 
 /**
@@ -39,15 +41,36 @@ public class Bilet_AlBean implements Serializable {
     private Ucak_Seferleri u_sefer;
 
     public List<Otobus_Seferleri> getList_otobus_sefer() {
-        return this.getDao().read_otbus_bileti(kalkis_sehri, varis_sehri);
+        List<Otobus_Seferleri> list = this.getDao().read_otbus_bileti(kalkis_sehri, varis_sehri);
+        if (list == null) {
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Kalkış Noktası ile Varış noktası aynı olamaz"));
+            return null;
+        } else {
+            return list;
+        }
     }
 
     public List<Tren_Seferleri> getList_tren_sefer() {
-        return this.getDao().read_tren_bileti(kalkis_sehri, varis_sehri);
+        List<Tren_Seferleri> list = this.getDao().read_tren_bileti(kalkis_sehri, varis_sehri);
+
+        if (list == null) {
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Kalkış Noktası ile Varış noktası aynı olamaz"));
+            return null;
+        } else {
+            return this.getDao().read_tren_bileti(kalkis_sehri, varis_sehri);
+        }
+
     }
 
     public List<Ucak_Seferleri> getList_ucak_sefer() {
-        return this.getDao().read_ucak_bileti(kalkis_sehri, varis_sehri);
+        List<Ucak_Seferleri> list = this.getDao().read_ucak_bileti(kalkis_sehri, varis_sehri);
+        if (list == null) {
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Kalkış Noktası ile Varış noktası aynı olamaz"));
+            return null;
+        } else {
+            return list;
+        }
+
     }
 
     public String bos_koltuk_goz_at_otobus(Otobus_Seferleri s) {

@@ -21,25 +21,24 @@ import javax.inject.Named;
 @Named
 @SessionScoped
 public class Otobus_SeferleriBean implements Serializable {
+
     private Otobus_SeferleriDao dao;
     private Otobus_Seferleri entity;
 
     public String create() {
-       boolean c = this.getDao().create(entity);
-       if(c == false){
-           FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Kalkış Noktası İle Varış Noktası Aynı Olamaz!!"));
-           return "/Admin/Seferler/Otobüs/Create";
-       }else{
-           return "/Admin/Seferler/Otobüs/Otobüs Seferleri";
-       }
-        
+        boolean c = this.getDao().create(entity);
+        if (c == false) {
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Kalkış Noktası İle Varış Noktası Aynı Olamaz!!"));
+            return "/Admin/Seferler/Otobüs/Create";
+        } else {
+            return "/Admin/Seferler/Otobüs/Otobüs Seferleri";
+        }
+
     }
 
     public List<Otobus_Seferleri> getRead() {
         return this.getDao().read();
     }
-    
-    
 
     public String updateForm(Otobus_Seferleri s) {
         this.entity = s;
@@ -48,18 +47,30 @@ public class Otobus_SeferleriBean implements Serializable {
 
     public String update() {
         boolean c = this.getDao().update(entity);
-        if(c== false){
+        if (c == false) {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Kalkış Noktası İle Varış Noktası Aynı Olamaz!!"));
-           return "/Admin/Seferler/Otobüs/Update"; 
-        }else{
-           return "/Admin/Seferler/Otobüs/Otobüs Seferleri"; 
+            return "/Admin/Seferler/Otobüs/Update";
+        } else {
+            return "/Admin/Seferler/Otobüs/Otobüs Seferleri";
         }
-        
+
     }
 
     public void delete(int c) {
         this.getDao().delete(c);
 
+    }
+
+    public int kalkis_noktasi(int id) {
+        return this.getDao().kalkis_nok(id);
+    }
+
+    public int varis_noktasi(int id) {
+        return this.getDao().varis_nok(id);
+    }
+    
+    public int firma_id(int id){
+        return this.getDao().firma_id(id);
     }
 
     public Otobus_SeferleriBean() {
