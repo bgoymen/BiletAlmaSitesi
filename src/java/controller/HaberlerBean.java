@@ -26,35 +26,30 @@ public class HaberlerBean implements Serializable {
 
     private Haberler entity;
 
-    public String create() {
+    public void create() {
         if (entity.getHaber().length() == 0) {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Lütfen Gerekli Yerleri Doldurunuz"));
-            return null;
         } else {
             this.getDao().create(entity);
             entity = new Haberler();
-            return "/Admin/Other/Haberler/Haberler";
         }
     }
     
-    public String clearForm() {
+    public void clearForm() {
         this.entity = new Haberler();
-        return "/Admin/Other/Haberler/Haberler";
     }
 
     public List<Haberler> getRead() {
         return this.getDao().read();
     }
 
-    public String updateForm(Haberler c) {
+    public void updateForm(Haberler c) {
         this.entity = c;
-        return "/Admin/Other/Haberler/Haberler";
     }
 
-    public String update() {
+    public void update() {
         this.getDao().update(entity);
         entity = new Haberler();
-        return "/Admin/Other/Haberler/Haberler";
     }
 
     public void delete(int c) {

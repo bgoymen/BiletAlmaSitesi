@@ -25,30 +25,26 @@ public class Tren_FirmalariBean implements Serializable {
     private Tren_FirmalariDao dao;
     private Tren_Firmalari entity;
 
-    public String create() {
+    public void create() {
         if (entity.getName().length() == 0) {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Lütfen Gerekli Yerleri Doldurunuz"));
-            return null;
         } else {
             this.getDao().create(entity);
             entity = new Tren_Firmalari();
-            return "/Admin/Firmalar/Tren/Tren Firmaları";
         }
 
     }
 
-    public String clearForm() {
+    public void clearForm() {
         this.entity = new Tren_Firmalari();
-        return "/Admin/Firmalar/Tren/Tren Firmaları";
     }
 
     public List<Tren_Firmalari> getRead() {
         return this.getDao().read();
     }
 
-    public String updateForm(Tren_Firmalari f) {
+    public void updateForm(Tren_Firmalari f) {
         this.entity = f;
-        return "/Admin/Firmalar/Tren/Tren Firmaları";
     }
 
     public String update() {

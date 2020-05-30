@@ -46,7 +46,7 @@ public class Tren_SeferleriDao extends DBConnection {
             }
 
         } catch (SQLException e) {
-            System.out.println("Hata(Tren_SeanslariDao(read)):" + e.getMessage());
+            System.out.println("Hata(Tren_SeferleriDao(read)):" + e.getMessage());
         }
 
         return list;

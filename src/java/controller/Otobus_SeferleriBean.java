@@ -25,13 +25,12 @@ public class Otobus_SeferleriBean implements Serializable {
     private Otobus_SeferleriDao dao;
     private Otobus_Seferleri entity;
 
-    public String create() {
+    public void create() {
         boolean c = this.getDao().create(entity);
         if (c == false) {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Kalkış Noktası İle Varış Noktası Aynı Olamaz!!"));
-            return "/Admin/Seferler/Otobüs/Create";
         } else {
-            return "/Admin/Seferler/Otobüs/Otobüs Seferleri";
+            entity = new Otobus_Seferleri();
         }
 
     }
@@ -40,20 +39,17 @@ public class Otobus_SeferleriBean implements Serializable {
         return this.getDao().read();
     }
 
-    public String updateForm(Otobus_Seferleri s) {
+    public void updateForm(Otobus_Seferleri s) {
         this.entity = s;
-        
-        return "/Admin/Seferler/Otobüs/Otobüs Seferleri";
     }
 
-    public String update() {
+    public void update() {
         boolean c = this.getDao().update(entity);
         if (c == false) {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Kalkış Noktası İle Varış Noktası Aynı Olamaz!!"));
-            return "/Admin/Seferler/Otobüs/Update";
         } else {
             this.entity = new Otobus_Seferleri();
-            return "/Admin/Seferler/Otobüs/Otobüs Seferleri";
+            entity = new Otobus_Seferleri();
         }
 
     }
@@ -70,8 +66,8 @@ public class Otobus_SeferleriBean implements Serializable {
     public int varis_noktasi(int id) {
         return this.getDao().varis_nok(id);
     }
-    
-    public int firma_id(int id){
+
+    public int firma_id(int id) {
         return this.getDao().firma_id(id);
     }
 

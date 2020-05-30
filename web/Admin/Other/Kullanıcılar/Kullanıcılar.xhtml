@@ -7,9 +7,10 @@
                 xmlns:f="http://xmlns.jcp.org/jsf/core">
 
     <ui:define name="content">
-        <h:form>
-            <div class="row">
-                <div class="col-md-6">
+
+        <div class="row">
+            <div class="col-md-6">
+                <h:form id="kullanıcılar_table">
                     <h:dataTable value="#{userBean.read}" var="c" class="table table-striped">
                         <h:column>
                             <f:facet name="header">ID</f:facet>
@@ -21,7 +22,9 @@
                         </h:column>
                         <h:column>
                             <f:facet name="header">Kullanıcı Adı</f:facet>
-                            <h:commandLink action="#{userBean.updateForm(c)}" value="#{c.user_name}"/>
+                            <h:commandLink action="#{userBean.updateForm(c)}" value="#{c.user_name}">
+                                <f:ajax execute="@this" render="kullanıcılar_form"/>
+                            </h:commandLink>
                         </h:column>
                         <h:column>
                             <f:facet name="header">Şifre</f:facet>
@@ -35,24 +38,34 @@
                             </div>
                         </h:column>
                     </h:dataTable>
-                </div>
+                </h:form>
+            </div>
 
-                <div class="col-md-6">
+            <div class="col-md-6">
+                <h:form id="kullanıcılar_form">
                     <h:inputHidden value="#{userBean.entity.id}"/>
                     Kullanıcı Mail: <h:inputText class="form-control" value="#{userBean.entity.user_mail}"/>
                     Kullanıcı Adı: <h:inputText class="form-control" value="#{userBean.entity.user_name}"/>
                     Kullanıcı Şifre: <h:inputText class="form-control" value="#{userBean.entity.user_password}"/>
 
-                    <h:commandButton rendered="#{userBean.entity.id==0}" class="btn btn-primary" action="#{userBean.create()}" value="Kullanıcıyı Ekle"/>
+                    <h:commandButton rendered="#{userBean.entity.id==0}" class="btn btn-primary" action="#{userBean.create()}" value="Kullanıcıyı Ekle">
+                        <f:ajax execute="kullanıcılar_form" render="kullanıcılar_form kullanıcılar_table"/>
+                    </h:commandButton>
 
                     <div class="btn-group" role="group">
-                        <h:commandButton rendered="#{userBean.entity.id!=0}" class="btn btn-primary" action="#{userBean.update()}" value="Kulanıcıyı Güncelle"/>
-                        <h:commandButton rendered="#{userBean.entity.id!=0}" class="btn btn-dark"  action="#{userBean.clearForm()}" value="Yeni Kullanıcı Ekle"/>
+                        <h:commandButton rendered="#{userBean.entity.id!=0}" class="btn btn-primary" action="#{userBean.update()}" value="Kulanıcıyı Güncelle">
+                            <f:ajax execute="kullanıcılar_form" render="kullanıcılar_form kullanıcılar_table"/>
+                        </h:commandButton>
+                        <h:commandButton rendered="#{userBean.entity.id!=0}" class="btn btn-dark"  action="#{userBean.clearForm()}" value="Yeni Kullanıcı Ekle">
+                            <f:ajax execute="@this" render="kullanıcılar_form"/>
+                        </h:commandButton>
                     </div>
-                </div>
+                </h:form>
             </div>
 
-        </h:form>
+        </div>
+
+
     </ui:define>
 </ui:composition>
 

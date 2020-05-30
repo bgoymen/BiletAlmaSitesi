@@ -25,20 +25,17 @@ public class Ucak_FirmalariBean implements Serializable {
     private Ucak_FirmalariDao dao;
     private Ucak_Firmalari entity;
 
-    public String create() {
+    public void create() {
         if (entity.getName().length() == 0) {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Lütfen Gerekli Yerleri Doldurunuz"));
-            return null;
         } else {
             this.getDao().create(entity);
             entity = new Ucak_Firmalari();
-            return "/Admin/Firmalar/Uçak/Uçak Firmaları";
         }
     }
 
-    public String clearForm() {
+    public void clearForm() {
         this.entity = new Ucak_Firmalari();
-        return "/Admin/Firmalar/Uçak/Uçak Firmaları";
     }
 
     public List<Ucak_Firmalari> getRead() {
@@ -49,15 +46,13 @@ public class Ucak_FirmalariBean implements Serializable {
         return this.getDao().getById(id);
     }
 
-    public String updateForm(Ucak_Firmalari f) {
+    public void updateForm(Ucak_Firmalari f) {
         this.entity = f;
-        return "/Admin/Firmalar/Uçak/Uçak Firmaları";
     }
 
-    public String update() {
+    public void update() {
         this.getDao().update(entity);
         entity = new Ucak_Firmalari();
-        return "/Admin/Firmalar/Uçak/Uçak Firmaları";
     }
 
     public void delete(int c) {

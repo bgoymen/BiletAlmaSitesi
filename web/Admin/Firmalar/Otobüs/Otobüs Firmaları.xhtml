@@ -7,9 +7,10 @@
                 xmlns:f="http://xmlns.jcp.org/jsf/core">
 
     <ui:define name="content">
-        <h:form>
-            <div class="row">
-                <div class="col-md-6">
+
+        <div class="row">
+            <div class="col-md-6">
+                <h:form id="otobus_firmalari_table">
                     <h:dataTable value="#{otobus_FirmalariBean.read}" var="f" class="table table-striped">
                         <h:column>
                             <f:facet name="header">ID</f:facet>
@@ -18,7 +19,9 @@
                         <h:column>
 
                             <f:facet name="header">Firma Adı</f:facet>
-                            <h:commandLink action="#{otobus_FirmalariBean.updateForm(f)}" value="#{f.name}"/>
+                            <h:commandLink action="#{otobus_FirmalariBean.updateForm(f)}" value="#{f.name}">
+                                <f:ajax execute="@this" render="otobus_firmalari_form"/>
+                            </h:commandLink>
                         </h:column>
                         <h:column>
                             <f:facet name="header">İşlemler</f:facet>
@@ -27,23 +30,34 @@
                             </div>
                         </h:column>
                     </h:dataTable>
+                </h:form>
+            </div>
 
-                </div>
 
-                <div class="col-md-6">
+            <div class="col-md-6">
+                <h:form id="otobus_firmalari_form">
                     <h:inputHidden value="#{otobus_FirmalariBean.entity.id}"/>
                     Otobüs Firmasının Adı: <h:inputText class="form-control" value="#{otobus_FirmalariBean.entity.name}"/>
 
 
-                    <h:commandButton rendered="#{otobus_FirmalariBean.entity.id==0}" class="btn btn-primary"  action="#{otobus_FirmalariBean.create()}" value="Otobüs Firmasını Ekle"/>
+                    <h:commandButton rendered="#{otobus_FirmalariBean.entity.id==0}" class="btn btn-primary"  action="#{otobus_FirmalariBean.create()}" value="Otobüs Firmasını Ekle">
+                        <f:ajax execute="otobus_firmalari_form" render="otobus_firmalari_form otobus_firmalari_table"/>
+                    </h:commandButton>
+                    
                     <div class="btn-group" role="group">
-                        <h:commandButton rendered="#{otobus_FirmalariBean.entity.id!=0}" class="btn btn-primary"  action="#{otobus_FirmalariBean.update()}" value="Otobüs Firmasını Güncelle"/>
-                        <h:commandButton rendered="#{otobus_FirmalariBean.entity.id!=0}" class="btn btn-dark"  action="#{otobus_FirmalariBean.clearForm()}" value="Yeni Firma Ekle"/>
+                        <h:commandButton rendered="#{otobus_FirmalariBean.entity.id!=0}" class="btn btn-primary"  action="#{otobus_FirmalariBean.update()}" value="Otobüs Firmasını Güncelle">
+                            <f:ajax execute="otobus_firmalari_form" render="otobus_firmalari_form otobus_firmalari_table"/>
+                        </h:commandButton>
+                        <h:commandButton rendered="#{otobus_FirmalariBean.entity.id!=0}" class="btn btn-dark"  action="#{otobus_FirmalariBean.clearForm()}" value="Yeni Firma Ekle">
+                            <f:ajax execute="@this" render="otobus_firmalari_form"/>
+                        </h:commandButton>
                     </div>
-                </div>
+                    
+                </h:form>
             </div>
+        </div>
 
 
-        </h:form>
+
     </ui:define>
 </ui:composition>

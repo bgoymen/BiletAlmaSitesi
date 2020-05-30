@@ -7,9 +7,9 @@
                 xmlns:f="http://xmlns.jcp.org/jsf/core">
 
     <ui:define name="content">
-        <h:form>
-            <div class="row">
-                <div class="col-md-6">
+        <div class="row">
+            <div class="col-md-6">
+                <h:form id="sehirler_table">
                     <h:dataTable value="#{sehirlerBean.read}" var="s" class="table table-striped">
                         <h:column>
                             <f:facet name="header">ID</f:facet>
@@ -17,7 +17,9 @@
                         </h:column>
                         <h:column>
                             <f:facet name="header">Şehrin Adı</f:facet>
-                            <h:commandLink  action="#{sehirlerBean.updateForm(s)}" value="#{s.name}"/>
+                            <h:commandLink  action="#{sehirlerBean.updateForm(s)}" value="#{s.name}">
+                                <f:ajax execute="@this" render="sehirler_form"/>
+                            </h:commandLink>
                         </h:column>
                         <h:column>
                             <f:facet name="header">İşlemler</f:facet>
@@ -26,21 +28,29 @@
                             </div>
                         </h:column>
                     </h:dataTable>
-                </div>
+                </h:form>
+            </div>
 
-                <div class="col-md-6">
+            <div class="col-md-6">
+                <h:form id="sehirler_form">
                     <h:inputHidden value="#{userBean.entity.id}"/>
                     Şehir Adı: <h:inputText class="form-control" value="#{sehirlerBean.entity.name}"/>
 
-                    <h:commandButton rendered="#{sehirlerBean.entity.id==0}" class="btn btn-primary" action="#{sehirlerBean.create()}" value="Şehri Ekle"/>
-                    
-                                        <div class="btn-group" role="group">
-                    <h:commandButton rendered="#{sehirlerBean.entity.id!=0}" class="btn btn-primary" action="#{sehirlerBean.update()}" value="Şehri Güncelle"/>
-                    <h:commandButton rendered="#{sehirlerBean.entity.id!=0}" class="btn btn-dark"  action="#{sehirlerBean.clearForm()}" value="Yeni Şhir Ekle"/>
+                    <h:commandButton rendered="#{sehirlerBean.entity.id==0}" class="btn btn-primary" action="#{sehirlerBean.create()}" value="Şehri Ekle">
+                         <f:ajax execute="sehirler_form" render="sehirler_form sehirler_table"/>
+                    </h:commandButton>
+
+                    <div class="btn-group" role="group">
+                        <h:commandButton rendered="#{sehirlerBean.entity.id!=0}" class="btn btn-primary" action="#{sehirlerBean.update()}" value="Şehri Güncelle">
+                            <f:ajax execute="sehirler_form" render="sehirler_form sehirler_table"/>
+                        </h:commandButton>
+                        <h:commandButton rendered="#{sehirlerBean.entity.id!=0}" class="btn btn-dark"  action="#{sehirlerBean.clearForm()}" value="Yeni Şhir Ekle">
+                            <f:ajax execute="@this" render="sehirler_form"/>
+                        </h:commandButton>
                     </div>
-                </div>
+                </h:form>
             </div>
-        </h:form>
+        </div>
     </ui:define>
 </ui:composition>
 

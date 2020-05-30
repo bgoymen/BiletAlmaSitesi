@@ -25,21 +25,20 @@ public class Otobus_FirmalariBean implements Serializable {
     private Otobus_FirmalariDao dao;
     private Otobus_Firmalari entity;
 
-    public String create() {
+    public void create() {
         if (entity.getName().length() == 0) {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Lütfen Gerekli Yerleri Doldurunuz"));
-            return null;
+            
         } else {
             this.getDao().create(entity);
             entity = new Otobus_Firmalari();
-            return "/Admin/Firmalar/Otobüs/Otobüs Firmaları";
+           
         }
 
     }
     
-    public String clearForm(){
+    public void clearForm(){
         this.entity = new Otobus_Firmalari();
-        return "/Admin/Firmalar/Otobüs/Otobüs Firmaları";
     }
 
     public List<Otobus_Firmalari> getRead() {
@@ -50,15 +49,14 @@ public class Otobus_FirmalariBean implements Serializable {
         return this.getDao().getById(id);
     }
 
-    public String updateForm(Otobus_Firmalari f) {
+    public void updateForm(Otobus_Firmalari f) {
         this.entity = f;
-        return "/Admin/Firmalar/Otobüs/Otobüs Firmaları";
+        
     }
 
-    public String update() {
+    public void update() {
         this.getDao().update(entity);
         entity = new Otobus_Firmalari();
-        return "/Admin/Firmalar/Otobüs/Otobüs Firmaları";
     }
 
     public void delete(int c) {

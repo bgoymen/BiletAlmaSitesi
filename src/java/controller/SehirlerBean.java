@@ -25,36 +25,31 @@ public class SehirlerBean implements Serializable {
     private SehirlerDao dao;
     private Sehirler entity;
 
-    public String create() {
+    public void create() {
         if (entity.getName().length() == 0) {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Lütfen Gerekli Yerleri Doldurunuz"));
-            return null;
         } else {
             this.getDao().create(entity);
             entity = new Sehirler();
-            return "/Admin/Other/Şehirler/Şehirler";
         }
 
     }
 
-    public String clearForm() {
+    public void clearForm() {
         this.entity = new Sehirler();
-        return "/Admin/Other/Şehirler/Şehirler";
     }
 
     public List<Sehirler> getRead() {
         return this.getDao().read();
     }
 
-    public String updateForm(Sehirler s) {
+    public void updateForm(Sehirler s) {
         this.entity = s;
-        return "/Admin/Other/Şehirler/Şehirler";
     }
 
-    public String update() {
+    public void update() {
         this.getDao().update(entity);
         this.entity = new Sehirler();
-        return "/Admin/Other/Şehirler/Şehirler";
     }
 
     public void delete(int c) {

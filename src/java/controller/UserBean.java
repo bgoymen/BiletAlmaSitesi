@@ -27,19 +27,16 @@ public class UserBean implements Serializable {
 
     private Users entity;
 
-    public String create() {
+    public void create() {
         if ((entity.getUser_mail().length() == 0) || (entity.getUser_name().length() == 0) || (entity.getUser_password().length() == 0)) {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Lütfen Gerekli Yerleri Doldurunuz"));
-            return null;
         } else {
             this.getDao().create(entity);
-            return "/Admin/Other/Kullanıcılar/Kullanıcılar";
         }
     }
 
-    public String clearForm() {
+    public void clearForm() {
         this.entity = new Users();
-        return "/Admin/Other/Kullanıcılar/Kullanıcılar";
     }
 
     public ResultSet getRead2() {
@@ -50,15 +47,13 @@ public class UserBean implements Serializable {
         return this.getDao().read();
     }
 
-    public String updateForm(Users c) {
+    public void updateForm(Users c) {
         this.entity = c;
-        return "/Admin/Other/Kullanıcılar/Kullanıcılar";
     }
 
-    public String update() {
+    public void update() {
         this.getDao().update(entity);
         this.entity = new Users();
-        return "/Admin/Other/Kullanıcılar/Kullanıcılar";
     }
 
     public void delete(int c) {
