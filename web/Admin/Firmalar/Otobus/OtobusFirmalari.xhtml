@@ -1,0 +1,63 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                template="/Admin/template/AdminTemplate.xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:define name="content">
+
+        <div class="row">
+            <div class="col-md-6">
+                <h:form id="otobus_firmalari_table">
+                    <h:dataTable value="#{otobus_FirmalariBean.read}" var="f" class="table table-striped">
+                        <h:column>
+                            <f:facet name="header">ID</f:facet>
+                                #{f.id}
+                        </h:column>
+                        <h:column>
+
+                            <f:facet name="header">Firma Adı</f:facet>
+                            <h:commandLink action="#{otobus_FirmalariBean.updateForm(f)}" value="#{f.name}">
+                                <f:ajax execute="@this" render="otobus_firmalari_form"/>
+                            </h:commandLink>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">İşlemler</f:facet>
+                            <div class="btn-group" role="group">
+                                <h:commandButton class="btn btn-danger" action="#{otobus_FirmalariBean.delete(f.id)}" value="Sil"/>
+                            </div>
+                        </h:column>
+                    </h:dataTable>
+                </h:form>
+            </div>
+
+
+            <div class="col-md-6">
+                <h:form id="otobus_firmalari_form">
+                    <h:inputHidden value="#{otobus_FirmalariBean.entity.id}"/>
+                    Otobüs Firmasının Adı: <h:inputText class="form-control" value="#{otobus_FirmalariBean.entity.name}"/>
+
+
+                    <h:commandButton rendered="#{otobus_FirmalariBean.entity.id==0}" class="btn btn-primary"  action="#{otobus_FirmalariBean.create()}" value="Otobüs Firmasını Ekle">
+                        <f:ajax execute="otobus_firmalari_form" render="otobus_firmalari_form otobus_firmalari_table"/>
+                    </h:commandButton>
+                    
+                    <div class="btn-group" role="group">
+                        <h:commandButton rendered="#{otobus_FirmalariBean.entity.id!=0}" class="btn btn-primary"  action="#{otobus_FirmalariBean.update()}" value="Otobüs Firmasını Güncelle">
+                            <f:ajax execute="otobus_firmalari_form" render="otobus_firmalari_form otobus_firmalari_table"/>
+                        </h:commandButton>
+                        <h:commandButton rendered="#{otobus_FirmalariBean.entity.id!=0}" class="btn btn-dark"  action="#{otobus_FirmalariBean.clearForm()}" value="Yeni Firma Ekle">
+                            <f:ajax execute="@this" render="otobus_firmalari_form"/>
+                        </h:commandButton>
+                    </div>
+                    
+                </h:form>
+            </div>
+        </div>
+
+
+
+    </ui:define>
+</ui:composition>
