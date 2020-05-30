@@ -52,6 +52,21 @@ public class Tren_SeferleriDao extends DBConnection {
         return list;
     }
 
+    public ResultSet read2(int firma_id) {
+
+        try {
+            Statement st = this.connect().createStatement();
+            ResultSet rs = st.executeQuery("select * from tren_seferleri where tren_firma_id=" + firma_id);
+
+            return rs;
+
+        } catch (SQLException e) {
+            System.out.println("Hata(Tren_SeferleriDao(read2)):" + e.getMessage());
+        }
+
+        return null;
+    }
+
     public boolean update(Tren_Seferleri s) {
         if (s.getKalkis_nok() == s.getVaris_nok()) {
             return false;
@@ -70,6 +85,7 @@ public class Tren_SeferleriDao extends DBConnection {
     public void delete(int s) {
         try {
             Statement st = this.connect().createStatement();
+            st.executeUpdate("delete from satin_alinan_bilet where tren_seferleri_id=" + s);
             st.executeUpdate("delete from tren_seferleri where id=" + s);
 
         } catch (SQLException e) {

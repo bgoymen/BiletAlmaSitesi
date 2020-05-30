@@ -81,6 +81,12 @@ public class Otobus_FirmalariDao extends DBConnection {
     public void delete(int f) {
         try {
             Statement st = this.connect().createStatement();
+            Otobus_SeferleriDao o = new Otobus_SeferleriDao();
+            ResultSet rs = o.read2(f);
+            while (rs.next()) {
+                st.executeUpdate("delete from satin_alinan_bilet where otobus_seferleri_id=" + rs.getInt("id"));
+            }
+            st.executeUpdate("delete from otobus_seferleri where firma_id=" + f);
             st.executeUpdate("delete from otobus_firmalari where id=" + f);
             
         } catch (SQLException e) {

@@ -17,17 +17,16 @@ import util.DBConnection;
  *
  * @author bünyamin
  */
-public class Ucak_SeferleriDao extends DBConnection{
+public class Ucak_SeferleriDao extends DBConnection {
+
     public boolean create(Ucak_Seferleri s) {
         if (s.getKalkis_nok() == s.getVaris_nok()) {
             return false;
         } else {
             try {
                 Statement st = this.connect().createStatement();
-                st.executeUpdate("insert into ucak_seferleri(ucak_firma_id, kalkis_nok, varis_nok, koltuk_sayisi,fiyat) values(" + s.getUcak_firma_id() + "," + s.getKalkis_nok() + "," + s.getVaris_nok() + "," + s.getKoltuk_sayisi() + ","+s.getFiyat()+")");
-                
-                
-                
+                st.executeUpdate("insert into ucak_seferleri(ucak_firma_id, kalkis_nok, varis_nok, koltuk_sayisi,fiyat) values(" + s.getUcak_firma_id() + "," + s.getKalkis_nok() + "," + s.getVaris_nok() + "," + s.getKoltuk_sayisi() + "," + s.getFiyat() + ")");
+
             } catch (SQLException ex) {
                 System.out.println("Hata(Ucak_SeferleriDao(Create)):" + ex.getMessage());
             }
@@ -45,14 +44,27 @@ public class Ucak_SeferleriDao extends DBConnection{
                 Ucak_Seferleri tmp = new Ucak_Seferleri(rs.getInt("id"), rs.getInt("ucak_firma_id"), rs.getInt("kalkis_nok"), rs.getInt("varis_nok"), rs.getInt("koltuk_sayisi"), rs.getInt("fiyat"));
                 list.add(tmp);
             }
-            
-            
-            
+
         } catch (SQLException e) {
             System.out.println("Hata(Ucak_SeferleriDao(read)):" + e.getMessage());
         }
 
         return list;
+    }
+
+    public ResultSet read2(int firma_id) {
+
+        try {
+            Statement st = this.connect().createStatement();
+            ResultSet rs = st.executeQuery("select * from ucak_seferleri where ucak_firma_id=" + firma_id);
+
+            return rs;
+
+        } catch (SQLException e) {
+            System.out.println("Hata(Ucak_SeferleriDao(read2)):" + e.getMessage());
+        }
+
+        return null;
     }
 
     public boolean update(Ucak_Seferleri s) {
@@ -63,10 +75,8 @@ public class Ucak_SeferleriDao extends DBConnection{
             System.out.println("else");
             try {
                 Statement st = this.connect().createStatement();
-                st.executeUpdate("update ucak_seferleri set ucak_firma_id= '" + s.getUcak_firma_id() + "', kalkis_nok= '" + s.getKalkis_nok() + "', varis_nok= '" + s.getVaris_nok() + "',koltuk_sayisi= '" + s.getKoltuk_sayisi() + "',fiyat='"+s.getFiyat()+"' where id=" + s.getId());
-                
-                
-                
+                st.executeUpdate("update ucak_seferleri set ucak_firma_id= '" + s.getUcak_firma_id() + "', kalkis_nok= '" + s.getKalkis_nok() + "', varis_nok= '" + s.getVaris_nok() + "',koltuk_sayisi= '" + s.getKoltuk_sayisi() + "',fiyat='" + s.getFiyat() + "' where id=" + s.getId());
+
             } catch (SQLException e) {
                 System.out.println("Hata(Ucak_SeferleriDao(Update)):" + e.getMessage());
             }
@@ -77,15 +87,14 @@ public class Ucak_SeferleriDao extends DBConnection{
     public void delete(int s) {
         try {
             Statement st = this.connect().createStatement();
+            st.executeUpdate("delete from satin_alinan_bilet where ucak_seferleri_id=" + s);
             st.executeUpdate("delete from ucak_seferleri where id=" + s);
-            
-            
-            
+
         } catch (SQLException e) {
             System.out.println("Hata(Ucak_SeferleriDao(Delete)):" + e.getMessage());
         }
     }
-    
+
     public int kalkis_nok(int id) {
 
         try {

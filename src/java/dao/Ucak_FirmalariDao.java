@@ -17,9 +17,9 @@ import util.DBConnection;
  *
  * @author Göymen
  */
-public class Ucak_FirmalariDao extends DBConnection{
-    
-        public Ucak_Firmalari getById(int id) {
+public class Ucak_FirmalariDao extends DBConnection {
+
+    public Ucak_Firmalari getById(int id) {
         Ucak_Firmalari f = null;
 
         try {
@@ -28,23 +28,19 @@ public class Ucak_FirmalariDao extends DBConnection{
             rs.next();
 
             f = new Ucak_Firmalari(rs.getInt("id"), rs.getString("Name"));
-            
-            
-           
+
         } catch (SQLException e) {
             System.out.println("Hata(UcakFirmalariDao(getById)): " + e.getMessage());
         }
 
         return f;
     }
-    
+
     public void create(Ucak_Firmalari f) {
         try {
             Statement st = this.connect().createStatement();
             st.executeUpdate("insert into ucak_firmalari(Name) values('" + f.getName() + "')");
-            
-           
-            
+
         } catch (SQLException ex) {
             System.out.println("Hata(Ucak_FirmalariDao(Create)):" + ex.getMessage());
         }
@@ -60,10 +56,7 @@ public class Ucak_FirmalariDao extends DBConnection{
                 Ucak_Firmalari tmp = new Ucak_Firmalari(rs.getInt("id"), rs.getString("Name"));
                 list.add(tmp);
             }
-            
-           
-            
-            
+
         } catch (SQLException e) {
             System.out.println("Hata(Ucak_FirmalariDao(read)):" + e.getMessage());
         }
@@ -75,8 +68,6 @@ public class Ucak_FirmalariDao extends DBConnection{
         try {
             Statement st = this.connect().createStatement();
             st.executeUpdate("update ucak_firmalari set Name= '" + f.getName() + "'where id=" + f.getId());
-            
-           
 
         } catch (SQLException e) {
             System.out.println("Hata(Ucak_FirmalariDao(Update)):" + e.getMessage());
@@ -86,10 +77,14 @@ public class Ucak_FirmalariDao extends DBConnection{
     public void delete(int f) {
         try {
             Statement st = this.connect().createStatement();
+            Ucak_SeferleriDao u = new Ucak_SeferleriDao();
+            ResultSet rs = u.read2(f);
+            while (rs.next()) {
+                st.executeUpdate("delete from satin_alinan_bilet where ucak_seferleri_id=" + rs.getInt("id"));
+            }
+            st.executeUpdate("delete from ucak_seferleri where ucak_firma_id=" + f);
             st.executeUpdate("delete from ucak_firmalari where id=" + f);
-            
-           
-            
+
         } catch (SQLException e) {
             System.out.println("Hata(Ucak_FirmalariDao(Delete)):" + e.getMessage());
         }

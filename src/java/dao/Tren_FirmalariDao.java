@@ -28,9 +28,7 @@ public class Tren_FirmalariDao extends DBConnection {
             rs.next();
 
             f = new Tren_Firmalari(rs.getInt("id"), rs.getString("Name"));
-            
-           
-            
+
         } catch (SQLException e) {
             System.out.println("Hata(TrenFirmalariDao(getById)): " + e.getMessage());
         }
@@ -42,9 +40,7 @@ public class Tren_FirmalariDao extends DBConnection {
         try {
             Statement st = this.connect().createStatement();
             st.executeUpdate("insert into tren_firmalari(Name) values('" + f.getName() + "')");
-            
-            
-            
+
         } catch (SQLException ex) {
             System.out.println("Hata(Tren_FirmalariDao(Create)):" + ex.getMessage());
         }
@@ -60,10 +56,7 @@ public class Tren_FirmalariDao extends DBConnection {
                 Tren_Firmalari tmp = new Tren_Firmalari(rs.getInt("id"), rs.getString("Name"));
                 list.add(tmp);
             }
-            
-            
-           
-            
+
         } catch (SQLException e) {
             System.out.println("Hata(Tren_FirmalariDao(read)):" + e.getMessage());
         }
@@ -75,8 +68,6 @@ public class Tren_FirmalariDao extends DBConnection {
         try {
             Statement st = this.connect().createStatement();
             st.executeUpdate("update tren_firmalari set Name= '" + f.getName() + "'where id=" + f.getId());
-            
-            
 
         } catch (SQLException e) {
             System.out.println("Hata(Tren_FirmalariDao(Update)):" + e.getMessage());
@@ -86,10 +77,14 @@ public class Tren_FirmalariDao extends DBConnection {
     public void delete(int f) {
         try {
             Statement st = this.connect().createStatement();
+            Tren_SeferleriDao t = new Tren_SeferleriDao();
+            ResultSet rs = t.read2(f);
+            while (rs.next()) {
+                st.executeUpdate("delete from satin_alinan_bilet where tren_seferleri_id=" + rs.getInt("id"));
+            }
+            st.executeUpdate("delete from tren_seferleri where tren_firma_id=" + f);
             st.executeUpdate("delete from tren_firmalari where id=" + f);
-            
-            
-            
+
         } catch (SQLException e) {
             System.out.println("Hata(Tren_FirmalariDao(Delete)):" + e.getMessage());
         }
