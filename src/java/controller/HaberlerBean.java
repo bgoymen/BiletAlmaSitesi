@@ -10,6 +10,8 @@ import entity.Haberler;
 import java.io.Serializable;
 import java.util.List;
 import javax.enterprise.context.SessionScoped;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import javax.inject.Named;
 
 /**
@@ -25,9 +27,14 @@ public class HaberlerBean implements Serializable {
     private Haberler entity;
 
     public String create() {
-        this.getDao().create(entity);
-        entity = new Haberler();
-        return "/Admin/Other/Haberler/Haberler";
+        if (entity.getHaber().length() == 0) {
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Lütfen Gerekli Yerleri Doldurunuz"));
+            return null;
+        } else {
+            this.getDao().create(entity);
+            entity = new Haberler();
+            return "/Admin/Other/Haberler/Haberler";
+        }
     }
 
     public List<Haberler> getRead() {

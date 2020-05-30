@@ -10,6 +10,8 @@ import entity.Sehirler;
 import java.io.Serializable;
 import java.util.List;
 import javax.enterprise.context.SessionScoped;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import javax.inject.Named;
 
 /**
@@ -24,8 +26,15 @@ public class SehirlerBean implements Serializable {
     private Sehirler entity;
 
     public String create() {
-        this.getDao().create(entity);
-        return "/Admin/Other/Şehirler/Şehirler";
+        if (entity.getName().length() == 0) {
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Lütfen Gerekli Yerleri Doldurunuz"));
+            return null;
+        } else {
+            this.getDao().create(entity);
+            entity = new Sehirler();
+            return "/Admin/Other/Şehirler/Şehirler";
+        }
+
     }
 
     public List<Sehirler> getRead() {

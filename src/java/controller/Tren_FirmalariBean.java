@@ -10,6 +10,8 @@ import entity.Tren_Firmalari;
 import java.io.Serializable;
 import java.util.List;
 import javax.enterprise.context.SessionScoped;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import javax.inject.Named;
 
 /**
@@ -24,9 +26,15 @@ public class Tren_FirmalariBean implements Serializable {
     private Tren_Firmalari entity;
 
     public String create() {
-        this.getDao().create(entity);
-        entity = new Tren_Firmalari();
-        return "/Admin/Firmalar/Tren/Tren Firmaları";
+        if (entity.getName().length() == 0) {
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Lütfen Gerekli Yerleri Doldurunuz"));
+            return null;
+        } else {
+            this.getDao().create(entity);
+            entity = new Tren_Firmalari();
+            return "/Admin/Firmalar/Tren/Tren Firmaları";
+        }
+
     }
 
     public List<Tren_Firmalari> getRead() {
