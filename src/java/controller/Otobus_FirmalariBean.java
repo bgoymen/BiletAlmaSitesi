@@ -41,7 +41,7 @@ public class Otobus_FirmalariBean implements Serializable {
 
     public String updateForm(Otobus_Firmalari f) {
         this.entity = f;
-        return "/Admin/Firmalar/Otobüs/Update";
+        return "/Admin/Firmalar/Otobüs/Otobüs Firmaları";
     }
 
     public String update() {

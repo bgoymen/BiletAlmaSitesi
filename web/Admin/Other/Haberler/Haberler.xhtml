@@ -8,28 +8,32 @@
 
     <ui:define name="content">
         <h:form>
-            <div class="m-3">
-                <h:commandButton class="btn btn-primary" action="/Admin/Other/Haberler/Create" value="Yeni Kullanıcı Ekle"/>
-            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <h:dataTable value="#{haberlerBean.read}" var="c" class="table table-striped">
+                        <h:column>
+                            <f:facet name="header">ID</f:facet>
+                                #{c.haber_id}
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">Haber</f:facet>
+                            <h:commandLink action="#{haberlerBean.updateForm(c)}" value="#{c.haber}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">İşlemler</f:facet>
+                            <div class="btn-group">
+                                <h:commandButton class="btn btn-danger" action="#{haberlerBean.delete(c.haber_id)}" value="Sil"/>
+                            </div>
+                        </h:column>
+                    </h:dataTable>
+                </div>
 
-            <div class="m-3">
-                <h:dataTable value="#{haberlerBean.read}" var="c" class="table table-striped">
-                    <h:column>
-                        <f:facet name="header">ID</f:facet>
-                            #{c.haber_id}
-                    </h:column>
-                    <h:column>
-                        <f:facet name="header">Haber</f:facet>
-                            #{c.haber}
-                    </h:column>
-                    <h:column>
-                        <f:facet name="header">İşlemler</f:facet>
-                        <div class="btn-group">
-                            <h:commandButton class="btn btn-warning" action="#{haberlerBean.updateForm(c)}" value="Güncelle"/>
-                            <h:commandButton class="btn btn-danger" action="#{haberlerBean.delete(c.haber_id)}" value="Sil"/>
-                        </div>
-                    </h:column>
-                </h:dataTable>
+                <div class="col-md-6">
+                    <h:inputHidden value="#{haberlerBean.entity.haber_id}"/>
+                    Haber: <h:inputText class="form-control" value="#{haberlerBean.entity.haber}"/>
+                    <h:commandButton rendered="#{haberlerBean.entity.haber_id!=0}" class="btn btn-primary" action="#{haberlerBean.update()}" value="Haberi Güncelle"/>
+                    <h:commandButton rendered="#{haberlerBean.entity.haber_id==0}" class="btn btn-primary" action="#{haberlerBean.create()}" value="Haberi Ekle"/>
+                </div>
             </div>
         </h:form>
     </ui:define>

@@ -44,7 +44,7 @@ public class Ucak_SeferleriBean implements Serializable {
 
     public String updateForm(Ucak_Seferleri s) {
         this.entity = s;
-        return "/Admin/Seferler/Uçak/Update";
+        return "/Admin/Seferler/Uçak/Uçak Seferleri";
     }
 
     public String update() {

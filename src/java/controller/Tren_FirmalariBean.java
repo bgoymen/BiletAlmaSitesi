@@ -35,7 +35,7 @@ public class Tren_FirmalariBean implements Serializable {
 
     public String updateForm(Tren_Firmalari f) {
         this.entity = f;
-        return "/Admin/Firmalar/Tren/Update";
+        return "/Admin/Firmalar/Tren/Tren Firmaları";
     }
 
     public String update() {

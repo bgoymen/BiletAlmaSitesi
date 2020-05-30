@@ -36,7 +36,7 @@ public class HaberlerBean implements Serializable {
 
     public String updateForm(Haberler c) {
         this.entity = c;
-        return "/Admin/Other/Haberler/Update";
+        return "/Admin/Other/Haberler/Haberler";
     }
 
     public String update() {
@@ -48,6 +48,11 @@ public class HaberlerBean implements Serializable {
     public void delete(int c) {
         this.getDao().delete(c);
 
+    }
+
+    public String haberler() {
+        this.entity = new Haberler();
+        return "/Admin/Other/Haberler/Haberler";
     }
 
     public HaberlerBean() {

@@ -39,7 +39,7 @@ public class Ucak_FirmalariBean implements Serializable {
 
     public String updateForm(Ucak_Firmalari f) {
         this.entity = f;
-        return "/Admin/Firmalar/Uçak/Update";
+        return "/Admin/Firmalar/Uçak/Uçak Firmaları";
     }
 
     public String update() {

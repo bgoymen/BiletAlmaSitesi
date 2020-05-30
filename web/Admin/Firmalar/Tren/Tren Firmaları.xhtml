@@ -8,28 +8,33 @@
 
     <ui:define name="content">
         <h:form>
-            <div class="m-3">
-                <h:commandButton class="btn btn-primary" action="/Admin/Firmalar/Tren/Create" value="Yeni Tren Firması Ekle"/>
-            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <h:dataTable value="#{tren_FirmalariBean.read}" var="f" class="table table-striped">
+                        <h:column>
+                            <f:facet name="header">ID</f:facet>
+                                #{f.id}
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">Firma Adı</f:facet>
+                            <h:commandLink action="#{tren_FirmalariBean.updateForm(f)}" value="#{f.name}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">İşlemler</f:facet>
+                            <div class="btn-group" role="group" >
+                                <h:commandButton class="btn btn-danger" action="#{tren_FirmalariBean.delete(f.id)}" value="Sil"/>
+                            </div>
+                        </h:column>
+                    </h:dataTable>
+                </div>
 
-            <div class="m-3">
-                <h:dataTable value="#{tren_FirmalariBean.read}" var="f" class="table table-striped">
-                    <h:column>
-                        <f:facet name="header">ID</f:facet>
-                            #{f.id}
-                    </h:column>
-                    <h:column>
-                        <f:facet name="header">Firma Adı</f:facet>
-                            #{f.name}
-                    </h:column>
-                    <h:column>
-                        <f:facet name="header">İşlemler</f:facet>
-                        <div class="btn-group" role="group" >
-                            <h:commandButton class="btn btn-warning" action="#{tren_FirmalariBean.updateForm(f)}" value="Güncelle"/>
-                            <h:commandButton class="btn btn-danger" action="#{tren_FirmalariBean.delete(f.id)}" value="Sil"/>
-                        </div>
-                    </h:column>
-                </h:dataTable>
+                <div class="col-md-6">
+                    <h:inputHidden value="#{tren_FirmalariBean.entity.id}"/>
+                    Tren Firmasının Adı: <h:inputText class="form-control" value="#{tren_FirmalariBean.entity.name}"/>
+
+                    <h:commandButton rendered="#{tren_FirmalariBean.entity.id!=0}" class="btn btn-primary"  action="#{tren_FirmalariBean.update()}" value="Tren Firmasını Güncelle"/>
+                    <h:commandButton rendered="#{tren_FirmalariBean.entity.id==0}" class="btn btn-primary"  action="#{tren_FirmalariBean.create()}" value="Tren Firmasını Ekle"/>
+                </div>
             </div>
         </h:form>
     </ui:define>

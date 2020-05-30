@@ -8,38 +8,45 @@
 
     <ui:define name="content">
         <h:form>
-            <div class="m-3">
-                <h:commandButton class="btn btn-primary" action="/Admin/Other/Kullanıcılar/Create" value="Yeni Kullanıcı Ekle"/>
+            <div class="row">
+                <div class="col-md-6">
+                    <h:dataTable value="#{userBean.read}" var="c" class="table table-striped">
+                        <h:column>
+                            <f:facet name="header">ID</f:facet>
+                                #{c.id}
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">Mail</f:facet>
+                                #{c.user_mail}
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">Kullanıcı Adı</f:facet>
+                            <h:commandLink action="#{userBean.updateForm(c)}" value="#{c.user_name}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">Şifre</f:facet>
+                                #{c.user_password}
+                        </h:column>
+
+                        <h:column>
+                            <f:facet name="header">İşlemler</f:facet>
+                            <div class="btn-group">
+                                <h:commandButton class="btn btn-danger" action="#{userBean.delete(c.id)}" value="Sil"/>
+                            </div>
+                        </h:column>
+                    </h:dataTable>
+                </div>
+
+                <div class="col-md-6">
+                    <h:inputHidden value="#{userBean.entity.id}"/>
+                    Kullanıcı Mail: <h:inputText class="form-control" value="#{userBean.entity.user_mail}"/>
+                    Kullanıcı Adı: <h:inputText class="form-control" value="#{userBean.entity.user_name}"/>
+                    Kullanıcı Şifre: <h:inputText class="form-control" value="#{userBean.entity.user_password}"/>
+                    <h:commandButton rendered="#{userBean.entity.id!=0}" class="btn btn-primary" action="#{userBean.update()}" value="Kulanıcıyı Güncelle"/>
+                    <h:commandButton rendered="#{userBean.entity.id==0}" class="btn btn-primary" action="#{userBean.create()}" value="Kullanıcıyı Ekle"/>
+                </div>
             </div>
 
-            <div class="m-3">
-                <h:dataTable value="#{userBean.read}" var="c" class="table table-striped">
-                    <h:column>
-                        <f:facet name="header">ID</f:facet>
-                            #{c.id}
-                    </h:column>
-                    <h:column>
-                        <f:facet name="header">Mail</f:facet>
-                            #{c.user_mail}
-                    </h:column>
-                    <h:column>
-                        <f:facet name="header">Kullanıcı Adı</f:facet>
-                            #{c.user_name}
-                    </h:column>
-                    <h:column>
-                        <f:facet name="header">Şifre</f:facet>
-                            #{c.user_password}
-                    </h:column>
-
-                    <h:column>
-                        <f:facet name="header">İşlemler</f:facet>
-                        <div class="btn-group">
-                            <h:commandButton class="btn btn-warning" action="#{userBean.updateForm(c)}" value="Güncelle"/>
-                            <h:commandButton class="btn btn-danger" action="#{userBean.delete(c.id)}" value="Sil"/>
-                        </div>
-                    </h:column>
-                </h:dataTable>
-            </div>
         </h:form>
     </ui:define>
 </ui:composition>

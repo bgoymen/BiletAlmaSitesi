@@ -8,29 +8,38 @@
 
     <ui:define name="content">
         <h:form>
-            <div class = "ml-3">
-                <h:commandButton class="btn btn-primary" action="/Admin/Firmalar/Otobüs/Create" value="Yeni Otobüs Firması Ekle"/>
+            <div class="row">
+                <div class="col-md-6">
+                    <h:dataTable value="#{otobus_FirmalariBean.read}" var="f" class="table table-striped">
+                        <h:column>
+                            <f:facet name="header">ID</f:facet>
+                                #{f.id}
+                        </h:column>
+                        <h:column>
+
+                            <f:facet name="header">Firma Adı</f:facet>
+                            <h:commandLink action="#{otobus_FirmalariBean.updateForm(f)}" value="#{f.name}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">İşlemler</f:facet>
+                            <div class="btn-group" role="group">
+                                <h:commandButton class="btn btn-danger" action="#{otobus_FirmalariBean.delete(f.id)}" value="Sil"/>
+                            </div>
+                        </h:column>
+                    </h:dataTable>
+
+                </div>
+
+                <div class="col-md-6">
+                    <h:inputHidden value="#{otobus_FirmalariBean.entity.id}"/>
+                    Otobüs Firmasının Adı: <h:inputText class="form-control" value="#{otobus_FirmalariBean.entity.name}"/>
+                   
+                    <h:commandButton rendered="#{otobus_FirmalariBean.entity.id!=0}" class="btn btn-primary"  action="#{otobus_FirmalariBean.update()}" value="Otobüs Firmasını Güncelle"/>
+                     <h:commandButton rendered="#{otobus_FirmalariBean.entity.id==0}" class="btn btn-primary"  action="#{otobus_FirmalariBean.create()}" value="Otobüs Firmasını Ekle"/>
+                </div>
             </div>
 
-            <div class = "m-3">
-                <h:dataTable value="#{otobus_FirmalariBean.read}" var="f" class="table table-striped">
-                    <h:column>
-                        <f:facet name="header">ID</f:facet>
-                            #{f.id}
-                    </h:column>
-                    <h:column>
-                        <f:facet name="header">Firma Adı</f:facet>
-                            #{f.name}
-                    </h:column>
-                    <h:column>
-                        <f:facet name="header">İşlemler</f:facet>
-                        <div class="btn-group" role="group">
-                            <h:commandButton class="btn btn-warning" action="#{otobus_FirmalariBean.updateForm(f)}" value="Güncelle"/>
-                            <h:commandButton class="btn btn-danger" action="#{otobus_FirmalariBean.delete(f.id)}" value="Sil"/>
-                        </div>
-                    </h:column>
-                </h:dataTable>
-            </div>
+
         </h:form>
     </ui:define>
 </ui:composition>

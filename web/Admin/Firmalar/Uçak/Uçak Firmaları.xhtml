@@ -8,29 +8,38 @@
 
     <ui:define name="content">
         <h:form>
-            <div class="m-3">
-                <h:commandButton class="btn btn-primary" action="/Admin/Firmalar/Uçak/Create" value="Yeni Uçak Firması Ekle"/>
+            <div class="row">
+                <div class="col-md-6">
+                    <h:dataTable value="#{ucak_FirmalariBean.read}" var="f" class="table table-striped">
+                        <h:column>
+                            <f:facet name="header">ID</f:facet>
+                                #{f.id}
+                        </h:column>
+                        <h:column>
+
+                            <f:facet name="header">Firma Adı</f:facet>
+                            <h:commandLink action="#{ucak_FirmalariBean.updateForm(f)}" value="#{f.name}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">İşlemler</f:facet>
+                            <div class="btn-group" role="group">
+                                <h:commandButton class="btn btn-danger" action="#{ucak_FirmalariBean.delete(f.id)}" value="Sil"/>
+                            </div>
+                        </h:column>
+                    </h:dataTable>
+
+                </div>
+
+                <div class="col-md-6">
+                    <h:inputHidden value="#{ucak_FirmalariBean.entity.id}"/>
+                    Uçak Firmasının Adı: <h:inputText class="form-control" value="#{ucak_FirmalariBean.entity.name}"/>
+                   
+                    <h:commandButton rendered="#{ucak_FirmalariBean.entity.id!=0}" class="btn btn-primary"  action="#{ucak_FirmalariBean.update()}" value="Uçak Firmasını Güncelle"/>
+                     <h:commandButton rendered="#{ucak_FirmalariBean.entity.id==0}" class="btn btn-primary"  action="#{ucak_FirmalariBean.create()}" value="Uçak Firmasını Ekle"/>
+                </div>
             </div>
-            <div class="m-3">
-                <h:dataTable value="#{ucak_FirmalariBean.read}" var="f" class="table table-striped">
-                    <h:column>
-                        <f:facet name="header">ID</f:facet>
-                            #{f.id}
-                    </h:column>
-                    <h:column>
-                        <f:facet name="header">Firma Adı</f:facet>
-                            #{f.name}
-                    </h:column>
-                    <h:column>
-                        <f:facet name="header">İşlemler</f:facet>
-                        <div class="btn-group" role="group">
-                            <h:commandButton class="btn btn-warning" action="#{ucak_FirmalariBean.updateForm(f)}" value="Güncelle"/>
-                            <h:commandButton class="btn btn-danger" action="#{ucak_FirmalariBean.delete(f.id)}" value="Sil"/>
-                        </div>
-                    </h:column>
-                </h:dataTable>
-            </div>
+
+
         </h:form>
     </ui:define>
 </ui:composition>
-

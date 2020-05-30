@@ -40,17 +40,23 @@ public class UserBean implements Serializable {
 
     public String updateForm(Users c) {
         this.entity = c;
-        return "/Admin/Other/Kullanıcılar/Update";
+        return "/Admin/Other/Kullanıcılar/Kullanıcılar";
     }
 
     public String update() {
         this.getDao().update(entity);
+        this.entity = new Users();
         return "/Admin/Other/Kullanıcılar/Kullanıcılar";
     }
 
     public void delete(int c) {
         this.getDao().delete(c);
 
+    }
+
+    public String kullanıcılar() {
+        this.entity = new Users();
+        return "/Admin/Other/Kullanıcılar/Kullanıcılar";
     }
 
     public UserBean() {

@@ -8,45 +8,68 @@
 
     <ui:define name="content">
         <h:form>
-            <div class="m-3">
-                <h:commandButton class="btn btn-primary" action="/Admin/Seferler/Otobüs/Create" value="Yeni Sefer Ekle"/>
+            <div class="row">
+
+                <div class="col-md-6">
+                    <h:dataTable value="#{otobus_SeferleriBean.read}" var="s" class="table table-striped">
+                        <h:column>
+                            <f:facet name="header">ID</f:facet>
+                                #{s.id}
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">Firma Adı</f:facet>
+                            <h:commandLink action="#{otobus_SeferleriBean.updateForm(s)}" value="#{otobus_FirmalariBean.getById(s.firma_id).name}"/>
+                            
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">Kalkış Noktası</f:facet>
+                                #{sehirlerBean.getById(s.kalkis_nok).name}
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">Varış Noktası</f:facet>
+                                #{sehirlerBean.getById(s.varis_nok).name}
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">Koltuk Sayısı</f:facet>
+                                #{s.koltuk_Sayisi}
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">Fiyat</f:facet>
+                            ₺ #{s.fiyat}
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">İşlemler</f:facet>
+                            <div class="btn-group" role="group">
+
+                                <h:commandButton class="btn btn-danger" action="#{otobus_SeferleriBean.delete(s.id)}" value="Sil"/>
+                            </div>
+                        </h:column>
+                    </h:dataTable>
+                </div>
+
+                <div class="col-md-6">
+                    <h:selectOneMenu class="custom-select" value="#{otobus_SeferleriBean.entity.firma_id}"  required="true">
+                        <p class="m-3">Otobüs Firması Seçiniz:</p><f:selectItems value="#{otobus_FirmalariBean.read}"  var="a"  itemLabel="#{a.name}" itemValue="#{a.id}"/>
+                    </h:selectOneMenu>
+                    <h:selectOneMenu class="custom-select" value="#{otobus_SeferleriBean.entity.kalkis_nok}"  required="true">
+                        <p class="m-3">Kalkış Noktası Seçiniz: </p><f:selectItems value="#{sehirlerBean.read}"  var="b"  itemLabel="#{b.name}" itemValue="#{b.id}" />
+                    </h:selectOneMenu>
+                    <h:selectOneMenu class="custom-select" value="#{otobus_SeferleriBean.entity.varis_nok}"  required="true">
+                        <p class="m-3">Varış Noktası Seçiniz: </p><f:selectItems value="#{sehirlerBean.read}"  var="c"  itemLabel="#{c.name}" itemValue="#{c.id}" />
+                    </h:selectOneMenu>
+                    <h:selectOneMenu class="custom-select" value="#{otobus_SeferleriBean.entity.koltuk_Sayisi}"  required="true">
+                        <p class="m-3">Koltuk Sayısını Seçiniz: </p> 
+                        <f:selectItems value="#{seferlerBean.koltuk_sayisi}"/>
+                    </h:selectOneMenu>
+                    <h:selectOneMenu class="custom-select" value="#{otobus_SeferleriBean.entity.fiyat}"  required="true">
+                        <p class="m-3">Fiyatı Seçiniz: </p> 
+                        <f:selectItems value="#{seferlerBean.fiyat}"/>
+                    </h:selectOneMenu>
+                    <h:commandButton rendered="#{otobus_SeferleriBean.entity.id!=0}" class="btn btn-primary" action="#{otobus_SeferleriBean.update()}" value="Seferi Güncelle"/>
+                    <h:commandButton rendered="#{otobus_SeferleriBean.entity.id==0}" class="btn btn-primary" action="#{otobus_SeferleriBean.create()}" value="Seferi Ekle"/>
+                </div>
             </div>
 
-            <div class="m-3">
-                <h:dataTable value="#{otobus_SeferleriBean.read}" var="s" class="table table-striped">
-                    <h:column>
-                        <f:facet name="header">ID</f:facet>
-                            #{s.id}
-                    </h:column>
-                    <h:column>
-                        <f:facet name="header">Firma Adı</f:facet>
-                            #{otobus_FirmalariBean.getById(s.firma_id).name}
-                    </h:column>
-                    <h:column>
-                        <f:facet name="header">Kalkış Noktası</f:facet>
-                            #{sehirlerBean.getById(s.kalkis_nok).name}
-                    </h:column>
-                    <h:column>
-                        <f:facet name="header">Varış Noktası</f:facet>
-                            #{sehirlerBean.getById(s.varis_nok).name}
-                    </h:column>
-                    <h:column>
-                        <f:facet name="header">Koltuk Sayısı</f:facet>
-                            #{s.koltuk_Sayisi}
-                    </h:column>
-                    <h:column>
-                        <f:facet name="header">Fiyat</f:facet>
-                        ₺ #{s.fiyat}
-                    </h:column>
-                    <h:column>
-                        <f:facet name="header">İşlemler</f:facet>
-                        <div class="btn-group" role="group">
-                            <h:commandButton class="btn btn-warning" action="#{otobus_SeferleriBean.updateForm(s)}" value="Güncelle"/>
-                            <h:commandButton class="btn btn-danger" action="#{otobus_SeferleriBean.delete(s.id)}" value="Sil"/>
-                        </div>
-                    </h:column>
-                </h:dataTable>
-            </div>
         </h:form>
     </ui:define>
 </ui:composition>

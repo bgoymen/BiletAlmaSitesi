@@ -19,7 +19,7 @@ import javax.inject.Named;
 @Named
 @SessionScoped
 public class SehirlerBean implements Serializable {
-    
+
     private SehirlerDao dao;
     private Sehirler entity;
 
@@ -34,11 +34,12 @@ public class SehirlerBean implements Serializable {
 
     public String updateForm(Sehirler s) {
         this.entity = s;
-        return "/Admin/Other/Şehirler/Update";
+        return "/Admin/Other/Şehirler/Şehirler";
     }
 
     public String update() {
         this.getDao().update(entity);
+        this.entity = new Sehirler();
         return "/Admin/Other/Şehirler/Şehirler";
     }
 
@@ -46,9 +47,14 @@ public class SehirlerBean implements Serializable {
         this.getDao().delete(c);
 
     }
-    
-    public Sehirler getById(int id){
+
+    public Sehirler getById(int id) {
         return this.getDao().getById(id);
+    }
+
+    public String sehirler() {
+        this.entity = new Sehirler();
+        return "/Admin/Other/Şehirler/Şehirler";
     }
 
     public SehirlerBean() {

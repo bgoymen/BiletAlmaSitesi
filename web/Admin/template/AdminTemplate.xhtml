@@ -20,10 +20,10 @@
                     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                         <div class="navbar-nav">
                             <h:commandLink styleClass="nav-item nav-link active" action="/Admin/Firmalar/Firmalar" value="Firmalar"/>
-                            <h:commandLink styleClass="nav-item nav-link active" action="/Admin/Other/Kullanıcılar/Kullanıcılar" value="Kullanıcılar"/>
+                            <h:commandLink styleClass="nav-item nav-link active" action="#{userBean.kullanıcılar()}" value="Kullanıcılar"/>
                             <h:commandLink styleClass="nav-item nav-link active" action="/Admin/Seferler/Seferler" value="Seferler"/>
-                            <h:commandLink styleClass="nav-item nav-link active" action="/Admin/Other/Şehirler/Şehirler" value="Şehirler"/>
-                            <h:commandLink styleClass="nav-item nav-link active" action="/Admin/Other/Haberler/Haberler" value="Haberler"/>
+                            <h:commandLink styleClass="nav-item nav-link active" action="#{sehirlerBean.sehirler()}" value="Şehirler"/>
+                            <h:commandLink styleClass="nav-item nav-link active" action="#{haberlerBean.haberler()}" value="Haberler"/>
                             <h:commandLink styleClass="nav-item nav-link active" action="/Admin/Other/Kampanyalar/Kampanyalar" value="Kampanyalar"/>
                             <h:commandLink styleClass="nav-item nav-link active" action="/Admin/Other/İletişimler" value="İletişimler"/>
                             <h:commandLink styleClass="nav-item nav-link active" action="/index" value="Çıkış Yap"/>

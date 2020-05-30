@@ -42,7 +42,8 @@ public class Otobus_SeferleriBean implements Serializable {
 
     public String updateForm(Otobus_Seferleri s) {
         this.entity = s;
-        return "/Admin/Seferler/Otobüs/Update";
+        
+        return "/Admin/Seferler/Otobüs/Otobüs Seferleri";
     }
 
     public String update() {
@@ -51,6 +52,7 @@ public class Otobus_SeferleriBean implements Serializable {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Kalkış Noktası İle Varış Noktası Aynı Olamaz!!"));
             return "/Admin/Seferler/Otobüs/Update";
         } else {
+            this.entity = new Otobus_Seferleri();
             return "/Admin/Seferler/Otobüs/Otobüs Seferleri";
         }
 
