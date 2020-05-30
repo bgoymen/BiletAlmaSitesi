@@ -24,18 +24,20 @@ bulunacaktır.
 
 - 7 tane one to many ( otobus_seferlei-otobus_firmalari, tren_seferleri-tren_firmalari, ucak_seferleri-ucak_firmalari, satin_alinan_bilet-otous_seferleri- satin_alinan_bilet-tren_seferleri satin_alinan_bilet-ucak_seferleri satin_alinan_bilet-users)
 
-- CRUD işlemlerinin tamamı (Create, Read(Tekli(Standart/Ayarlar)), Read(Liste),Update,Delete)
+- Create
 
-- 3 adet Filter Kullanımı (Otosbüs, Uçak, Tren Bileti alırken hangi şehire gidileceği seçiliyor.)
+- Read (Tekli) (Standart/Ayarlar)
 
-- XHTML Validatorler(Login.xhtml ve register.xhtml)
+- Read (Liste)
 
+- Update
 
---- Tahmini yapılması planlananlar:
+- Delete
 
-- Dosya İşleminin yapılması(Kampanyalar.xhtml)
+- Ajax işelemleri tamamlandı
 
-- Java Bean Validtorlerinin yapılması (Login.xhtml, Register.xhtml)
+- XHTML Validatorler tamamlandı(Login.xhtml ve register.xhtml)
 
-- Ajax kullanımı (Standart/Ayarlar.xhtml)
+-Java Bean Validatorler tamamlandı (Users.java)
+
 
