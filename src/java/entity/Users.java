@@ -23,8 +23,7 @@ public class Users {
     
     @NotEmpty(message="Kullanıcı Adı Boş Bırakılamaz")
     private String user_name;
-    
-    @Max(value=5,message = "Şifre 5 karakterden daha büyük olmalı!")
+   
     private String user_password;
     private int type;
 
