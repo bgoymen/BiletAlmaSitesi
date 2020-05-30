@@ -64,6 +64,18 @@ public class Ucak_SeferleriBean implements Serializable {
 
     }
 
+    public int kalkis_noktasi(int id) {
+        return this.getDao().kalkis_nok(id);
+    }
+
+    public int varis_noktasi(int id) {
+        return this.getDao().varis_nok(id);
+    }
+
+    public int firma_id(int id) {
+        return this.getDao().firma_id(id);
+    }
+
     public Ucak_SeferleriBean() {
     }
 

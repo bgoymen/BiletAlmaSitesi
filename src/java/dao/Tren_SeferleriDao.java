@@ -25,10 +25,8 @@ public class Tren_SeferleriDao extends DBConnection {
         } else {
             try {
                 Statement st = this.connect().createStatement();
-                st.executeUpdate("insert into tren_seferleri(tren_firma_id, kalkis_nok, varis_nok, koltuk_sayisi,fiyat) values(" + s.getTren_firma_id() + "," + s.getKalkis_nok() + "," + s.getVaris_nok() + "," + s.getKoltuk_sayisi() + ","+s.getFiyat()+")");
-                
-                
-                
+                st.executeUpdate("insert into tren_seferleri(tren_firma_id, kalkis_nok, varis_nok, koltuk_sayisi,fiyat) values(" + s.getTren_firma_id() + "," + s.getKalkis_nok() + "," + s.getVaris_nok() + "," + s.getKoltuk_sayisi() + "," + s.getFiyat() + ")");
+
             } catch (SQLException ex) {
                 System.out.println("Hata(Tren_SeferleriDao(Create)):" + ex.getMessage());
             }
@@ -46,10 +44,7 @@ public class Tren_SeferleriDao extends DBConnection {
                 Tren_Seferleri tmp = new Tren_Seferleri(rs.getInt("id"), rs.getInt("tren_firma_id"), rs.getInt("kalkis_nok"), rs.getInt("varis_nok"), rs.getInt("koltuk_sayisi"), rs.getInt("fiyat"));
                 list.add(tmp);
             }
-            
-            
-            
-            
+
         } catch (SQLException e) {
             System.out.println("Hata(Tren_SeanslariDao(read)):" + e.getMessage());
         }
@@ -63,10 +58,8 @@ public class Tren_SeferleriDao extends DBConnection {
         } else {
             try {
                 Statement st = this.connect().createStatement();
-                st.executeUpdate("update tren_seferleri set tren_firma_id= '" + s.getTren_firma_id() + "', kalkis_nok= '" + s.getKalkis_nok() + "', varis_nok= '" + s.getVaris_nok() + "',koltuk_sayisi= '" + s.getKoltuk_sayisi() + "',fiyat='"+s.getFiyat()+"' where id=" + s.getId());
-                
-                
-                
+                st.executeUpdate("update tren_seferleri set tren_firma_id= '" + s.getTren_firma_id() + "', kalkis_nok= '" + s.getKalkis_nok() + "', varis_nok= '" + s.getVaris_nok() + "',koltuk_sayisi= '" + s.getKoltuk_sayisi() + "',fiyat='" + s.getFiyat() + "' where id=" + s.getId());
+
             } catch (SQLException e) {
                 System.out.println("Hata(Tren_SeferleriDao(Update)):" + e.getMessage());
             }
@@ -78,15 +71,13 @@ public class Tren_SeferleriDao extends DBConnection {
         try {
             Statement st = this.connect().createStatement();
             st.executeUpdate("delete from tren_seferleri where id=" + s);
-            
-            
-            
+
         } catch (SQLException e) {
             System.out.println("Hata(Tren_SeferleriDao(Delete)):" + e.getMessage());
         }
     }
-    
-        public int kalkis_nok(int id) {
+
+    public int kalkis_nok(int id) {
 
         try {
             Statement st = this.connect().createStatement();

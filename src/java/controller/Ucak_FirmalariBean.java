@@ -6,7 +6,6 @@
 package controller;
 
 import dao.Ucak_FirmalariDao;
-import entity.Tren_Firmalari;
 import entity.Ucak_Firmalari;
 import java.io.Serializable;
 import java.util.List;
