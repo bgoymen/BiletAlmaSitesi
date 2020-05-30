@@ -91,7 +91,7 @@ public class Otobus_SeferleriDao extends DBConnection {
             }
 
         } catch (SQLException e) {
-            System.out.println("Hata(Otobus_SeferleriDao(read)):" + e.getMessage());
+            System.out.println("Hata(Otobus_SeferleriDao(kalkis_nok)):" + e.getMessage());
         }
         return -1;
     }
@@ -109,7 +109,7 @@ public class Otobus_SeferleriDao extends DBConnection {
             }
 
         } catch (SQLException e) {
-            System.out.println("Hata(Otobus_SeferleriDao(read)):" + e.getMessage());
+            System.out.println("Hata(Otobus_SeferleriDao(varis)):" + e.getMessage());
         }
         return -1;
     }
@@ -126,7 +126,7 @@ public class Otobus_SeferleriDao extends DBConnection {
             }
 
         } catch (SQLException e) {
-            System.out.println("Hata(Otobus_SeferleriDao(read)):" + e.getMessage());
+            System.out.println("Hata(Otobus_SeferleriDao(firma_id)):" + e.getMessage());
         }
         return -1;
     }

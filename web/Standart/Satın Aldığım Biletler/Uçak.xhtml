@@ -2,11 +2,41 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
                 xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-                template="/Standart/template/StandartTemplate.xhtml">
-    
+                template="/Standart/template/StandartTemplate.xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+
     <ui:define name="content">
-         Hoşgeldiniz. Normal Giriş Yaptınız.
+        <h:form>
+            <div class="m-3">
+                <h:dataTable value="#{satin_Aldigim_BiletBean.read_otobus_biletleri}" var="s" class="table table-striped">
+                   
+                        <h:column>
+                            <f:facet name="header">Firma Adı</f:facet>
+                                #{otobus_FirmalariBean.getById(otobus_SeferleriBean.firma_id(s.otobus_seferleri_id)).name}
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">Koltuk No</f:facet>
+                                #{s.koltuk_no}
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">Kalkış noktası</f:facet>
+                                #{sehirlerBean.getById(otobus_SeferleriBean.kalkis_noktasi(s.otobus_seferleri_id)).name}
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">Varış noktası</f:facet>
+                                #{sehirlerBean.getById(otobus_SeferleriBean.varis_noktasi(s.otobus_seferleri_id)).name}
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">İşlemler</f:facet>
+                            <div class="btn-group" role="group">
+                                <h:commandButton class="btn btn-danger" action="#{satin_Aldigim_BiletBean.delete(s.id)}" value="İade Et" />
+                            </div>
+                        </h:column>
+
+                </h:dataTable>
+            </div>
+        </h:form>
     </ui:define>
 </ui:composition>
-
 

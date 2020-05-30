@@ -85,4 +85,57 @@ public class Tren_SeferleriDao extends DBConnection {
             System.out.println("Hata(Tren_SeferleriDao(Delete)):" + e.getMessage());
         }
     }
+    
+        public int kalkis_nok(int id) {
+
+        try {
+            Statement st = this.connect().createStatement();
+            ResultSet rs = st.executeQuery("select * from tren_seferleri order by id asc");
+            rs.next();
+            while (rs.next()) {
+                if (rs.getInt("id") == id) {
+                    return rs.getInt("kalkis_nok");
+                }
+            }
+
+        } catch (SQLException e) {
+            System.out.println("Hata(Tren_SeferleriDao(kalkis_nok)):" + e.getMessage());
+        }
+        return -1;
+    }
+
+    public int varis_nok(int id) {
+
+        try {
+            Statement st = this.connect().createStatement();
+            ResultSet rs = st.executeQuery("select * from tren_seferleri order by id asc");
+            rs.next();
+            while (rs.next()) {
+                if (rs.getInt("id") == id) {
+                    return rs.getInt("varis_nok");
+                }
+            }
+
+        } catch (SQLException e) {
+            System.out.println("Hata(Tren_SeferleriDao(varis_nok)):" + e.getMessage());
+        }
+        return -1;
+    }
+
+    public int firma_id(int id) {
+        try {
+            Statement st = this.connect().createStatement();
+            ResultSet rs = st.executeQuery("select * from tren_seferleri order by id asc");
+            rs.next();
+            while (rs.next()) {
+                if (rs.getInt("id") == id) {
+                    return rs.getInt("tren_firma_id");
+                }
+            }
+
+        } catch (SQLException e) {
+            System.out.println("Hata(Tren_SeferleriDao(firma_id)):" + e.getMessage());
+        }
+        return -1;
+    }
 }

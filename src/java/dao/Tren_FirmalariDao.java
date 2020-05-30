@@ -32,7 +32,7 @@ public class Tren_FirmalariDao extends DBConnection {
            
             
         } catch (SQLException e) {
-            System.out.println("Hata(UcakFirmalariDao(getById)): " + e.getMessage());
+            System.out.println("Hata(TrenFirmalariDao(getById)): " + e.getMessage());
         }
 
         return f;

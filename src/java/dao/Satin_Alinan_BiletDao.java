@@ -28,7 +28,7 @@ public class Satin_Alinan_BiletDao extends DBConnection {
 
         try {
             Statement st = this.connect().createStatement();
-            st.executeUpdate("insert into satin_alinan_bilet(user_id,seyehat_turu, otobus_seferleri_id,ucak_seferleri_id,tren_seferleri_id,koltuk_no) values(" + s.getUser_id() + "," + s.getSeyehat_turu() + "," + s.getOtobus_seferleri_id() + ",0,0," + s.getKoltuk_no() + ")");
+            st.executeUpdate("insert into satin_alinan_bilet(user_id,seyehat_turu, otobus_seferleri_id,ucak_seferleri_id,tren_seferleri_id,koltuk_no) values(" + s.getUser_id() + "," + s.getSeyehat_turu() + "," + s.getOtobus_seferleri_id() + ","+s.getUcak_seferleri_id()+","+s.getTren_seferleri_id()+"," + s.getKoltuk_no() + ")");
 
         } catch (SQLException ex) {
             System.out.println("Hata(Satin_Alinan_BiletDao(Create(1))):" + ex.getMessage());
