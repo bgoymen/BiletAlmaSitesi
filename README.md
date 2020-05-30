@@ -22,22 +22,24 @@ bulunacaktır.
 
 --- Yapılanlar:
 
-- 7 tane one to many ( otobus_seferlei-otobus_firmalari, tren_seferleri-tren_firmalari, ucak_seferleri-ucak_firmalari, satin_alinan_bilet-otous_seferleri- satin_alinan_bilet-tren_seferleri satin_alinan_bilet-ucak_seferleri satin_alinan_bilet-users)
+- 7 tane one to many eklendi( otobus_seferlei-otobus_firmalari, tren_seferleri-tren_firmalari, ucak_seferleri-ucak_firmalari, satin_alinan_bilet-otous_seferleri- satin_alinan_bilet-tren_seferleri satin_alinan_bilet-ucak_seferleri satin_alinan_bilet-users)
 
-- Create
+- Bütün tablolar için Create işlemi tamamlandı.
 
-- Read (Tekli) (Standart/Ayarlar)
+- Bütün tablolar için Read (Tekli)(Standart/Ayarlar) işlemi tamamlandı.
 
-- Read (Liste)
+- Bütün tablolar için Read (Liste) işlemi tamamlandı.
 
-- Update
+- Bütün tablolar için Update işlemi tamamlandı.
 
-- Delete
+- Bütün tablolar için Delete işlemi tamamlandı.
 
-- Ajax işelemleri tamamlandı
+- Filter İşlemi tamamlandı(LoginFilter).
 
-- XHTML Validatorler tamamlandı(Login.xhtml ve register.xhtml)
+- Ajax işelemleri tamamlandı.
 
--Java Bean Validatorler tamamlandı (Users.java)
+- XHTML Validatorler tamamlandı(Login.xhtml ve register.xhtml).
+
+- Java Bean Validatorler tamamlandı (Users.java).
 
 
