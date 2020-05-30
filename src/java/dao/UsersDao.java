@@ -12,6 +12,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import javax.faces.context.FacesContext;
 import util.DBConnection;
 
 /**
@@ -46,7 +47,7 @@ public class UsersDao extends DBConnection {
         }
         return list;
     }
-
+    
     public Users control(String user_mail, String user_password) throws SQLException {
         ResultSet rs = this.read2();
         Users u = new Users();
@@ -55,13 +56,10 @@ public class UsersDao extends DBConnection {
         } else {
             while (rs.next()) {
                 if ((rs.getString("user_mail").equals(user_mail)) && (rs.getString("user_password").equals(user_password))) {
-                    if (rs.getString("type").equals("0")) {
-                        u = new Users(rs.getInt("id"), rs.getString("user_mail"), rs.getString("user_name"), rs.getString("user_password"), rs.getInt("type"));
-                        return u;
-                    } else if (rs.getString("type").equals("1")) {
-                        u = new Users(rs.getInt("id"), rs.getString("user_mail"), rs.getString("user_name"), rs.getString("user_password"), rs.getInt("type"));
-                        return u;
-                    }
+                    
+                    u = new Users(rs.getInt("id"), rs.getString("user_mail"), rs.getString("user_name"), rs.getString("user_password"), rs.getInt("type"));
+                    FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("valid_user", u);    
+                    return u;
                 }
             }
 
