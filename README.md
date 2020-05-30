@@ -37,5 +37,5 @@ bulunacaktır.
 
 - Java Bean Validtorlerinin yapılması (Login.xhtml, Register.xhtml)
 
-- Ajax kullanımı (Standart/Ayarlar)
+- Ajax kullanımı (Standart/Ayarlar.xhtml)
 
