@@ -37,6 +37,11 @@ public class SehirlerBean implements Serializable {
 
     }
 
+    public String clearForm() {
+        this.entity = new Sehirler();
+        return "/Admin/Other/Şehirler/Şehirler";
+    }
+
     public List<Sehirler> getRead() {
         return this.getDao().read();
     }

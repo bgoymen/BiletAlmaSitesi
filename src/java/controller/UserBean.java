@@ -37,6 +37,11 @@ public class UserBean implements Serializable {
         }
     }
 
+    public String clearForm() {
+        this.entity = new Users();
+        return "/Admin/Other/Kullanıcılar/Kullanıcılar";
+    }
+
     public ResultSet getRead2() {
         return this.getDao().read2();
     }

@@ -33,9 +33,13 @@
                 <div class="col-md-6">
                     <h:inputHidden value="#{ucak_FirmalariBean.entity.id}"/>
                     Uçak Firmasının Adı: <h:inputText class="form-control" value="#{ucak_FirmalariBean.entity.name}"/>
-                   
-                    <h:commandButton rendered="#{ucak_FirmalariBean.entity.id!=0}" class="btn btn-primary"  action="#{ucak_FirmalariBean.update()}" value="Uçak Firmasını Güncelle"/>
-                     <h:commandButton rendered="#{ucak_FirmalariBean.entity.id==0}" class="btn btn-primary"  action="#{ucak_FirmalariBean.create()}" value="Uçak Firmasını Ekle"/>
+
+
+                    <h:commandButton rendered="#{ucak_FirmalariBean.entity.id==0}" class="btn btn-primary"  action="#{ucak_FirmalariBean.create()}" value="Uçak Firmasını Ekle"/>
+                    <div class="btn-group" role="group">
+                        <h:commandButton rendered="#{ucak_FirmalariBean.entity.id!=0}" class="btn btn-primary"  action="#{ucak_FirmalariBean.update()}" value="Uçak Firmasını Güncelle"/>
+                        <h:commandButton rendered="#{ucak_FirmalariBean.entity.id!=0}" class="btn btn-dark"  action="#{ucak_FirmalariBean.clearForm()}" value="Yeni Firma Ekle"/>
+                    </div>
                 </div>
             </div>
 

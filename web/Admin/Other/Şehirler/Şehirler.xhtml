@@ -31,8 +31,13 @@
                 <div class="col-md-6">
                     <h:inputHidden value="#{userBean.entity.id}"/>
                     Şehir Adı: <h:inputText class="form-control" value="#{sehirlerBean.entity.name}"/>
-                    <h:commandButton rendered="#{sehirlerBean.entity.id!=0}" class="btn btn-primary" action="#{sehirlerBean.update()}" value="Şehri Güncelle"/>
+
                     <h:commandButton rendered="#{sehirlerBean.entity.id==0}" class="btn btn-primary" action="#{sehirlerBean.create()}" value="Şehri Ekle"/>
+                    
+                                        <div class="btn-group" role="group">
+                    <h:commandButton rendered="#{sehirlerBean.entity.id!=0}" class="btn btn-primary" action="#{sehirlerBean.update()}" value="Şehri Güncelle"/>
+                    <h:commandButton rendered="#{sehirlerBean.entity.id!=0}" class="btn btn-dark"  action="#{sehirlerBean.clearForm()}" value="Yeni Şhir Ekle"/>
+                    </div>
                 </div>
             </div>
         </h:form>

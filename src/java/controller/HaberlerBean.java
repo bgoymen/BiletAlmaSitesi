@@ -36,6 +36,11 @@ public class HaberlerBean implements Serializable {
             return "/Admin/Other/Haberler/Haberler";
         }
     }
+    
+    public String clearForm() {
+        this.entity = new Haberler();
+        return "/Admin/Other/Haberler/Haberler";
+    }
 
     public List<Haberler> getRead() {
         return this.getDao().read();

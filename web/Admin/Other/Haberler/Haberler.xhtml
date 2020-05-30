@@ -31,8 +31,11 @@
                 <div class="col-md-6">
                     <h:inputHidden value="#{haberlerBean.entity.haber_id}"/>
                     Haber: <h:inputText class="form-control" value="#{haberlerBean.entity.haber}"/>
-                    <h:commandButton rendered="#{haberlerBean.entity.haber_id!=0}" class="btn btn-primary" action="#{haberlerBean.update()}" value="Haberi Güncelle"/>
                     <h:commandButton rendered="#{haberlerBean.entity.haber_id==0}" class="btn btn-primary" action="#{haberlerBean.create()}" value="Haberi Ekle"/>
+                    <div class="btn-group" role="group">
+                        <h:commandButton rendered="#{haberlerBean.entity.haber_id!=0}" class="btn btn-primary" action="#{haberlerBean.update()}" value="Haberi Güncelle"/>
+                        <h:commandButton rendered="#{haberlerBean.entity.haber_id!=0}" class="btn btn-dark"  action="#{haberlerBean.clearForm()}" value="Yeni Haber Ekle"/>
+                    </div>
                 </div>
             </div>
         </h:form>

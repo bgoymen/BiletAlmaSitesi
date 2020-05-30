@@ -36,6 +36,11 @@ public class Ucak_FirmalariBean implements Serializable {
         }
     }
 
+    public String clearForm() {
+        this.entity = new Ucak_Firmalari();
+        return "/Admin/Firmalar/Uçak/Uçak Firmaları";
+    }
+
     public List<Ucak_Firmalari> getRead() {
         return this.getDao().read();
     }

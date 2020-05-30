@@ -36,6 +36,11 @@ public class Otobus_FirmalariBean implements Serializable {
         }
 
     }
+    
+    public String clearForm(){
+        this.entity = new Otobus_Firmalari();
+        return "/Admin/Firmalar/Otobüs/Otobüs Firmaları";
+    }
 
     public List<Otobus_Firmalari> getRead() {
         return this.getDao().read();

@@ -42,8 +42,13 @@
                     Kullanıcı Mail: <h:inputText class="form-control" value="#{userBean.entity.user_mail}"/>
                     Kullanıcı Adı: <h:inputText class="form-control" value="#{userBean.entity.user_name}"/>
                     Kullanıcı Şifre: <h:inputText class="form-control" value="#{userBean.entity.user_password}"/>
-                    <h:commandButton rendered="#{userBean.entity.id!=0}" class="btn btn-primary" action="#{userBean.update()}" value="Kulanıcıyı Güncelle"/>
+
                     <h:commandButton rendered="#{userBean.entity.id==0}" class="btn btn-primary" action="#{userBean.create()}" value="Kullanıcıyı Ekle"/>
+
+                    <div class="btn-group" role="group">
+                        <h:commandButton rendered="#{userBean.entity.id!=0}" class="btn btn-primary" action="#{userBean.update()}" value="Kulanıcıyı Güncelle"/>
+                        <h:commandButton rendered="#{userBean.entity.id!=0}" class="btn btn-dark"  action="#{userBean.clearForm()}" value="Yeni Kullanıcı Ekle"/>
+                    </div>
                 </div>
             </div>
 

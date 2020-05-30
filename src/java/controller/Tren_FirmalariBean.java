@@ -37,6 +37,11 @@ public class Tren_FirmalariBean implements Serializable {
 
     }
 
+    public String clearForm() {
+        this.entity = new Tren_Firmalari();
+        return "/Admin/Firmalar/Tren/Tren Firmaları";
+    }
+
     public List<Tren_Firmalari> getRead() {
         return this.getDao().read();
     }

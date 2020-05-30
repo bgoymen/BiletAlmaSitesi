@@ -32,8 +32,12 @@
                     <h:inputHidden value="#{tren_FirmalariBean.entity.id}"/>
                     Tren Firmasının Adı: <h:inputText class="form-control" value="#{tren_FirmalariBean.entity.name}"/>
 
-                    <h:commandButton rendered="#{tren_FirmalariBean.entity.id!=0}" class="btn btn-primary"  action="#{tren_FirmalariBean.update()}" value="Tren Firmasını Güncelle"/>
+
                     <h:commandButton rendered="#{tren_FirmalariBean.entity.id==0}" class="btn btn-primary"  action="#{tren_FirmalariBean.create()}" value="Tren Firmasını Ekle"/>
+                    <div class="btn-group" role="group">
+                        <h:commandButton rendered="#{tren_FirmalariBean.entity.id!=0}" class="btn btn-primary"  action="#{tren_FirmalariBean.update()}" value="Tren Firmasını Güncelle"/>
+                        <h:commandButton rendered="#{tren_FirmalariBean.entity.id!=0}" class="btn btn-dark"  action="#{tren_FirmalariBean.clearForm()}" value="Yeni Firma Ekle"/>
+                    </div>
                 </div>
             </div>
         </h:form>
