@@ -6,6 +6,7 @@
 package dao;
 
 import entity.Iletisim;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -23,7 +24,7 @@ public class IletisimDao extends DBConnection {
         try {
             Statement st = this.connect().createStatement();
             st.executeUpdate("insert into iletisim(mail,Baslik,Konu) values('" + i.getMail() + "','" + i.getBaslik() + "','" + i.getKonu() + "')");
-            
+
         } catch (SQLException e) {
             System.out.println("Hata(IletisimDao(Create)): " + e.getMessage());
         }
@@ -39,8 +40,7 @@ public class IletisimDao extends DBConnection {
                 Iletisim tmp = new Iletisim(rs.getInt("id"), rs.getString("mail"), rs.getString("Baslik"), rs.getString("Konu"));
                 list.add(tmp);
             }
-            
-            
+
         } catch (SQLException e) {
             System.out.println("Hata(IletisimDao(read)): " + e.getMessage());
         }
@@ -51,10 +51,45 @@ public class IletisimDao extends DBConnection {
         try {
             Statement st = this.connect().createStatement();
             st.executeUpdate("delete from iletisim where id=" + f);
-            
+
         } catch (SQLException e) {
             System.out.println("Hata(İletişimDao(Delete)):" + e.getMessage());
         }
+    }
+
+    public List<Iletisim> read(int page, int pageSize) {
+        List<Iletisim> list = new ArrayList<>();
+
+        int start1 = (page - 1) * pageSize;
+
+        try {
+            PreparedStatement pst = this.connect().prepareStatement("select * from iletisim order by id asc limit " + start1 + "," + pageSize);
+            ResultSet rs = pst.executeQuery();
+            while (rs.next()) {
+                Iletisim tmp = new Iletisim(rs.getInt("id"), rs.getString("mail"), rs.getString("Baslik"), rs.getString("Konu"));
+                list.add(tmp);
+            }
+
+        } catch (SQLException e) {
+            System.out.println("Hata(IletisimDao(read(int page, int pageSize))):" + e.getMessage());
+        }
+
+        return list;
+    }
+
+    public int count() {
+        int count = 0;
+        try {
+            PreparedStatement pst = this.connect().prepareStatement("select count(id) as iletisim_count from iletisim");
+            ResultSet rs = pst.executeQuery();
+            rs.next();
+            count = rs.getInt("iletisim_count");
+
+        } catch (SQLException e) {
+            System.out.println("Hata(IletisimDao(count)):" + e.getMessage());
+        }
+
+        return count;
     }
 
 }

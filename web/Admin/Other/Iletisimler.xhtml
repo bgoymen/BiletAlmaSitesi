@@ -9,6 +9,14 @@
     <ui:define name="content">
         <div class="m-3">
             <h:form id="iletisimler_table">
+                
+                    <div class="btn-group">
+                        Page #{iletisimBean.page} of #{iletisimBean.pageCount}
+                        <br/>
+                        <h:commandButton action="#{iletisimBean.previous()}" value="Önceki Sayfa" styleClass="btn btn-dark" />
+                        <h:commandButton action="#{iletisimBean.next()}" value="Sonraki Sayfa" styleClass="btn btn-info" />
+                    </div>
+
                 <h:dataTable value="#{iletisimBean.read}" var="a" class="table table-striped">
                     <h:column>
                         <f:facet name="header">ID</f:facet>
