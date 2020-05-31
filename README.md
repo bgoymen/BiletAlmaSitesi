@@ -42,4 +42,6 @@ bulunacaktır.
 
 - Java Bean Validatorler tamamlandı (Users.java).
 
+- Pagination İşlemleri Tamamlandi (Admin klasörü altındaki bütün listelemelere eklendi)
+
 
