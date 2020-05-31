@@ -48,8 +48,8 @@ public class UsersDao extends DBConnection {
         }
         return list;
     }
-    
-        public List<Users> read(int page, int pageSize) {
+
+    public List<Users> read(int page, int pageSize) {
         List<Users> list = new ArrayList<>();
 
         int start1 = (page - 1) * pageSize;
@@ -83,7 +83,7 @@ public class UsersDao extends DBConnection {
 
         return count;
     }
-    
+
     public Users control(String user_mail, String user_password) throws SQLException {
         ResultSet rs = this.read2();
         Users u = new Users();
@@ -92,9 +92,9 @@ public class UsersDao extends DBConnection {
         } else {
             while (rs.next()) {
                 if ((rs.getString("user_mail").equals(user_mail)) && (rs.getString("user_password").equals(user_password))) {
-                    
+
                     u = new Users(rs.getInt("id"), rs.getString("user_mail"), rs.getString("user_name"), rs.getString("user_password"), rs.getInt("type"));
-                    FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("valid_user", u);    
+                    FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("valid_user", u);
                     return u;
                 }
             }

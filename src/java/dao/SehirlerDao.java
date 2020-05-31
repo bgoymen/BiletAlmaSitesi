@@ -6,6 +6,7 @@
 package dao;
 
 import entity.Sehirler;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -45,6 +46,41 @@ public class SehirlerDao extends DBConnection {
         }
 
         return list;
+    }
+
+    public List<Sehirler> read(int page, int pageSize) {
+        List<Sehirler> list = new ArrayList<>();
+
+        int start1 = (page - 1) * pageSize;
+
+        try {
+            PreparedStatement pst = this.connect().prepareStatement("select * from sehirler order by id asc limit " + start1 + "," + pageSize);
+            ResultSet rs = pst.executeQuery();
+            while (rs.next()) {
+                Sehirler tmp = new Sehirler(rs.getInt("id"), rs.getString("Name"));
+                list.add(tmp);
+            }
+
+        } catch (SQLException e) {
+            System.out.println("Hata(SehirlerDao(read(int page, int pageSize))):" + e.getMessage());
+        }
+
+        return list;
+    }
+
+    public int count() {
+        int count = 0;
+        try {
+            PreparedStatement pst = this.connect().prepareStatement("select count(id) as sehirler_count from sehirler");
+            ResultSet rs = pst.executeQuery();
+            rs.next();
+            count = rs.getInt("sehirler_count");
+
+        } catch (SQLException e) {
+            System.out.println("Hata(SehirlerDao(count)):" + e.getMessage());
+        }
+
+        return count;
     }
 
     public Sehirler getById(int id) {
