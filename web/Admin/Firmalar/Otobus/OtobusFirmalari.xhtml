@@ -25,9 +25,9 @@
                         </h:column>
                         <h:column>
                             <f:facet name="header">İşlemler</f:facet>
-                            <div class="btn-group" role="group">
-                                <h:commandButton class="btn btn-danger" action="#{otobus_FirmalariBean.delete(f.id)}" value="Sil"/>
-                            </div>
+                            <h:commandButton class="btn btn-danger" action="#{otobus_FirmalariBean.delete(f.id)}" value="Sil">
+                                <f:ajax execute="@this" render="otobus_firmalari_table"/>
+                            </h:commandButton>
                         </h:column>
                     </h:dataTable>
                 </h:form>
@@ -43,7 +43,7 @@
                     <h:commandButton rendered="#{otobus_FirmalariBean.entity.id==0}" class="btn btn-primary"  action="#{otobus_FirmalariBean.create()}" value="Otobüs Firmasını Ekle">
                         <f:ajax execute="otobus_firmalari_form" render="otobus_firmalari_form otobus_firmalari_table"/>
                     </h:commandButton>
-                    
+
                     <div class="btn-group" role="group">
                         <h:commandButton rendered="#{otobus_FirmalariBean.entity.id!=0}" class="btn btn-primary"  action="#{otobus_FirmalariBean.update()}" value="Otobüs Firmasını Güncelle">
                             <f:ajax execute="otobus_firmalari_form" render="otobus_firmalari_form otobus_firmalari_table"/>
@@ -52,12 +52,10 @@
                             <f:ajax execute="@this" render="otobus_firmalari_form"/>
                         </h:commandButton>
                     </div>
-                    
+
                 </h:form>
             </div>
         </div>
-
-
 
     </ui:define>
 </ui:composition>

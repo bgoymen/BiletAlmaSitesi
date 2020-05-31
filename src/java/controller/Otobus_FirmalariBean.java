@@ -28,16 +28,16 @@ public class Otobus_FirmalariBean implements Serializable {
     public void create() {
         if (entity.getName().length() == 0) {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Lütfen Gerekli Yerleri Doldurunuz"));
-            
+
         } else {
             this.getDao().create(entity);
             entity = new Otobus_Firmalari();
-           
+
         }
 
     }
-    
-    public void clearForm(){
+
+    public void clearForm() {
         this.entity = new Otobus_Firmalari();
     }
 
@@ -51,7 +51,7 @@ public class Otobus_FirmalariBean implements Serializable {
 
     public void updateForm(Otobus_Firmalari f) {
         this.entity = f;
-        
+
     }
 
     public void update() {
@@ -59,8 +59,8 @@ public class Otobus_FirmalariBean implements Serializable {
         entity = new Otobus_Firmalari();
     }
 
-    public void delete(int c) {
-        this.getDao().delete(c);
+    public void delete(int id) {
+        this.getDao().delete(id);
 
     }
 

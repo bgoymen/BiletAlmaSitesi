@@ -45,7 +45,10 @@
                             <f:facet name="header">İşlemler</f:facet>
                             <div class="btn-group" role="group">
 
-                                <h:commandButton class="btn btn-danger" action="#{tren_SeferleriBean.delete(s.id)}" value="Sil"/>
+                                <h:commandButton class="btn btn-danger" action="#{tren_SeferleriBean.delete(s.id)}" value="Sil">
+                                    <f:ajax execute="@this" render="tren_seferleri_table"/>
+                                </h:commandButton>
+
                             </div>
                         </h:column>
                     </h:dataTable>

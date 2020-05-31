@@ -51,10 +51,9 @@
                         <h:column>
                             <f:facet name="header">İşlemler</f:facet>
 
-                            <div class="btn-group" role="group">
-
-                                <h:commandButton class="btn btn-danger" action="#{ucak_SeferleriBean.delete(s.id)}" value="Sil"/>
-                            </div>
+                            <h:commandButton class="btn btn-danger" action="#{ucak_SeferleriBean.delete(s.id)}" value="Sil">
+                                <f:ajax execute="@this" render="ucak_seferleri_table"/>
+                            </h:commandButton>
 
                         </h:column>
                     </h:dataTable>

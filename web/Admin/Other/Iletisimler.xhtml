@@ -7,8 +7,8 @@
                 xmlns:f="http://xmlns.jcp.org/jsf/core">
 
     <ui:define name="content">
-        <h:form>
-            <div class="m-3">
+        <div class="m-3">
+            <h:form id="iletisimler_table">
                 <h:dataTable value="#{iletisimBean.read}" var="a" class="table table-striped">
                     <h:column>
                         <f:facet name="header">ID</f:facet>
@@ -28,10 +28,12 @@
                     </h:column>
                     <h:column>
                         <f:facet name="header">İşlemler</f:facet>
-                        <h:commandButton class="btn btn-danger" action="#{iletisimBean.delete(a.id)}" value="Sil"/>
+                        <h:commandButton class="btn btn-danger" action="#{iletisimBean.delete(a.id)}" value="Sil">
+                            <f:ajax execute="@this" render="iletisimler_table"/>
+                        </h:commandButton>
                     </h:column>
                 </h:dataTable>
-            </div>
-        </h:form>
+            </h:form>
+        </div>
     </ui:define>
 </ui:composition>

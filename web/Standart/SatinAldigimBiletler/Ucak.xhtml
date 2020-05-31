@@ -7,36 +7,38 @@
                 xmlns:f="http://xmlns.jcp.org/jsf/core">
 
     <ui:define name="content">
-        <h:form>
-            <div class="m-3">
+        <div class="m-3">
+            <h:form id="ucak_table">
                 <h:dataTable value="#{satin_Aldigim_BiletBean.read_ucak_biletleri}" var="s" class="table table-striped">
-                   
-                        <h:column>
-                            <f:facet name="header">Firma Adı</f:facet>
-                                #{ucak_FirmalariBean.getById(ucak_SeferleriBean.firma_id(s.ucak_seferleri_id)).name}
-                        </h:column>
-                        <h:column>
-                            <f:facet name="header">Koltuk No</f:facet>
-                                #{s.koltuk_no}
-                        </h:column>
-                        <h:column>
-                            <f:facet name="header">Kalkış noktası</f:facet>
-                                #{sehirlerBean.getById(ucak_SeferleriBean.kalkis_noktasi(s.ucak_seferleri_id)).name}
-                        </h:column>
-                        <h:column>
-                            <f:facet name="header">Varış noktası</f:facet>
-                                #{sehirlerBean.getById(ucak_SeferleriBean.varis_noktasi(s.ucak_seferleri_id)).name}
-                        </h:column>
-                        <h:column>
-                            <f:facet name="header">İşlemler</f:facet>
-                            <div class="btn-group" role="group">
-                                <h:commandButton class="btn btn-danger" action="#{satin_Aldigim_BiletBean.delete(s.id)}" value="İade Et" />
-                            </div>
-                        </h:column>
+
+                    <h:column>
+                        <f:facet name="header">Firma Adı</f:facet>
+                            #{ucak_FirmalariBean.getById(ucak_SeferleriBean.firma_id(s.ucak_seferleri_id)).name}
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Koltuk No</f:facet>
+                            #{s.koltuk_no}
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Kalkış noktası</f:facet>
+                            #{sehirlerBean.getById(ucak_SeferleriBean.kalkis_noktasi(s.ucak_seferleri_id)).name}
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Varış noktası</f:facet>
+                            #{sehirlerBean.getById(ucak_SeferleriBean.varis_noktasi(s.ucak_seferleri_id)).name}
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">İşlemler</f:facet>
+                        <div class="btn-group" role="group">
+                            <h:commandButton class="btn btn-danger" action="#{satin_Aldigim_BiletBean.delete(s.id)}" value="İade Et" >
+                                <f:ajax execute="@this" render="ucak_table"/>
+                            </h:commandButton>
+                        </div>
+                    </h:column>
 
                 </h:dataTable>
-            </div>
-        </h:form>
+            </h:form>
+        </div>
     </ui:define>
 </ui:composition>
 

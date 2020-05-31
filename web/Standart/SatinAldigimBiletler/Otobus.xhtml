@@ -7,10 +7,10 @@
                 xmlns:f="http://xmlns.jcp.org/jsf/core">
 
     <ui:define name="content">
-        <h:form>
             <div class="m-3">
-                <h:dataTable value="#{satin_Aldigim_BiletBean.read_otobus_biletleri}" var="s" class="table table-striped">
-                   
+                <h:form id="otobus_table">
+                    <h:dataTable value="#{satin_Aldigim_BiletBean.read_otobus_biletleri}" var="s" class="table table-striped">
+
                         <h:column>
                             <f:facet name="header">Firma Adı</f:facet>
                                 #{otobus_FirmalariBean.getById(otobus_SeferleriBean.firma_id(s.otobus_seferleri_id)).name}
@@ -30,13 +30,16 @@
                         <h:column>
                             <f:facet name="header">İşlemler</f:facet>
                             <div class="btn-group" role="group">
-                                <h:commandButton class="btn btn-danger" action="#{satin_Aldigim_BiletBean.delete(s.id)}" value="İade Et" />
+                                <h:commandButton class="btn btn-danger" action="#{satin_Aldigim_BiletBean.delete(s.id)}" value="İade Et" >
+                                    <f:ajax execute="@this" render="otobus_table"/>
+                                </h:commandButton>
                             </div>
                         </h:column>
 
-                </h:dataTable>
+                    </h:dataTable>
+                </h:form>
             </div>
-        </h:form>
+
     </ui:define>
 </ui:composition>
 

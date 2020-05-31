@@ -23,7 +23,7 @@ import javax.servlet.http.HttpServletResponse;
 @WebFilter("/*")
 public class LoginFilter implements Filter {
 
-    public static int user_type;
+    static int user_type;
 
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
@@ -33,16 +33,17 @@ public class LoginFilter implements Filter {
         String url = req.getRequestURI();
 
         Users u = (Users) req.getSession().getAttribute("valid_user");
+        if(u != null){
+            this.setUser_type(u.getType());
+        }
 
         if (u == null) {
             if ((url.contains("/Admin/Admin")) || (url.contains("/Admin/Admin"))
-                    || (url.contains("/Admin/Admin") || (url.contains("/Admin/Admin")))
                     || (url.contains("/Admin/Firmalar/Otobus/OtobusFirmalari"))
                     || (url.contains("/Admin/Firmalar/Tren/TrenFirmalari"))
                     || (url.contains("/Admin/Firmalar/Ucak/UcakFirmalari"))
                     || (url.contains("/Admin/Firmalar/Firmalar"))
                     || (url.contains("/Admin/Other/Haberler/Haberler"))
-                    || (url.contains("/Admin/Other/Kampanyalar/Kampanyalar"))
                     || (url.contains("/Admin/Other/Kullanicilar/Kullanicilar"))
                     || (url.contains("/Admin/Other/Iletisimler"))
                     || (url.contains("/Admin/Seferler/Otobus/OtobusSeferleri"))
@@ -65,50 +66,58 @@ public class LoginFilter implements Filter {
                     || (url.contains("/Standart/SatinAldigimBiletler/Tren"))
                     || (url.contains("/Standart/SatinAldigimBiletler/Ucak"))
                     || (url.contains("/Standart/Ayarlar"))
-                    || (url.contains("/Standart/Haberler"))
-                    || (url.contains("/Standart/Kampanyalar"))) {
+                    || (url.contains("/Standart/Haberler"))) {
                 res.sendRedirect(req.getContextPath() + "/Login.xhtml");
             } else {
                 chain.doFilter(request, response);
             }
         } else {
             if (url.contains("Register") || url.contains("Login")) {
-                if (user_type == 0) {
-                    res.sendRedirect(req.getContextPath() + "/Standart/Standart.xhtml");
-                } else if (user_type == 1) {
-                    res.sendRedirect(req.getContextPath() + "/Admin/Admin.xhtml");
-                } else {
-                    System.out.println("LoginFilter(Hata) (type kontrol if)");
+                switch (LoginFilter.getUser_type()) {
+                    case 0:
+                        res.sendRedirect(req.getContextPath() + "/Standart/Standart.xhtml");
+                        break;
+                    case 1:
+                        res.sendRedirect(req.getContextPath() + "/Admin/Admin.xhtml");
+                        break;
+                    default:
+                        System.out.println("LoginFilter(Hata) (type kontrol id)");
+                        System.out.println(LoginFilter.getUser_type());
+                        break;
                 }
             } else if (url.contains("index")) {
                 u = null;
+                LoginFilter.setUser_type(-1);
                 req.getSession().invalidate();
                 res.sendRedirect(req.getContextPath() + "");
             } else {
-                if (u.getType() == 0) {
-                    if ((url.contains("/Admin/Admin")) || (url.contains("/Admin/Admin"))
-                            || (url.contains("/Admin/Admin") || (url.contains("/Admin/Admin")))
-                            || (url.contains("/Admin/Firmalar/Otobus/OtobusFirmalari"))
-                            || (url.contains("/Admin/Firmalar/Tren/TrenFirmalari"))
-                            || (url.contains("/Admin/Firmalar/Ucak/UcakFirmalari"))
-                            || (url.contains("/Admin/Firmalar/Firmalar"))
-                            || (url.contains("/Admin/Other/Haberler/Haberler"))
-                            || (url.contains("/Admin/Other/Kampanyalar/Kampanyalar"))
-                            || (url.contains("/Admin/Other/Kullanicilar/Kullanicilar"))
-                            || (url.contains("/Admin/Other/Iletisimler"))
-                            || (url.contains("/Admin/Seferler/Otobus/OtobusSeferleri"))
-                            || (url.contains("/Admin/Seferler/Tren/TrenSeferleri"))
-                            || (url.contains("/Admin/Seferler/Ucak/UcakSeferleri"))
-                            || (url.contains("/Admin/Seferler/Seferler"))) {
-                        res.sendRedirect(req.getContextPath() + "/Standart/Standart.xhtml");
-                    } else {
+                switch (LoginFilter.getUser_type()) {
+                    case 0:
+                        if ((url.contains("/Admin/Admin")) || (url.contains("/Admin/Admin"))
+                                || (url.contains("/Admin/Admin") || (url.contains("/Admin/Admin")))
+                                || (url.contains("/Admin/Firmalar/Otobus/OtobusFirmalari"))
+                                || (url.contains("/Admin/Firmalar/Tren/TrenFirmalari"))
+                                || (url.contains("/Admin/Firmalar/Ucak/UcakFirmalari"))
+                                || (url.contains("/Admin/Firmalar/Firmalar"))
+                                || (url.contains("/Admin/Other/Haberler/Haberler"))
+                                || (url.contains("/Admin/Other/Kullanicilar/Kullanicilar"))
+                                || (url.contains("/Admin/Other/Iletisimler"))
+                                || (url.contains("/Admin/Seferler/Otobus/OtobusSeferleri"))
+                                || (url.contains("/Admin/Seferler/Tren/TrenSeferleri"))
+                                || (url.contains("/Admin/Seferler/Ucak/UcakSeferleri"))
+                                || (url.contains("/Admin/Seferler/Seferler"))) {
+                            res.sendRedirect(req.getContextPath() + "/Standart/Standart.xhtml");
+                        } else {
+                            chain.doFilter(request, response);
+                        }
+                        break;
+                    case 1:
                         chain.doFilter(request, response);
-                    }
-                } else if (u.getType() == 1) {
-                    chain.doFilter(request, response);
-                } else {
-                    System.out.println("LoginFilter(Hata) (type kontro else)");
-                    System.out.println(user_type);
+                        break;
+                    default:
+                        System.out.println("LoginFilter(Hata) (type kontro else)");
+                        System.out.println(LoginFilter.getUser_type());
+                        break;
                 }
             }
         }

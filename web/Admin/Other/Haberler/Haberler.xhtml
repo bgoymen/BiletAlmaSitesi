@@ -24,7 +24,11 @@
                         <h:column>
                             <f:facet name="header">İşlemler</f:facet>
                             <div class="btn-group">
-                                <h:commandButton class="btn btn-danger" action="#{haberlerBean.delete(c.haber_id)}" value="Sil"/>
+                                
+                                <h:commandButton class="btn btn-danger" action="#{haberlerBean.delete(c.haber_id)}" value="Sil">
+                                    <f:ajax execute="@this" render="haberler_table"/>
+                                </h:commandButton>
+
                             </div>
                         </h:column>
                     </h:dataTable>

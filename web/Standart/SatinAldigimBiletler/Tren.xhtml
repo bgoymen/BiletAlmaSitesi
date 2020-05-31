@@ -7,36 +7,40 @@
                 xmlns:f="http://xmlns.jcp.org/jsf/core">
 
     <ui:define name="content">
-        <h:form>
-            <div class="m-3">
+
+        <div class="m-3">
+            <h:form id="tren_table">
                 <h:dataTable value="#{satin_Aldigim_BiletBean.read_tren_biletleri}" var="s" class="table table-striped">
-                   
-                        <h:column>
-                            <f:facet name="header">Firma Adı</f:facet>
-                                #{tren_FirmalariBean.getById(tren_SeferleriBean.firma_id((s.tren_seferleri_id))).name}
-                        </h:column>
-                        <h:column>
-                            <f:facet name="header">Koltuk No</f:facet>
-                                #{s.koltuk_no}
-                        </h:column>
-                        <h:column>
-                            <f:facet name="header">Kalkış noktası</f:facet>
-                                #{sehirlerBean.getById(tren_SeferleriBean.kalkis_noktasi(s.tren_seferleri_id)).name}
-                        </h:column>
-                        <h:column>
-                            <f:facet name="header">Varış noktası</f:facet>
-                                #{sehirlerBean.getById(tren_SeferleriBean.varis_noktasi(s.tren_seferleri_id)).name}
-                        </h:column>
-                        <h:column>
-                            <f:facet name="header">İşlemler</f:facet>
-                            <div class="btn-group" role="group">
-                                <h:commandButton class="btn btn-danger" action="#{satin_Aldigim_BiletBean.delete(s.id)}" value="İade Et" />
-                            </div>
-                        </h:column>
+
+                    <h:column>
+                        <f:facet name="header">Firma Adı</f:facet>
+                            #{tren_FirmalariBean.getById(tren_SeferleriBean.firma_id((s.tren_seferleri_id))).name}
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Koltuk No</f:facet>
+                            #{s.koltuk_no}
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Kalkış noktası</f:facet>
+                            #{sehirlerBean.getById(tren_SeferleriBean.kalkis_noktasi(s.tren_seferleri_id)).name}
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Varış noktası</f:facet>
+                            #{sehirlerBean.getById(tren_SeferleriBean.varis_noktasi(s.tren_seferleri_id)).name}
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">İşlemler</f:facet>
+                        <div class="btn-group" role="group">
+                            <h:commandButton class="btn btn-danger" action="#{satin_Aldigim_BiletBean.delete(s.id)}" value="İade Et" >
+                                <f:ajax execute="@this" render="tren_table"/>
+                            </h:commandButton>
+                        </div>
+                    </h:column>
 
                 </h:dataTable>
-            </div>
-        </h:form>
+            </h:form>
+        </div>
+
     </ui:define>
 </ui:composition>
 
