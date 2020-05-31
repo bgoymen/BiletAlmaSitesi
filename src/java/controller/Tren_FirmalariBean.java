@@ -25,6 +25,27 @@ public class Tren_FirmalariBean implements Serializable {
     private Tren_FirmalariDao dao;
     private Tren_Firmalari entity;
 
+    private int page = 1;
+    private int pageSize = 10;
+    private int pageCount;
+
+    public void next() {
+        if (page == pageCount) {
+            this.page = 1;
+        } else {
+            this.page++;
+        }
+    }
+
+    public void previous() {
+        if (this.page == 1) {
+            this.page = pageCount;
+        } else {
+            this.page--;
+        }
+
+    }
+
     public void create() {
         if (entity.getName().length() == 0) {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Lütfen Gerekli Yerleri Doldurunuz"));
@@ -40,7 +61,7 @@ public class Tren_FirmalariBean implements Serializable {
     }
 
     public List<Tren_Firmalari> getRead() {
-        return this.getDao().read();
+        return this.getDao().read(page, pageSize);
     }
 
     public void updateForm(Tren_Firmalari f) {
@@ -89,6 +110,31 @@ public class Tren_FirmalariBean implements Serializable {
 
     public void setEntity(Tren_Firmalari entity) {
         this.entity = entity;
+    }
+
+    public int getPage() {
+        return page;
+    }
+
+    public void setPage(int page) {
+        this.page = page;
+    }
+
+    public int getPageSize() {
+        return pageSize;
+    }
+
+    public void setPageSize(int pageSize) {
+        this.pageSize = pageSize;
+    }
+
+    public int getPageCount() {
+        this.pageCount = (int) Math.ceil(this.getDao().count() / (double) pageSize);
+        return pageCount;
+    }
+
+    public void setPageCount(int pageCount) {
+        this.pageCount = pageCount;
     }
 
 }

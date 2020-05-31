@@ -12,6 +12,14 @@
 
             <div class="col-md-6">
                 <h:form id="tren_firmalari_table">
+
+                    <div class="btn-group">
+                        Page #{tren_FirmalariBean.page} of #{tren_FirmalariBean.pageCount}
+                        <br/>
+                        <h:commandButton action="#{tren_FirmalariBean.previous()}" value="Önceki Sayfa" styleClass="btn btn-dark" />
+                        <h:commandButton action="#{tren_FirmalariBean.next}" value="Sonraki Sayfa" styleClass="btn btn-info" />
+                    </div>
+
                     <h:dataTable value="#{tren_FirmalariBean.read}" var="f" class="table table-striped">
                         <h:column>
                             <f:facet name="header">ID</f:facet>
