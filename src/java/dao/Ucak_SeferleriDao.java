@@ -6,6 +6,7 @@
 package dao;
 
 import entity.Ucak_Seferleri;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -95,6 +96,41 @@ public class Ucak_SeferleriDao extends DBConnection {
         }
 
         return null;
+    }
+    
+            public List<Ucak_Seferleri> read(int page, int pageSize) {
+        List<Ucak_Seferleri> list = new ArrayList<>();
+
+        int start1 = (page - 1) * pageSize;
+
+        try {
+            PreparedStatement pst = this.connect().prepareStatement("select * from ucak_seferleri order by id asc limit " + start1 + "," + pageSize);
+            ResultSet rs = pst.executeQuery();
+            while (rs.next()) {
+                Ucak_Seferleri tmp = new Ucak_Seferleri(rs.getInt("id"), rs.getInt("ucak_firma_id"), rs.getInt("kalkis_nok"), rs.getInt("varis_nok"), rs.getInt("koltuk_sayisi"), rs.getInt("fiyat"));
+                list.add(tmp);
+            }
+
+        } catch (SQLException e) {
+            System.out.println("Hata(Ucak_SeferleriDao(read(int page, int pageSize))):" + e.getMessage());
+        }
+
+        return list;
+    }
+
+    public int count() {
+        int count = 0;
+        try {
+            PreparedStatement pst = this.connect().prepareStatement("select count(id) as ucak_seferleri_count from ucak_seferleri");
+            ResultSet rs = pst.executeQuery();
+            rs.next();
+            count = rs.getInt("ucak_seferleri_count");
+
+        } catch (SQLException e) {
+            System.out.println("Hata(Ucak_SeferleriDao(count)):" + e.getMessage());
+        }
+
+        return count;
     }
 
     public boolean update(Ucak_Seferleri s) {

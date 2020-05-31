@@ -14,6 +14,13 @@
 
                 <h:form id="ucak_seferleri_table">
 
+                    <div class="btn-group">
+                        Page #{ucak_SeferleriBean.page} of #{ucak_SeferleriBean.pageCount}
+                        <br/>
+                        <h:commandButton action="#{ucak_SeferleriBean.previous()}" value="Önceki Sayfa" styleClass="btn btn-dark" />
+                        <h:commandButton action="#{ucak_SeferleriBean.next()}" value="Sonraki Sayfa" styleClass="btn btn-info" />
+                    </div>
+
                     <h:dataTable value="#{ucak_SeferleriBean.read}" var="s" class="table table-striped">
                         <h:column>
                             <f:facet name="header">ID</f:facet>

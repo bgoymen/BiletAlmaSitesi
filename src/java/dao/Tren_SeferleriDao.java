@@ -97,8 +97,8 @@ public class Tren_SeferleriDao extends DBConnection {
 
         return null;
     }
-    
-        public List<Tren_Seferleri> read(int page, int pageSize) {
+
+    public List<Tren_Seferleri> read(int page, int pageSize) {
         List<Tren_Seferleri> list = new ArrayList<>();
 
         int start1 = (page - 1) * pageSize;
