@@ -6,6 +6,7 @@
 package dao;
 
 import entity.Ucak_Firmalari;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -62,6 +63,41 @@ public class Ucak_FirmalariDao extends DBConnection {
         }
 
         return list;
+    }
+    
+        public List<Ucak_Firmalari> read(int page, int pageSize) {
+        List<Ucak_Firmalari> list = new ArrayList<>();
+
+        int start1 = (page - 1) * pageSize;
+
+        try {
+            PreparedStatement pst = this.connect().prepareStatement("select * from ucak_firmalari order by id asc limit " + start1 + "," + pageSize);
+            ResultSet rs = pst.executeQuery();
+            while (rs.next()) {
+                Ucak_Firmalari tmp = new Ucak_Firmalari(rs.getInt("id"), rs.getString("Name"));
+                list.add(tmp);
+            }
+
+        } catch (SQLException e) {
+            System.out.println("Hata(Ucak_FirmalariDao(read(int page, int pageSize))):" + e.getMessage());
+        }
+
+        return list;
+    }
+
+    public int count() {
+        int count = 0;
+        try {
+            PreparedStatement pst = this.connect().prepareStatement("select count(id) as ucak_firmalari_count from ucak_firmalari");
+            ResultSet rs = pst.executeQuery();
+            rs.next();
+            count = rs.getInt("ucak_firmalari_count");
+
+        } catch (SQLException e) {
+            System.out.println("Hata(Ucak_FirmalariDao(count)):" + e.getMessage());
+        }
+
+        return count;
     }
 
     public void update(Ucak_Firmalari f) {

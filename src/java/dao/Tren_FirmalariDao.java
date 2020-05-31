@@ -64,14 +64,14 @@ public class Tren_FirmalariDao extends DBConnection {
 
         return list;
     }
-    
-        public List<Tren_Firmalari> read(int page, int pageSize) {
+
+    public List<Tren_Firmalari> read(int page, int pageSize) {
         List<Tren_Firmalari> list = new ArrayList<>();
-        
-        int start1 = (page-1)*pageSize;
-        
+
+        int start1 = (page - 1) * pageSize;
+
         try {
-            PreparedStatement pst = this.connect().prepareStatement("select * from tren_firmalari order by id asc limit "+start1+","+pageSize);
+            PreparedStatement pst = this.connect().prepareStatement("select * from tren_firmalari order by id asc limit " + start1 + "," + pageSize);
             ResultSet rs = pst.executeQuery();
             while (rs.next()) {
                 Tren_Firmalari tmp = new Tren_Firmalari(rs.getInt("id"), rs.getString("Name"));
@@ -79,19 +79,19 @@ public class Tren_FirmalariDao extends DBConnection {
             }
 
         } catch (SQLException e) {
-            System.out.println("Hata(Otobus_FirmalariDao(read(int page, int pageSize))):" + e.getMessage());
+            System.out.println("Hata(Tren_FirmalariDao(read(int page, int pageSize))):" + e.getMessage());
         }
 
         return list;
     }
-    
-        public int count() {
+
+    public int count() {
         int count = 0;
         try {
             PreparedStatement pst = this.connect().prepareStatement("select count(id) as tren_firmalari_count from tren_firmalari");
             ResultSet rs = pst.executeQuery();
             rs.next();
-            count=rs.getInt("tren_firmalari_count");
+            count = rs.getInt("tren_firmalari_count");
 
         } catch (SQLException e) {
             System.out.println("Hata(Tren_FirmalariDao(count)):" + e.getMessage());
