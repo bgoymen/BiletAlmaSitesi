@@ -44,4 +44,6 @@ bulunacaktır.
 
 - Pagination İşlemleri Tamamlandi (Admin klasörü altındaki bütün listelemelere eklendi)
 
+- Dosya işelemleri tamamlandı(Ayarlar.xhtml dosyası içinde kullanıcılar profil resmi yükleyebiliyor.)
+
 
