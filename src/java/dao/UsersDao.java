@@ -7,6 +7,7 @@ package dao;
 
 import entity.Satin_Alinan_Bilet;
 import entity.Users;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -46,6 +47,41 @@ public class UsersDao extends DBConnection {
             System.out.println(e.getMessage());
         }
         return list;
+    }
+    
+        public List<Users> read(int page, int pageSize) {
+        List<Users> list = new ArrayList<>();
+
+        int start1 = (page - 1) * pageSize;
+
+        try {
+            PreparedStatement pst = this.connect().prepareStatement("select * from users order by id asc limit " + start1 + "," + pageSize);
+            ResultSet rs = pst.executeQuery();
+            while (rs.next()) {
+                Users tmp = new Users(rs.getInt("id"), rs.getString("user_mail"), rs.getString("user_name"), rs.getString("user_password"), rs.getInt("type"));
+                list.add(tmp);
+            }
+
+        } catch (SQLException e) {
+            System.out.println("Hata(UsersDao(read(int page, int pageSize))):" + e.getMessage());
+        }
+
+        return list;
+    }
+
+    public int count() {
+        int count = 0;
+        try {
+            PreparedStatement pst = this.connect().prepareStatement("select count(id) as users_count from users");
+            ResultSet rs = pst.executeQuery();
+            rs.next();
+            count = rs.getInt("users_count");
+
+        } catch (SQLException e) {
+            System.out.println("Hata(UsersDao(count)):" + e.getMessage());
+        }
+
+        return count;
     }
     
     public Users control(String user_mail, String user_password) throws SQLException {
