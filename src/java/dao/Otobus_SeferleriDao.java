@@ -6,6 +6,7 @@
 package dao;
 
 import entity.Otobus_Seferleri;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -96,6 +97,41 @@ public class Otobus_SeferleriDao extends DBConnection {
         }
 
         return null;
+    }
+    
+    public List<Otobus_Seferleri> read(int page, int pageSize) {
+        List<Otobus_Seferleri> list = new ArrayList<>();
+
+        int start1 = (page - 1) * pageSize;
+
+        try {
+            PreparedStatement pst = this.connect().prepareStatement("select * from otobus_seferleri order by id asc limit " + start1 + "," + pageSize);
+            ResultSet rs = pst.executeQuery();
+            while (rs.next()) {
+                Otobus_Seferleri tmp = new Otobus_Seferleri(rs.getInt("id"), rs.getInt("firma_id"), rs.getInt("kalkis_nok"), rs.getInt("varis_nok"), rs.getInt("koltuk_sayisi"), rs.getInt("fiyat"));
+                list.add(tmp);
+            }
+
+        } catch (SQLException e) {
+            System.out.println("Hata(Otobus_SeferleriDao(read(int page, int pageSize))):" + e.getMessage());
+        }
+
+        return list;
+    }
+
+    public int count() {
+        int count = 0;
+        try {
+            PreparedStatement pst = this.connect().prepareStatement("select count(id) as otobus_seferleri_count from otobus_seferleri");
+            ResultSet rs = pst.executeQuery();
+            rs.next();
+            count = rs.getInt("otobus_seferleri_count");
+
+        } catch (SQLException e) {
+            System.out.println("Hata(Otobus_SeferleriDao(count)):" + e.getMessage());
+        }
+
+        return count;
     }
 
     public boolean update(Otobus_Seferleri f) {

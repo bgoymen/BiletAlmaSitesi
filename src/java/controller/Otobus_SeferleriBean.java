@@ -25,6 +25,27 @@ public class Otobus_SeferleriBean implements Serializable {
     private Otobus_SeferleriDao dao;
     private Otobus_Seferleri entity;
 
+    private int page = 1;
+    private int pageSize = 10;
+    private int pageCount;
+
+    public void next() {
+        if (page == pageCount) {
+            this.page = 1;
+        } else {
+            this.page++;
+        }
+    }
+
+    public void previous() {
+        if (this.page == 1) {
+            this.page = pageCount;
+        } else {
+            this.page--;
+        }
+
+    }
+
     public void create() {
         boolean c = this.getDao().create(entity);
         if (c == false) {
@@ -36,7 +57,7 @@ public class Otobus_SeferleriBean implements Serializable {
     }
 
     public List<Otobus_Seferleri> getRead() {
-        return this.getDao().read();
+        return this.getDao().read(page, pageSize);
     }
 
     public void updateForm(Otobus_Seferleri s) {
@@ -99,6 +120,31 @@ public class Otobus_SeferleriBean implements Serializable {
 
     public void setEntity(Otobus_Seferleri entity) {
         this.entity = entity;
+    }
+
+    public int getPage() {
+        return page;
+    }
+
+    public void setPage(int page) {
+        this.page = page;
+    }
+
+    public int getPageSize() {
+        return pageSize;
+    }
+
+    public void setPageSize(int pageSize) {
+        this.pageSize = pageSize;
+    }
+
+    public int getPageCount() {
+        this.pageCount = (int) Math.ceil(this.getDao().count() / (double) pageSize);
+        return pageCount;
+    }
+
+    public void setPageCount(int pageCount) {
+        this.pageCount = pageCount;
     }
 
 }
