@@ -67,15 +67,17 @@ public class Otobus_FirmalariDao extends DBConnection {
 
     public List<Otobus_Firmalari> read(int page, int pageSize) {
         List<Otobus_Firmalari> list = new ArrayList<>();
-        
-        int start1 = (page-1)*pageSize;
-        
+
+        int start1 = (page - 1) * pageSize;
+
         try {
-            PreparedStatement pst = this.connect().prepareStatement("select * from otobus_firmalari order by id asc limit "+start1+","+pageSize);
+            PreparedStatement pst = this.connect().prepareStatement("select * from otobus_firmalari order by id asc limit " + start1 + "," + pageSize);
             ResultSet rs = pst.executeQuery();
             while (rs.next()) {
-                Otobus_Firmalari tmp = new Otobus_Firmalari(rs.getInt("id"), rs.getString("Name"));
-                list.add(tmp);
+                if (rs.getInt("id") != 0) {
+                    Otobus_Firmalari tmp = new Otobus_Firmalari(rs.getInt("id"), rs.getString("Name"));
+                    list.add(tmp);
+                }
             }
 
         } catch (SQLException e) {
@@ -84,14 +86,14 @@ public class Otobus_FirmalariDao extends DBConnection {
 
         return list;
     }
-    
-        public int count() {
+
+    public int count() {
         int count = 0;
         try {
             PreparedStatement pst = this.connect().prepareStatement("select count(id) as otobus_firmalari_count from otobus_firmalari");
             ResultSet rs = pst.executeQuery();
             rs.next();
-            count=rs.getInt("otobus_firmalari_count");
+            count = rs.getInt("otobus_firmalari_count");
 
         } catch (SQLException e) {
             System.out.println("Hata(Otobus_FirmalariDao(count)):" + e.getMessage());

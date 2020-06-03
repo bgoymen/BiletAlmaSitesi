@@ -10,6 +10,7 @@ package entity;
  * @author Göymen
  */
 public class Iletisim {
+
     private int id;
     private String mail;
     private String baslik;
@@ -56,6 +57,5 @@ public class Iletisim {
     public void setKonu(String Konu) {
         this.Konu = Konu;
     }
-    
-    
+
 }

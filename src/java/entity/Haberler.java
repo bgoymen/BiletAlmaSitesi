@@ -10,6 +10,7 @@ package entity;
  * @author Göymen
  */
 public class Haberler {
+
     private int haber_id;
     private String haber;
 
@@ -36,6 +37,5 @@ public class Haberler {
     public void setHaber(String haber) {
         this.haber = haber;
     }
-    
-    
+
 }

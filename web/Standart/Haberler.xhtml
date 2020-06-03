@@ -5,9 +5,9 @@
                 template="/Standart/template/StandartTemplate.xhtml"
                 xmlns:h="http://xmlns.jcp.org/jsf/html"
                 xmlns:f="http://xmlns.jcp.org/jsf/core">
-    
+
     <ui:define name="content">
-         <h:form>
+        <h:form>
             <h:dataTable value="#{haberlerBean.read}" var="c" class="table table-striped">
                 <h:column>
                     <f:facet name="header">ID</f:facet>

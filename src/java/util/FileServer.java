@@ -8,7 +8,6 @@ package util;
 import controller.DocumentBean;
 import java.io.File;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.nio.file.Files;
 import javax.inject.Inject;
 import javax.servlet.ServletException;
@@ -23,18 +22,16 @@ import javax.servlet.http.HttpServletResponse;
  */
 @WebServlet(name = "FileServer", urlPatterns = {"/file/*"})
 public class FileServer extends HttpServlet {
-    
+
     @Inject
     private DocumentBean dc;
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String file = request.getPathInfo();
-        File f = new File(dc.getUploadto()+file);
-        
+        File f = new File(dc.getUploadto() + file);
+
         Files.copy(f.toPath(), response.getOutputStream());
     }
-
-   
 
 }

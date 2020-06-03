@@ -6,12 +6,10 @@
 package controller;
 
 import dao.Satin_Alinan_BiletDao;
-import dao.UsersDao;
 import entity.Otobus_Seferleri;
 import entity.Satin_Alinan_Bilet;
 import entity.Tren_Seferleri;
 import entity.Ucak_Seferleri;
-import entity.Users;
 import java.io.Serializable;
 import java.util.List;
 import javax.enterprise.context.SessionScoped;
@@ -119,21 +117,21 @@ public class Bilet_AlBean implements Serializable {
         int user_id = LoginBean.getUser_id();
         entity = new Satin_Alinan_Bilet(user_id, 1, o_sefer.getId(), 0, 0, koltuk_no);
         this.getDao().create(entity);
-        return "/SatinAldigimBiletler/SatinAldiğimBiletler/Otobus?faces-redirect=true";
+        return "/Standart/SatinAldigimBiletler/Otobus?faces-redirect=true";
     }
 
     public String create_tren(int koltuk_no) {
         int user_id = LoginBean.getUser_id();
         entity = new Satin_Alinan_Bilet(user_id, 3, 0, 0, t_Sefer.getId(), koltuk_no);
         this.getDao().create(entity);
-        return "/SatinAldigimBiletler/SatinAldiğimBiletler/Tren?faces-redirect=true";
+        return "/Standart/SatinAldigimBiletler/Tren?faces-redirect=true";
     }
 
     public String create_ucak(int koltuk_no) {
         int user_id = LoginBean.getUser_id();
         entity = new Satin_Alinan_Bilet(user_id, 2, 0, u_sefer.getId(), 0, koltuk_no);
         this.getDao().create(entity);
-        return "/SatinAldigimBiletler/SatinAldiğimBiletler/Ucak?faces-redirect=true";
+        return "/Standart/SatinAldigimBiletler/Ucak?faces-redirect=true";
     }
 
     public Bilet_AlBean() {

@@ -98,7 +98,7 @@ public class Otobus_SeferleriDao extends DBConnection {
 
         return null;
     }
-    
+
     public List<Otobus_Seferleri> read(int page, int pageSize) {
         List<Otobus_Seferleri> list = new ArrayList<>();
 
@@ -108,8 +108,10 @@ public class Otobus_SeferleriDao extends DBConnection {
             PreparedStatement pst = this.connect().prepareStatement("select * from otobus_seferleri order by id asc limit " + start1 + "," + pageSize);
             ResultSet rs = pst.executeQuery();
             while (rs.next()) {
-                Otobus_Seferleri tmp = new Otobus_Seferleri(rs.getInt("id"), rs.getInt("firma_id"), rs.getInt("kalkis_nok"), rs.getInt("varis_nok"), rs.getInt("koltuk_sayisi"), rs.getInt("fiyat"));
-                list.add(tmp);
+                if (rs.getInt("id") != 0) {
+                    Otobus_Seferleri tmp = new Otobus_Seferleri(rs.getInt("id"), rs.getInt("firma_id"), rs.getInt("kalkis_nok"), rs.getInt("varis_nok"), rs.getInt("koltuk_sayisi"), rs.getInt("fiyat"));
+                    list.add(tmp);
+                }
             }
 
         } catch (SQLException e) {

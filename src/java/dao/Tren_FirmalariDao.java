@@ -74,8 +74,10 @@ public class Tren_FirmalariDao extends DBConnection {
             PreparedStatement pst = this.connect().prepareStatement("select * from tren_firmalari order by id asc limit " + start1 + "," + pageSize);
             ResultSet rs = pst.executeQuery();
             while (rs.next()) {
-                Tren_Firmalari tmp = new Tren_Firmalari(rs.getInt("id"), rs.getString("Name"));
-                list.add(tmp);
+                if (rs.getInt("id") != 0) {
+                    Tren_Firmalari tmp = new Tren_Firmalari(rs.getInt("id"), rs.getString("Name"));
+                    list.add(tmp);
+                }
             }
 
         } catch (SQLException e) {

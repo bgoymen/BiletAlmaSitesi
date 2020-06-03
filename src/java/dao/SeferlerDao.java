@@ -23,11 +23,11 @@ public class SeferlerDao {
         }
         return koltuk;
     }
-    
-    public List<Integer> fiyat(){
+
+    public List<Integer> fiyat() {
         List<Integer> fiyat = new ArrayList<>();
         int sayac = 10;
-        for(int i = 0; i<99;i++){
+        for (int i = 0; i < 99; i++) {
             fiyat.add(sayac);
             sayac += 5;
         }

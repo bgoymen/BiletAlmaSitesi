@@ -57,8 +57,10 @@ public class SehirlerDao extends DBConnection {
             PreparedStatement pst = this.connect().prepareStatement("select * from sehirler order by id asc limit " + start1 + "," + pageSize);
             ResultSet rs = pst.executeQuery();
             while (rs.next()) {
-                Sehirler tmp = new Sehirler(rs.getInt("id"), rs.getString("Name"));
-                list.add(tmp);
+                if (rs.getInt("id") != 0) {
+                    Sehirler tmp = new Sehirler(rs.getInt("id"), rs.getString("Name"));
+                    list.add(tmp);
+                }
             }
 
         } catch (SQLException e) {

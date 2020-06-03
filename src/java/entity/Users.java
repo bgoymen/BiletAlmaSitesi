@@ -14,16 +14,16 @@ import javax.validation.constraints.NotEmpty;
  *
  * @author bünyamin
  */
-
 public class Users {
+
     private int id;
-    
+
     @Email(message = "Lütfen geçerli bir email giriniz!")
     private String user_mail;
-    
-    @NotEmpty(message="Kullanıcı Adı Boş Bırakılamaz")
+
+    @NotEmpty(message = "Kullanıcı Adı Boş Bırakılamaz")
     private String user_name;
-   
+
     private String user_password;
     private int type;
 
@@ -77,6 +77,5 @@ public class Users {
     public void setType(int type) {
         this.type = type;
     }
-    
-    
+
 }

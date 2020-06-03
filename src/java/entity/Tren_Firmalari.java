@@ -10,6 +10,7 @@ package entity;
  * @author Göymen
  */
 public class Tren_Firmalari {
+
     private int id;
     private String name;
 
@@ -36,5 +37,5 @@ public class Tren_Firmalari {
     public void setName(String name) {
         this.name = name;
     }
-    
+
 }

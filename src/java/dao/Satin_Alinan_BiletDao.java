@@ -28,7 +28,7 @@ public class Satin_Alinan_BiletDao extends DBConnection {
 
         try {
             Statement st = this.connect().createStatement();
-            st.executeUpdate("insert into satin_alinan_bilet(user_id,seyehat_turu, otobus_seferleri_id,ucak_seferleri_id,tren_seferleri_id,koltuk_no) values(" + s.getUser_id() + "," + s.getSeyehat_turu() + "," + s.getOtobus_seferleri_id() + ","+s.getUcak_seferleri_id()+","+s.getTren_seferleri_id()+"," + s.getKoltuk_no() + ")");
+            st.executeUpdate("insert into satin_alinan_bilet(user_id,seyehat_turu, otobus_seferleri_id,ucak_seferleri_id,tren_seferleri_id,koltuk_no) values(" + s.getUser_id() + "," + s.getSeyehat_turu() + "," + s.getOtobus_seferleri_id() + "," + s.getUcak_seferleri_id() + "," + s.getTren_seferleri_id() + "," + s.getKoltuk_no() + ")");
 
         } catch (SQLException ex) {
             System.out.println("Hata(Satin_Alinan_BiletDao(Create(1))):" + ex.getMessage());
@@ -44,7 +44,7 @@ public class Satin_Alinan_BiletDao extends DBConnection {
             ResultSet rs = st.executeQuery("select * from satin_alinan_bilet order by id asc");
 
             while (rs.next()) {
-                if ((rs.getInt("user_id") == id) && (rs.getInt("seyehat_turu") == seyehat_turu)){
+                if ((rs.getInt("user_id") == id) && (rs.getInt("seyehat_turu") == seyehat_turu)) {
                     Satin_Alinan_Bilet tmp = new Satin_Alinan_Bilet(rs.getInt("id"), rs.getInt("user_id"), rs.getInt("seyehat_turu"), rs.getInt("otobus_seferleri_id"), rs.getInt("ucak_seferleri_id"), rs.getInt("tren_seferleri_id"), rs.getInt("koltuk_no"));
                     list.add(tmp);
                 }
@@ -206,7 +206,7 @@ public class Satin_Alinan_BiletDao extends DBConnection {
         return false;
     }
 
-    public int seyehat_turu(Satin_Alinan_Bilet s){
+    public int seyehat_turu(Satin_Alinan_Bilet s) {
         return s.getSeyehat_turu();
     }
 }

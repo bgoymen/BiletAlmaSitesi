@@ -5,7 +5,6 @@
  */
 package dao;
 
-import entity.Satin_Alinan_Bilet;
 import entity.Users;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -144,6 +143,8 @@ public class UsersDao extends DBConnection {
     public void delete(int c) {
         try {
             Statement st = this.connect().createStatement();
+            st.executeUpdate("delete from satin_alinan_bilet where user_id=" + c);
+            st.executeUpdate("delete from document where user_id=" + c);
             st.executeUpdate("delete from users where id=" + c);
 
         } catch (SQLException e) {

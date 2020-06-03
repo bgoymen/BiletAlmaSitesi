@@ -10,6 +10,7 @@ package entity;
  * @author Göymen
  */
 public class Sehirler {
+
     private int id;
     private String name;
 
@@ -36,6 +37,5 @@ public class Sehirler {
     public void setName(String name) {
         this.name = name;
     }
-    
-    
+
 }

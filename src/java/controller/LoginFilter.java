@@ -33,7 +33,7 @@ public class LoginFilter implements Filter {
         String url = req.getRequestURI();
 
         Users u = (Users) req.getSession().getAttribute("valid_user");
-        if(u != null){
+        if (u != null) {
             this.setUser_type(u.getType());
         }
 

@@ -64,8 +64,8 @@ public class Ucak_FirmalariDao extends DBConnection {
 
         return list;
     }
-    
-        public List<Ucak_Firmalari> read(int page, int pageSize) {
+
+    public List<Ucak_Firmalari> read(int page, int pageSize) {
         List<Ucak_Firmalari> list = new ArrayList<>();
 
         int start1 = (page - 1) * pageSize;
@@ -74,8 +74,10 @@ public class Ucak_FirmalariDao extends DBConnection {
             PreparedStatement pst = this.connect().prepareStatement("select * from ucak_firmalari order by id asc limit " + start1 + "," + pageSize);
             ResultSet rs = pst.executeQuery();
             while (rs.next()) {
-                Ucak_Firmalari tmp = new Ucak_Firmalari(rs.getInt("id"), rs.getString("Name"));
-                list.add(tmp);
+                if (rs.getInt("id") != 0) {
+                    Ucak_Firmalari tmp = new Ucak_Firmalari(rs.getInt("id"), rs.getString("Name"));
+                    list.add(tmp);
+                }
             }
 
         } catch (SQLException e) {

@@ -44,7 +44,7 @@ public class DocumentDao extends DBConnection {
             try {
                 PreparedStatement pst = this.connect().prepareStatement("delete from document where user_id=" + d.getUser_id());
                 pst.executeUpdate();
-                
+
             } catch (SQLException e) {
                 System.out.println("Hata(DocumenDao(create1): " + e.getMessage());
             }

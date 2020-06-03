@@ -10,7 +10,7 @@ package entity;
  * @author Göymen
  */
 public class Document {
-    
+
     private int user_id;
     private String filePath;
     private String fileName;
@@ -57,6 +57,5 @@ public class Document {
     public void setFileType(String fileType) {
         this.fileType = fileType;
     }
-    
-    
+
 }

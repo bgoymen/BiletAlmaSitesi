@@ -40,8 +40,6 @@ public class Satin_Alinan_Bilet {
         this.tren_seferleri_id = tren_seferleri_id;
         this.koltuk_no = koltuk_no;
     }
-    
-    
 
     public int getId() {
         return id;
@@ -98,6 +96,5 @@ public class Satin_Alinan_Bilet {
     public void setKoltuk_no(int koltuk_no) {
         this.koltuk_no = koltuk_no;
     }
-    
-    
+
 }

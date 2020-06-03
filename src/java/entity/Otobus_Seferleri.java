@@ -77,6 +77,5 @@ public class Otobus_Seferleri {
     public void setFiyat(int fiyat) {
         this.fiyat = fiyat;
     }
-    
 
 }
